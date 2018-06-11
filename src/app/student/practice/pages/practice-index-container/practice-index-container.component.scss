@@ -1,0 +1,98 @@
+@import 'theme-variables';
+
+.container-fluid {
+  overflow: auto;
+  position: relative;
+}
+
+.breadcrumb {
+  background: none;
+
+  .breadcrumb-item {
+    color: $white;
+    font-size: $base-font-size * .9;
+
+    a {
+      color: $white;
+      font-size: $base-font-size * .9;
+    }
+  }
+
+  .breadcrumb-item+.breadcrumb-item {
+    ::before {
+      color: $white;
+    }
+  }
+}
+
+.icon-addon {
+  color: $gray-600;
+  display: block;
+  position: relative;
+
+  &::before {
+    content: ' ';
+    display: table;
+  }
+
+  &::after {
+    content: ' ';
+    display: table;
+  }
+
+  .fa {
+    font-size: 14px;
+    margin-left: -2.5px;
+    padding: 10px 0;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 7px;
+    width: 20px;
+    z-index: 2;
+  }
+
+  .form-control {
+    float: left;
+    font-weight: normal;
+    padding-right: 30px;
+
+    &:focus {
+      border-color: $orange;
+    }
+
+    &:focus + .fa {
+      color: $orange;
+    }
+  }
+}
+
+.filter {
+  .dropdown-toggle
+  &::after {
+    content: none;
+  }
+
+  .filter-link {
+    color: $white;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+.mylibs-heading {
+  font-size: $font-size-sm;
+  margin-left: auto;
+  .count {
+    background: $primary;
+    height: 10px;
+    width: 10px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .mylibs-heading {
+    margin-left: 0;
+  }
+}

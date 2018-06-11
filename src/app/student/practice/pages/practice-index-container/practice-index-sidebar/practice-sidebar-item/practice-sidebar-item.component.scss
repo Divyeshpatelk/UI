@@ -1,0 +1,32 @@
+@import 'theme-variables';
+
+.material-list-content-inner {
+  p {
+    color: $darkblue;
+  }
+
+  .meterial-list {
+    p {
+      color: $gray-600;
+      font-size: $base-font-size * .79;
+      margin-bottom: 0;
+      margin-right: .5rem;
+    }
+
+    span {
+      margin-right: .2rem;
+    }
+  }
+
+  &.active {
+    p {
+      // color: $white;
+    }
+
+    .meterial-list {
+      p {
+        // color: $white;
+      }
+    }
+  }
+}

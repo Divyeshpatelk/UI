@@ -1,0 +1,33 @@
+<div class="bg-white">
+  <div class="container-fluid">
+    <div class="row form-wizard">
+      <div class="col-sm-4 d-flex align-items-center finish">
+        <button [routerLink]="['/partner']" class="btn btn-link">
+          <span class="fa fa-arrow-left"></span> {{'PREV' | translate}}</button>
+        <p class="mb-0 ml-auto">Create & Upload</p>
+        <div class="shape"></div>
+      </div>
+      <div class="col-sm-4 d-flex active">
+        <p class="mb-0 mx-auto align-self-center">Cover Page</p>
+      </div>
+      <div class="col-sm-4 pl-5 d-flex align-items-center">
+        <p class="mb-0 ">Pricing</p>
+        <button [routerLink]="['/partner', 'course', courseId, 'publish']" class="btn btn-link ml-auto"> {{'NEXT' | translate}}
+          <span class="fa fa-arrow-right"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex index-fixed-height">
+    <!-- Sidebar start -->
+    <div style="overflow: auto; width: 480px;">
+      <pdg-course-index-sidebar></pdg-course-index-sidebar>
+    </div>
+    <!-- Sidebar end -->
+    <div class="container-fluid bg-white" style="overflow: auto;">
+      <pdg-course-index-content></pdg-course-index-content>
+    </div>
+  </div>
+
+</div>

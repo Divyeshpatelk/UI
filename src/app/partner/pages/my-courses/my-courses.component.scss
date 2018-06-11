@@ -1,0 +1,89 @@
+@import 'theme-variables';
+
+.add-course-card {
+  &.card {
+    background-color: $gray-200;
+    border: 3px dashed $gray-500;
+  }
+
+  span,
+  h5 {
+    color: $gray-600;
+  }
+}
+
+.card-footer {
+  background-color: $white;
+  border-top: 0;
+}
+
+.col-xl-3 {
+  max-width: 23.7%;
+
+  &.col-lg-4 {
+    &.col-md-6 {
+      margin: 0 .4rem 1rem .571rem;
+      min-height: 17rem;
+    }
+  }
+}
+
+.dropdown-menu {
+  &.show {
+    &::before {
+      border-bottom: 7px solid $gray-200;
+      border-bottom-color: rgba(0, 0, 0, 0.2);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      content: '';
+      display: inline-block;
+      position: absolute;
+      right: 11px;
+      top: -7px;
+    }
+
+    &::after {
+      border-bottom: 6px solid $white;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      content: '';
+      display: inline-block;
+      position: absolute;
+      right: 10px;
+      top: -6px;
+    }
+  }
+}
+
+//responsive card media query
+@media (max-width: 767px) {
+  .add-course-card {
+    min-height: 400px;
+  }
+
+  .col-xl-3 {
+    &.col-lg-4 {
+      &.col-md-6 {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .col-md-6 {
+    max-width: 47%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .col-lg-4 {
+    max-width: 31.5%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1349px) {
+  .col-xl-3 {
+    max-width: 23.5%;
+  }
+}

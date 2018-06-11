@@ -1,0 +1,132 @@
+.visiontxt {
+    p {
+        font-size: 1.25rem;
+    }
+}
+.carousel-item {
+    position: relative;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    transition: -webkit-transform .6s ease;
+    transition: transform .6s ease;
+    transition: transform .6s ease,-webkit-transform .6s ease;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    .carousel-caption {
+        top: 30%;
+        text-align: left;
+        left: 4%;
+        width: 44%;
+    }
+    @media (max-width: 991px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+    @media (max-width: 660px) {
+        h1 {
+            font-size: .9rem;
+        }
+        p{
+            font-size: 0.5em;
+            margin-bottom: .1rem;
+        }
+        button {
+            padding: 0.2rem .2rem;
+            font-size: .55rem;
+        }
+    }
+}
+.py-2 {
+    padding-top: .5rem!important;
+    padding-bottom: .5rem!important;
+}
+.mb-2 {
+    margin-bottom: .5rem!important;
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0;
+    font-size: 1.21rem;
+    .card-img-top {
+        max-height: 200px;
+        max-width: 200px;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem;
+    }
+    .team-member-name {
+        font-size: 1.25rem;
+    }
+}
+.py-2 {
+    padding-top: .5rem!important;
+    padding-bottom: .5rem!important;
+}
+.joinus-content {
+    padding-left: 1rem;
+    h4{
+        font-size: 1.35rem;
+    }
+    .recruitment {
+        p {
+            color: #868e96;
+            font-size: 1.20rem;
+        }
+    }
+}
+.content-body {
+    padding: 2.5rem 0rem 0;
+}
+
+.joinus-sample-img {
+    width: 90%;
+}
+.address-col {
+    background-position: left;
+    background-size: contain;
+    position: relative;
+    width: 100%;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        background: #fff;
+        opacity: .5;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1
+    }
+    .address {
+        position: relative;
+        z-index: 99;
+        color: #868e96;
+        font-size: 1.20rem;
+        &.email {
+            label {
+                color: #00293b;
+                font-weight: bold;
+                margin-right: 10px;
+            }
+            
+        }
+    }
+
+}

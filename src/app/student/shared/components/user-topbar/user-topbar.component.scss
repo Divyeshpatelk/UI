@@ -1,0 +1,170 @@
+@import 'theme-variables';
+
+$navbar-box-shadow: rgba(0, 0, 0, .27);
+$dropdown-con-color: rgba(0, 0, 0, .2);
+
+.navbar {
+  background: url('/assets/images/topbarbg.png') repeat-y;
+  box-shadow: 0 3px 8px 1px $navbar-box-shadow;
+  .ped-logo {
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: -20px 0px 47px #bdbdbd;
+    height: 53px;
+    padding: 3px 6px;
+  }
+
+}
+@media only screen and (max-width: 590px) {
+  .navbar {
+    background: url('/assets/images/topbarbg.png') repeat-y -147px 0;
+    .navbar-brand {
+      width: 150px;
+    }
+  }
+}
+.divider {
+  border-left: 1px solid $gray-200;
+  margin-bottom: -6px;
+  margin-top: -7px;
+}
+
+//dropdown on hover link color css in menu
+.dropdown-item {
+  &.active {
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  &:active {
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+}
+
+
+
+//navbar hover effact css
+.navbar-light {
+  .navbar-nav {
+    .show {
+      .nav-link {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+
+    .active {
+      .nav-link {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+
+    .nav-link {
+      &.show {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &.active {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &:focus {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &:hover {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+    @media only screen and (max-width: 1024px) {
+      .nav-link {
+        font-size: 12px;
+      }
+      .px-3 {
+        padding-left: .5rem !important;
+        padding-right: .5rem !important;
+      }
+    }
+  }
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.navbar-brand {
+  width: 280px;
+}
+
+@media only screen and (max-width: 991px) {
+  .collapse {
+    &.navbar-collapse {
+      &.show {
+        padding: 15px 0;
+      }
+    }
+    .navbar-nav  {
+      display: block;
+    }
+  }
+
+  .mobile-menu {
+    display: inline;
+  }
+
+  .hide-in-mobile {
+    display: none;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .mobile-menu {
+    margin-right: 0 !important;
+    > a{
+      > .dropdown {
+        #navbarDropdownMenuLink {
+          padding: 0 !important;
+        }
+      }
+    }
+  }
+  .navbar {
+    .ped-logo {
+      left: -5px;
+      position: relative;
+    }
+  } 
+}

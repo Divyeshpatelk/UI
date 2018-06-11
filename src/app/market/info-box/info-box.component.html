@@ -1,0 +1,13 @@
+<div class="container ped-info-box">
+  <div class="row">
+    <div class="col-sm-4 col-xs-12 text-center" *ngFor="let info of infoComponent">
+      <div>
+        <div class="d-flex ped-info-img justify-content-center">
+          <img class="align-self-center" src="{{info.img}}" alt="">
+        </div>
+        <h3>{{info.title}}</h3>
+        <p>{{info.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>

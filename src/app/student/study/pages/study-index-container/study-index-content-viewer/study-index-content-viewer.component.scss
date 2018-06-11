@@ -1,0 +1,147 @@
+@import 'theme-variables';
+.gray-text {
+  color: $gray-600;
+  &.selected {
+    background: $primary;
+
+    a {
+      color: $white;
+    }
+  }
+}
+
+.social-info {
+  display: none !important;
+  p {
+    font-size: $base-font-size * .8;
+  }
+}
+
+.description {
+  font-size: $font-size-base * .8;
+}
+
+.video-name {
+  font-size: $base-font-size * .9;
+  font-weight: $font-weight-bold;
+}
+
+.video-info {
+  span,
+  p {
+    font-size: $base-font-size * .8;
+  }
+}
+
+.list-group-item {
+  &.active {
+    span {
+      color: $white;
+    }
+  }
+}
+
+.video-pdf-section {
+  max-height: calc(100vh - 235px);
+  overflow-y: auto;
+}
+
+.video-list {
+  max-height: calc(100vh - 155px);
+  overflow-y: auto;
+}
+
+.video-list-options {
+  border-bottom: 1px solid $gray-200;
+
+  h6 {
+    font-size: $base-font-size * .9;
+  }
+}
+
+.media {
+  cursor: pointer;
+
+  .video-name,
+  p,
+  span {
+    word-break: break-all;
+  }
+
+  &.active {
+    background: $primary;
+
+    .video-name,
+    p,
+    span {
+      color: $white;
+    }
+  }
+
+  &:hover {
+    background: lighten($orange, 25%);
+  }
+
+  &.active {
+    &:hover {
+      background: $primary;
+    }
+  }
+}
+
+.middle-part {
+  width: calc(100% - 310px);
+
+  .preview-section {
+    height: calc(100vh - 225px);
+  }
+}
+
+.right-part {
+  /*height: calc(100vh - 225px);*/
+  padding-bottom:5px;
+  width: 320px;
+}
+
+.student-video-preview {
+  width: 100%;
+}
+.ped-thumb-mobile {
+  width: 35%;
+}
+@media only screen  and ( max-width: 991px ) {
+  .middle-part {
+    width: 100%;
+  }
+  
+  .ped-content-list-sidebar {
+    position: fixed;
+    right: -320px;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+     -ms-transition: all 0.4s ease-out;
+      -o-transition: all 0.4s ease-out;
+         transition: all 0.4s ease-out;
+    z-index: 9999;
+
+  }
+  .ped-active-content-list-sidebar {
+    right: 0;
+    top: 54px;
+    height: calc(100vh);
+  }
+  .ped-content-activator {
+    position: absolute;
+    background: $orange;
+    z-index: 9;
+    right: 0;
+    padding: 7px 10px;
+    color: $white;
+    top: 0;
+  }
+  .middle-part {
+    .preview-section {
+      height: auto;
+    }
+  }
+}

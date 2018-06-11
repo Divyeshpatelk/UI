@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white">
+  <div class="container ped-navbar">
+    <a class="navbar-brand mr-3" href="javascript:void(0);" routerLink="/" pdgLogoClickHandle>
+      <img src="{{staticContentPath}}/images/logo.svg" height="43" />
+    </a>
+    <div class="collapse navbar-collapse">
+      <!--div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+        <button class="btn btn-outline-primary" id="dropdownManual" ngbDropdownToggle>Courses</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+          <button class="dropdown-item">Action - 1</button>
+          <button class="dropdown-item">Another Action</button>
+          <button class="dropdown-item">Something else is here</button>
+        </div>
+      </div-->
+    </div>
+
+    <div *ngIf="!isLoggedIn; else userdetaildisplay" class="ped-topbar-actions d-flex align-items-center">
+      <button type="button" class="btn btn-dark ped-min-d-hide" routerLink="/signup">{{'SIGN_UP_FREE' | translate}}</button>
+      <button type="button" class="btn btn-dark ped-min-d-show d-none" routerLink="/signup">{{'SIGN_UP' | translate}}</button>
+      <div class="divider"></div>
+      <button type="button" class="btn btn-primary" (click)="showLogin()">
+        {{'SIGN_IN' | translate}}
+      </button>
+    </div>
+    <ng-template #userdetaildisplay>
+      <div>
+        {{user?.firstname}} {{user?.lastname}}
+        <button type="button" class="btn btn-primary ml-1" (click)="logout()">
+          {{ 'SIGN_OUT' | translate}} </button>
+      </div>
+    </ng-template>
+  </div>
+</nav>

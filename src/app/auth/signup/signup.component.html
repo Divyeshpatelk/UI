@@ -1,0 +1,185 @@
+<div class="container">
+  <div class="row ">
+    <div class="col-xl-4 col-lg-5 col-md-10 col-sm-12 m-sm-auto">
+      <div class="card mt-5">
+        <div class="card-body">
+          <div class="text-center logo">
+            <a href="javascript:void(0)" [routerLink]="['/home']"><img src="{{staticContentPath}}/images/logo.svg" alt="" height="70" srcset=""></a>
+            
+          </div>
+          <div class="ped-social-register text-center">
+              <span>Register using</span>
+              <button type="button" class="btn ped-google-social-login" (click)="signInWithGoogle()" id="loginBtn">
+                <i class="fa fa-google-plus" aria-hidden="true"></i>&nbsp;&nbsp;{{'REGISTER_IN_GOOGLE' | translate}}
+              </button>
+              <button type="button" class="btn ped-facebook-social-login" (click)="signInWithFB()" id="loginBtn">
+                <i class="fa fa-facebook" aria-hidden="true"></i>&nbsp;&nbsp;{{'REGISTER_IN_FACEBOOK' | translate}}
+              </button>
+          </div>
+          
+            <div class="ped-signup-divider">
+              <span>{{'OR' | translate}}</span>
+            </div>
+          <div class="title text-center">
+            <h4>{{'SIGN_UP'| translate}}</h4>
+          </div>
+
+          <!-- <div class="seperator text-center my-3">
+            <h6>
+              <span>{{'OR' | translate}}</span>
+            </h6>
+          </div> -->
+
+          <!-- <div class="social-icons text-center my-3">
+            <a href="javascript:void(0);">
+              <span class="fa fa-facebook icon icon-fb"></span>
+            </a>
+            <a href="javascript:void(0);">
+              <span class="fa fa-twitter icon icon-twitter"></span>
+            </a>
+            <a href="javascript:void(0);">
+              <span class="fa fa-google-plus icon icon-google"></span>
+            </a>
+            <a href="javascript:void(0);">
+              <span class="fa fa-linkedin icon icon-lin"></span>
+            </a>
+          </div> -->
+          <div class="form-part mt-1">
+            <form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm.value)">
+              <div class="form-group" [ngClass]="{'has-error':!signUpForm.controls['firstname'].valid && signUpForm.controls['firstname'].touched }">
+                <input type="text" id="first-name" class="form-control" name="fname" formControlName="firstname" placeholder="{{'PLACEHOLDERS.FIRSTNAME' | translate}}">
+                <div *ngIf="!signUpForm.controls['firstname'].valid && signUpForm.controls['firstname'].touched">
+                  <div *ngIf="signUpForm.controls['firstname'].hasError('required') || signUpForm.controls['firstname'].hasError('whitespace')"
+                    class="text-danger mt-1">
+                    <small>{{'ERROR.SIGNUP.Firstname_required' | translate}}</small>
+                  </div>
+                  <div [hidden]="signUpForm.controls['firstname'].hasError('pattern')" *ngIf="signUpForm.controls['firstname'].hasError('minlength') || signUpForm.controls['firstname'].hasError('maxlength')"
+                    class="text-danger mt-1">
+                    <small>{{'ERROR.SIGNUP.Firstname_length' | translate}}</small>
+                  </div>
+                  <div *ngIf="signUpForm.controls['firstname'].hasError('pattern')" class="text-danger mt-1">
+                    <small>{{'ERROR.SIGNUP.Firstname_invalid' | translate}}</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" [ngClass]="{'has-error':!signUpForm.controls['lastname'].valid && signUpForm.controls['lastname'].touched }">
+                <input type="text" id="last-name" class="form-control" name="lname" formControlName="lastname" placeholder="{{'PLACEHOLDERS.LASTNAME' | translate}}">
+                <div *ngIf="!signUpForm.controls['lastname'].valid && signUpForm.controls['lastname'].touched">
+                  <div *ngIf="signUpForm.controls['lastname'].hasError('pattern')" class="text-danger mt-1">
+                    <small>{{'ERROR.SIGNUP.Lastname_invalid' | translate}}</small>
+                  </div>
+                  <div [hidden]="signUpForm.controls['lastname'].hasError('pattern')" *ngIf="signUpForm.controls['lastname'].hasError('minlength') || signUpForm.controls['lastname'].hasError('maxlength')"
+                    class="text-danger mt-1">
+                    <small>{{'ERROR.SIGNUP.Lastname_length' | translate}}</small>
+                  </div>
+                  <div *ngIf="signUpForm.controls['lastname'].hasError('required') || signUpForm.controls['lastname'].hasError('whitespace')"
+                    class="text-danger mt-1">
+                    <small>{{'ERROR.SIGNUP.Lastname_required' | translate}}</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row  mb-3" [ngClass]="{'has-error':!signUpForm.controls['dob'].valid}">
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <input type="text" id="date-picker" class="form-control" aria-describedby="sizing-addon1" placeholder="{{'PLACEHOLDERS.DATE' | translate}}"
+                      formControlName="dob" maxlength="10" [maxDate]="maxDate" [minDate]="minDate" name="dp" ngbDatepicker
+                      #datepicker="ngbDatepicker">
+                    <span class="input-group-addon" id="sizing-addon1" (click)="toggleDatePicker($event)">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div *ngIf="!signUpForm.controls['dob'].valid && signUpForm.controls['dob'].touched">
+                    <div class="text-danger mt-1" *ngIf="signUpForm.controls['dob'].hasError('required') || signUpForm.controls['dob'].hasError('whitespace')">
+                      <small>{{'ERROR.SIGNUP.Dob_required' | translate}}</small>
+                    </div>
+                    <div class="text-danger mt-1" *ngIf="maxDate.year <= signUpForm.controls.dob.value.year || minDate.year > signUpForm.controls.dob.value.year">
+                      <small>{{'ERROR.SIGNUP.Dob_invalid_year' | translate}}</small>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="col-sm-5 ">
+                  <div class="">
+                    <div class="custom-radio-div pt-2 ">
+                      <label class="custom-control custom-radio mb-0 mr-2">
+                        <input id="radio1" name="gender" value="Male" type="radio" formControlName="gender" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{'MALE' | translate}}</span>
+                      </label>
+                      <label class="custom-control custom-radio mb-0 mr-2">
+                        <input id="radio2" name="gender" value="Female" type="radio" formControlName="gender" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{'FEMALE' | translate}}</span>
+                      </label>
+                    </div>
+
+                    <div *ngIf="signUpForm.controls['gender'].hasError('required') && signUpForm.controls['gender'].touched" class="text-danger">
+                      <small>{{'ERROR.SIGNUP.GENDER' | translate}}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" [ngClass]="{'has-error':!signUpForm.controls['mobilenumber'].valid && signUpForm.controls['mobilenumber'].touched}">
+                <input pdgOnlyNumber="true" type="text" id="mobile-number" [maxlength]="10" class="form-control" name="mobile" formControlName="mobilenumber"
+                  placeholder="{{'PLACEHOLDERS.MOBILE' | translate}}" />
+                <div *ngIf="!signUpForm.controls['mobilenumber'].valid && signUpForm.controls['mobilenumber'].touched">
+                  <div *ngIf="signUpForm.controls['mobilenumber'].hasError('minlength')" class="text-danger mt-1">
+                    <small>{{'ERROR.SIGNUP.MobileNo_length' | translate}}</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" [ngClass]="{'has-error':!signUpForm.controls['email'].valid && signUpForm.controls['email'].touched }">
+                <div class="icon-addon addon-md">
+                  <input type="text" id="email" (focusout)="isEmailAvailable()" (focus)="focusInFunction()" class="form-control" name="email"
+                    formControlName="email" placeholder="{{'PLACEHOLDERS.EMAIL' | translate}}">
+                  <label for="email" class="fa fa-spinner fa-spin fa-lg" *ngIf="loading"></label>
+                  <label for="email" class="fa fa-check-circle fa-lg fa-icon-green" *ngIf="success"></label>
+                  <label for="email" class="fa fa-times-circle fa-lg fa-icon fa-icon-red" *ngIf="error"></label>
+
+                  <div *ngIf="!signUpForm.controls['email'].valid && signUpForm.controls['email'].touched">
+                    <div [hidden]="signUpForm.controls['email'].hasError('pattern')" *ngIf="signUpForm.controls['email'].hasError('maxlength')"
+                      class="text-danger mt-1">
+                      <small>{{'ERROR.SIGNUP.Email_length' | translate}}</small>
+                    </div>
+                    <div *ngIf="signUpForm.controls['email'].hasError('required')" class="text-danger mt-1">
+                      <small>{{'ERROR.SIGNUP.Email_required' | translate}}</small>
+                    </div>
+                    <div *ngIf="signUpForm.controls['email'].hasError('pattern')" class="text-danger mt-1">
+                      <small>{{'ERROR.SIGNUP.Email_invalid' | translate}}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <label class="custom-control custom-checkbox mb-0 mr-0">
+                <input type="checkbox" class="custom-control-input" name="terms" id="terms-conditions" formControlName="terms">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{'AGREE' | translate }}
+                </span>
+              </label>
+              <a href="javascript:void(0);" [routerLink]="['/terms-and-conditions']" class="text-primary">{{'TERMS' | translate}}</a>
+              <div *ngIf="!signUpForm.controls['terms'].valid && signUpForm.controls['terms'].touched">
+                <div class="text-danger" *ngIf="signUpForm.controls['terms'].hasError('pattern') && signUpForm.controls['terms'].touched">
+                  <small>{{'ERROR.SIGNUP.TERMS' | translate}}</small>
+                </div>
+              </div>
+              <button class="btn btn-dark btn-block mt-3 ped-submit-btn"   type="submit" [disabled]="!signUpForm.valid">
+                <div *ngIf="!signUpForm.valid" placement="right" ngbTooltip="{{'SIGNUP_TOOL_TIP_MSG' | translate}}">{{'SIGNUP_SUBMIT_BUTTON' | translate}}</div>
+                <div *ngIf="signUpForm.valid">{{'SIGNUP_SUBMIT_BUTTON' | translate}}</div>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3">
+        <p class="text-center">{{'HAVE_ACCT' | translate}}
+          <a href="javascript:void(0);" [routerLink]="['/login']">
+            <button class="btn btn-dark">{{'SIGN_IN' | translate}}</button>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

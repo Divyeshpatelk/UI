@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit Cover Image</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body text-center">
+  <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+</div>
+<div class="modal-footer bg-dark">
+  <button type="button" class="btn btn-primary btn-sm" (click)="submit()">{{'SUBMIT' | translate}}</button>
+  <button type="button" class="btn btn-outline-primary btn-sm" (click)="activeModal.close('')">{{'CANCEL' | translate}}</button>
+</div>

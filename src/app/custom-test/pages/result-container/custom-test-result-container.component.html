@@ -1,0 +1,339 @@
+<div *ngIf="testResultData" class="test-result bg-dark">
+  <div class="container">
+    <div class="row m-0 custom-result">
+      <div class="col py-2">
+        <div class="row">
+          <div class="text-center col section-top-bar-header p-0">
+            <p class="mb-0 text-white">
+              <big> {{'ACCURACY' | translate}}</big>
+            </p>
+            <p class="mb-0">
+              <span class="fa fa-dot-circle-o mr-2 text-light"></span>
+              <span class="text-primary">{{testResultData.accuracy.toFixed(2)}}%</span>
+            </p>
+          </div>
+          <div class="text-center col section-top-bar-header p-0">
+            <p class="mb-0 text-white">
+              <big> {{'TOTAL_TIME_TAKEN' | translate}}</big>
+            </p>
+            <p class="mb-0">
+              <span class="fa fa-clock-o mr-2 text-light"></span>
+              <span class="text-primary">{{testResultData.timeTaken | formatTimer}}</span>
+            </p>
+          </div>
+          <div class="text-center col section-top-bar-header p-0" >
+            <p class="mb-0 text-white">
+              <big>{{'AVG_TIME_PER_MCQ' | translate}}</big>
+            </p>
+            <p class="mb-0">
+              <span class="fa fa-clock-o mr-2 text-light"></span>
+              <span class="text-primary">{{testResultData?.avgTimePerMcq | formatTimer}}</span>
+            </p>
+          </div>
+          <div class="text-center col section-top-bar-header p-0">
+            <p class="mb-0 text-white">
+              <big>{{'SCORE' | translate}}</big>
+            </p>
+            <p class="mb-0">
+              <span class="fa fa-clock-o mr-2 text-light"></span>
+              <span class="text-primary">{{testResultData?.totalObtainedMarks}} / {{testResultData?.tatalExamMarks}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 d-sm-block d-md-none"></div>
+      <div class="py-2 col d-flex align-items-center justify-content-center">
+        <div class="align-self-center col">
+          <div class="progress">
+            <div *ngIf="testResultData?.calculatedPer?.correct !== 0" class="progress-bar bg-success" role="progressbar" [ngStyle]="percentage?.correct">{{testResultData?.calculatedPer?.correct.toFixed(0)}}%</div>
+            <div *ngIf="testResultData?.calculatedPer?.incorrect !== 0" class="progress-bar bg-danger" role="progressbar" [ngStyle]="percentage?.incorrect">{{testResultData?.calculatedPer?.incorrect.toFixed(0)}}%</div>
+            <div *ngIf="testResultData?.calculatedPer?.unanswered !== 0" class="progress-bar bg-custom-gray" role="progressbar" [ngStyle]="percentage?.unanswered">{{testResultData?.calculatedPer?.unanswered.toFixed(0)}}%</div>
+          </div>
+          <div class="d-flex justify-content mt-1">
+            <p class="mb-0 text-white">
+                <span class="fa fa-square text-success"></span> {{'CORRECT' | translate}} : {{testResultData?.calculatedCount?.correct}} ( {{testResultData?.correctScore}} {{'MARKS' | translate}} )
+            </p>
+            <p class="mb-0 text-white ml-auto">
+                <span class="fa fa-square text-danger"></span> {{'INCORRECT' | translate}} : {{testResultData?.calculatedCount?.incorrect}} ( {{testResultData?.incorrectScore}} {{'MARKS' | translate}} )
+            </p>
+            <p class="mb-0 text-white ml-auto">
+                <span class="fa fa-square text-gray"></span> {{'UNANSWERED' | translate}} : {{testResultData?.calculatedCount?.unanswered}} ( {{testResultData?.unattendedScore}} {{'MARKS' | translate}} )
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+
+
+<ngb-tabset (tabChange)="beforeSectionChange($event)">
+  <ngb-tab *ngFor="let sec of sections" [id]=[sec.id]>
+      <ng-template ngbTabTitle>
+          <div title="{{ sec.name }}">
+              <big><b>{{sec.name}}</b></big>
+          </div>
+      </ng-template>
+      <ng-template ngbTabContent>
+          <div class="row test-result section-topbar">
+            <div class="col">
+              <div class="row">
+                <div class="col text-center section-top-bar-header">
+                    <p class="mb-0 text-dark">
+                        <big>{{ 'ACCURACY' | translate }}</big>
+                      </p> 
+                      <p class="mb-0">
+                          <span class="fa fa-dot-circle-o mr-2"></span>
+                          <span class="text-primary">{{currentSectionResult?.accuracy.toFixed(2)}}%</span>
+                      </p>
+                  </div>
+                  <div class="col text-center section-top-bar-header">
+                    <p class="mb-0 text-dark">
+                      <big>{{ 'SECTION_TIME_TAKEN' | translate }}</big>
+                    </p> 
+                    <p class="mb-0">
+                      <span class="fa fa-dot-circle-o mr-2"></span>
+                      <span class="text-primary">{{currentSectionResult?.sectionTimeTaken | formatTimer}}</span>
+                    </p>
+                  </div>
+                  <div class="col text-center section-top-bar-header">
+                    <p class="mb-0 text-dark">
+                        <big>{{ 'AVG_TIME_PER_MCQ' | translate }}</big>
+                    </p> 
+                    <p class="mb-0">
+                        <span class="fa fa-dot-circle-o mr-2"></span>
+                        <span class="text-primary">{{currentSectionResult?.sectionAvgTime | formatTimer}}</span>
+                    </p>
+                  </div>
+                  <div class="col text-center section-top-bar-header">
+                    <p class="mb-0 text-dark">
+                        <big>{{ 'SCORE' | translate }}</big>
+                    </p> 
+                    <p class="mb-0">
+                        <span class="fa fa-clock-o mr-2"></span>
+                        <span class="text-primary">{{ currentSectionResult?.obtaninedmark }} / {{ currentSectionResult?.totalmark }}</span>
+                    </p>  
+                  </div>
+              </div>
+            </div>
+            <div class="w-100 d-sm-block d-md-none"></div>
+            <div class="col">
+              <div class="row">
+                  <div class="col text-center section-top-bar-header">
+                      <p class="mb-0 text-dark">
+                        <big> {{ 'TOTAL_QUESTION' | translate }}</big>
+                      </p>
+                      <p class="mb-0">
+                          <span class="text-primary">{{ currentSectionResult?.total }}</span>
+                      </p> 
+                  </div>
+                  <div class="col text-center text-custom-success section-top-bar-header">
+                      <p class="mb-0">
+                         <big> {{ 'CORRECT' | translate }}</big>
+                      </p>
+                      <p class="mb-0">
+                          <span>{{ currentSectionResult?.correct }} ( {{ currentSectionResult?.correctScore > 0 ? ( '+' + currentSectionResult?.correctScore ) : currentSectionResult?.correctScore  }}  {{'MARKS' | translate}} )</span>
+                      </p> 
+                  </div>
+                  <div class="col text-center section-top-bar-header">
+                      <p class="mb-0 text-danger">
+                        <big> {{ 'INCORRECT' | translate }}</big>
+                      </p>
+                      <p class="mb-0">
+                          <span class="text-danger">{{ currentSectionResult?.incorrect }} ( {{ currentSectionResult?.incorrectScore  }}  {{'MARKS' | translate}} )</span>
+                      </p> 
+                  </div>
+                  <div class="col text-center section-top-bar-header">
+                      <p class="mb-0 text-gray">
+                          <big> {{ 'UNANSWERED' | translate }}</big>
+                      </p>
+                      <p class="mb-0">
+                          <span class="text-gray">{{ currentSectionResult?.unanswered }} ( {{ currentSectionResult?.unansweredScore > 0 ? ( '+' + currentSectionResult?.unansweredScore ) : currentSectionResult?.unansweredScore  }}  {{'MARKS' | translate}} )</span>
+                      </p> 
+                  </div>
+              </div>
+            </div>
+            
+         </div>
+         <div class="container py-3">
+          <div class="row">
+            <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 px-2 question-panel">
+              <div class="card ped-mob-quiz">
+                <div class="card-header bg-white">
+                  <div class="d-flex flex-wrap align-items-center">
+                    <h5 class="mb-0 mr-2">{{'QUESTION' | translate}} {{ currentQuesIndex + 1}}</h5>
+                    <div class="time ml-auto">
+                      <span class="time-text">{{'TIME_SPENT_PER_QUES' | translate}}</span>
+                      <h5 class="text-primary text-center mb-0">
+                        <span class="fa fa-clock-o"></span> {{selectedQuestion.questionInfo?.timeTaken | formatTimer}}</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body p-3 pdg-p-t-c">
+                  <div class="custom-quiz-container pdg-p-t-c" innerHTML="{{selectedQuestion.question?.question}}"></div>
+                  <div class="custom-controls-stacked" *ngFor="let choice of selectedQuestion.question?.choices">
+                    <label class="custom-control mr-0 py-1 custom-radio pr-1" *ngIf="selectedQuestion.question?.rightAnswers.length === 1; else multiplecorrect"
+                      [class.success]="selectedQuestion.question?.rightAnswers.indexOf(choice.id) !== -1" [class.danger]="choice.selected && selectedQuestion.question?.rightAnswers.indexOf(choice.id) === -1">
+                      <input id="radio2" name="radio" type="checkbox" class="custom-control-input" [(ngModel)]="choice.selected"
+                        [disabled]="true">
+                      <span class="custom-control-indicator ml-1 mt-1"></span>
+                      <span innerHTML="{{choice.text}}" class="pdg-p-t-c custom-control-description ml-1"></span>
+                      <span class="ml-auto status px-2 align-self-center" *ngIf="(selectedAns == choice.id) && selectedQuestion.question?.rightAnswers.indexOf(choice.id) === -1">{{'INCORRECT' | translate}}</span>
+                      <span class="ml-auto status px-2 align-self-center" *ngIf="selectedQuestion.question?.rightAnswers.indexOf(choice.id) !== -1">{{'CORRECT' | translate}}</span>
+                    </label>
+        
+                    <ng-template #multiplecorrect>
+                      <label class="custom-control custom-checkbox mr-0 py-1 pr-1" [class.success]="selectedQuestion.question?.rightAnswers.indexOf(choice.id) !== -1"
+                        [class.danger]="choice.selected && selectedQuestion.question?.rightAnswers.indexOf(choice.id) === -1">
+                        <input id="checkbox" name="checkbox" type="checkbox" class="custom-control-input" [(ngModel)]="choice.selected" [disabled]="true">
+                        <span class="custom-control-indicator ml-1 mt-1"></span>
+                        <span innerHTML="{{choice.text}}" class="pdg-p-t-c custom-control-description ml-1"></span>
+                        <span class="ml-auto status px-2 align-self-center" *ngIf="choice.selected && selectedQuestion.question?.rightAnswers.indexOf(choice.id) === -1">{{'INCORRECT' | translate}}</span>
+                        <span class="ml-auto status px-2 align-self-center" *ngIf="selectedQuestion.question?.rightAnswers.indexOf(choice.id) !== -1">{{'CORRECT' | translate}}</span>
+                      </label>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="card-footer py-3 bg-white">
+                  <!-- <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 explaination-part">
+                      <h6>{{'EXPLANATION' | translate}}:</h6>
+                      <p class="mb-0" innerHTML="{{selectedQuestion.question?.explanation}}">
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 related-topic">
+                      <h6>Related Topics</h6>
+                      <ul class="list-group">
+                        <li class="list-group-item" style="cursor: pointer;" *ngFor="let topic of selectedQuestionRelatedTopics" (click)="goToStudyPage(topic.indexId)">
+                          <h6 class="mb-0 text-primary">{{topic.title}}</h6>
+                          <div class="d-flex">
+                            <p class="mb-0 mr-2">
+                              <span class="fa fa-play-circle-o"></span>&nbsp;
+                              <small>{{topic.contentUnitCount?.videos || 0}} {{(topic.contentUnitCount?.videos > 1 ? 'VIDEOS' : 'VIDEO')
+                                | translate}}</small>
+                            </p>
+                            <p class="mb-0">
+                              <span class="fa fa-book"></span>&nbsp;
+                              <small>{{topic.contentUnitCount?.books || 0}} {{(topic.contentUnitCount?.books > 1 ? 'PDFS' : 'PDF') | translate}}</small>
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="pdg-p-t-c col-lg-12 col-md-12 col-sm-12 explaination-part">
+                      <h6>{{'EXPLANATION' | translate}}:</h6>
+                      <p class="mb-0" innerHTML="{{selectedQuestion.question?.explanation}}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 pl-0 pr-2 quiz-info">
+              <div class="card ml-2 ped-mob-sidebar">
+                <!-- <div class="card-header bg-white ped-mob-timer">
+                  <div class="d-flex">
+                    <h5 class="mb-0">Time
+                      <span class="fa fa-clock-o ml-1"></span>
+                      <span class="text-primary ml-1">02:00:00</span>
+                    </h5>
+                    <h5 class="ml-auto mb-0">Marked
+                      <span class="fa fa-thumb-tack ml-1"></span>
+                      <span class="text-primary">2</span>
+                    </h5>
+                  </div>
+                </div> -->
+                <div class="card-body p-3">
+                  <div class="filter-div py-1">
+                    <!-- <div class="d-flex text-align-center">
+                      <h6>{{'FILTER' | translate}}</h6>
+                      <a href="javascript:void(0);" class="ml-2" (click)="clearFilter()">
+                        <h6>
+                          <small>
+                            <u>{{'CLEAR_FILTER' | translate}}</u>
+                          </small>
+                        </h6>
+                      </a>
+                    </div> -->
+
+                          <div class="row pb-1">
+                            <!-- CORRECT -->
+                            <div class="col-sm-6 pr-0">
+                              <label class="ped-mark-correct  align-items-center d-flex ped-common-marks" ngbButtonLabel>
+                                  <span>{{ currentSectionResult?.correct }}</span>
+                                  <input  type="checkbox" class="d-none" [(ngModel)]="filters.attended" >{{'CORRECT' | translate}}
+                              </label>
+                            </div>
+                            <!-- INCORRECT -->
+                            <div class="col-sm-6">
+                              <label class="ped-mark-incorrect  align-items-center d-flex ped-common-marks" ngbButtonLabel>
+                                <span>{{ currentSectionResult?.incorrect }}</span>
+                                <input type="checkbox" class="d-none" [(ngModel)]="filters.unattended">
+                                {{'INCORRECT' | translate}}
+                              </label>
+                            </div>
+                          </div>
+                          <div class="row pb-1">
+                          <!-- Not Answered -->
+                        <div class="col-sm-6">
+                          <label class="ped-not-unnswered  align-items-center d-flex ped-common-marks" *ngIf="!isShowRightAnsOptionEnabled" ngbButtonLabel>
+                            <span>{{ currentSectionResult?.unanswered }}</span>
+                            <input type="checkbox" class="d-none" [(ngModel)]="filters.skipped">{{'UNANSWERED' | translate}}
+                          </label>
+                        </div>
+                      </div>
+                    <!-- <div class="pb-2" data-toggle="buttons">
+                      <div class="row">
+                        <label class="btn-sm btn-light m-2" ngbButtonLabel>
+                          <input type="checkbox" class="d-none" ngbButton [(ngModel)]="filters.unattended">{{'UNATTENDED' | translate}}
+                        </label>
+        
+                        <label class="btn-sm btn-success m-2" ngbButtonLabel>
+                          <input type="checkbox" class="d-none" ngbButton [(ngModel)]="filters.correct">{{'CORRECT' | translate}}
+                        </label>
+        
+                        <label class="btn-sm btn-danger m-2" ngbButtonLabel>
+                          <input type="checkbox" class="d-none" ngbButton [(ngModel)]="filters.incorrect">{{'INCORRECT' | translate}}
+                        </label>
+                      </div>
+                    </div> -->
+                  </div>
+                  <ng-container *ngIf="(curSectionResultQuestionsFlagData | questionFilter: filterArgs) as filteredData">
+                    <div class="question-no flex-wrap align-items-center d-flex pt-3" style="max-height: 285px; overflow-y: scroll;">
+                      <label *ngFor="let question of filteredData; index as count"
+                        class="rounded"
+                        [class.activeQuesion]="count === currentQuesIndex" 
+                        [class.ped-mark-correct]="question?.correct"
+                        [class.ped-mark-incorrect]="question?.incorrect"
+                        [class.ped-not-unnswered]="question?.unAnswered"
+                        class="align-items-center d-flex ped-common-marks" ngbButtonLabel>
+                        <span (click)="jumpToQues(count)" style="height:35px;width:35px;">
+                          {{count+1}}
+                        </span>
+                        <!-- {{question | json}} -->
+                      </label>
+                    </div>
+                    <div *ngIf="filteredData.length === 0">
+                      <small>{{'NO_QUESTION_ON_FILTER' | translate}}</small>
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="card-footer bg-white">
+                  <div class="d-flex">
+                    <button class="btn btn-dark btn-md" [disabled]="currentQuesIndex === 0" (click)="showPreviousQues()">
+                      <span class="fa fa-chevron-left mr-2 text-primary"></span>{{'PREV' | translate}}
+                    </button>
+                    <button class="btn btn-dark btn-md ml-auto" [disabled]="currentQuesIndex === curSectionResultQuestionsFlagData?.length - 1" (click)="showNextQues()">{{'NEXT' | translate}}
+                      <span class="fa fa-chevron-right ml-2 text-primary"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </ng-template>
+  </ngb-tab>
+</ngb-tabset>

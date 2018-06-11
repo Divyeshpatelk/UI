@@ -1,0 +1,147 @@
+@import 'theme-variables';
+
+.course-description {
+
+  p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    color: $gray-700;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    font-size: $base-font-size * .8;
+    height: $font-size-base * .8 * $line-height-lg * 3; /* Fallback for non-webkit */
+    line-height: $line-height-lg;
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    word-break: normal;
+    word-wrap: break-word;
+    max-width: 250px;
+  }
+}
+
+.desciption-part {
+  min-height: 6.2rem;
+
+  h6 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    font-size: $font-size-base;
+    height: $font-size-base * $line-height-lg * 2; /* Fallback for non-webkit */
+    line-height: $line-height-lg;
+    margin: 0 auto;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    word-break: normal;
+    word-wrap: break-word;
+    max-width: 250px;
+  }
+}
+
+.course-review-panel {
+  border-top: 1px solid $gray-600;
+
+  p {
+    font-size: $base-font-size * .767;
+  }
+}
+
+.badge {
+  font-size: 66%;
+}
+
+.rating > .rating-count {
+  font-size: $base-font-size * .767;
+}
+
+.icon-panel {
+  border-left: 1px solid $gray-200;
+  margin-top: -2px;
+}
+
+.coursepack-options {
+  margin-left: 10px;
+  margin-top: 110px;
+  position: absolute;
+  visibility: hidden;
+
+  span {
+    background-color: $white;
+    border: 1px solid $gray-700;
+
+    &:hover {
+      border-color: $orange;
+      color: $orange;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.single-course-pack {
+  transition: transform .2s linear, box-shadow .2s linear;
+
+  .custom-control {
+    position: absolute;
+
+    &.custom-checkbox {
+      visibility: hidden;
+     }
+  }
+
+  .custom-control-indicator {
+    background-color: $white;
+    background-size: 70% 70%;
+    border: 1px solid $orange;
+    height: 1.4rem;
+    left: .5rem;
+    top: .5rem;
+    width: 1.4rem;
+  }
+
+  .custom-control-input {
+    &:checked ~ .custom-control-indicator {
+      background-color: $orange;
+      color: $white;
+    }
+  }
+
+  &:hover {
+    background-color: $gray-100;
+    box-shadow: 1px 3px 4px $gray-700;
+    transform: translateY(-1px);
+
+    .custom-control {
+      &.custom-checkbox {
+        visibility: visible;
+      }
+    }
+
+    .coursepack-options {
+      visibility: visible;
+    }
+  }
+
+  img {
+    margin-right: .5rem;
+    max-height: 100px;
+
+  }
+}
+
+.star {
+  color: $gray-500;
+}
+
+.filled {
+  color: $orange;
+}
+
+.license {
+  margin-left: -7px;
+  margin-top: 65px;
+  position: absolute;
+}
+

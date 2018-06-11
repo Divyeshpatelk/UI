@@ -1,0 +1,190 @@
+@import 'theme-variables';
+
+.seperator {
+  h6 {
+    position: relative;
+    z-index: 1;
+    &::before {
+      border-top: 1px solid $gray-400;
+      bottom: 0;
+      content: '';
+      left: 0;
+      margin: 0 auto;
+      // this centers the line to the full width specified
+      position: absolute;
+      // positioning must be absolute here, and relative positioning must be applied to the parent */
+      right: 0;
+      top: 50%;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+
+  span {
+    background: $white;
+    padding: 0 15px;
+  }
+}
+
+.slider {
+  -webkit-appearance: none;
+  -webkit-transition: 0.2s;
+  position: relative;
+  &::-ms-track {
+    padding: 0;
+    position: relative;
+    top: -15px;
+    width: 100%;
+    margin: 0;
+    height: auto !important;
+    cursor: pointer;
+    background-color: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+  &::-ms-fill-lower {
+    background: $gray-400;
+    border-radius: 5px;
+    height: 15px;
+    opacity: 0.7;
+    outline: none;
+    transition: opacity 0.2s;
+  }
+  &::-ms-fill-upper {
+    background: $gray-400;
+    border-radius: 5px;
+    height: 15px;
+    opacity: 0.7;
+    outline: none;
+    transition: opacity 0.2s;
+  }
+
+  &::-webkit-slider-runnable-track {
+    background: $gray-400;
+    border-radius: 5px;
+    height: 15px;
+    opacity: 0.7;
+    outline: none;
+    transition: opacity 0.2s;
+    top: -8px;
+  }
+
+  &::-moz-range-track {
+    -webkit-appearance: none;
+    background: $gray-400;
+    border-radius: 5px;
+    height: 15px;
+    opacity: 0.7;
+    outline: none;
+    transition: opacity 0.2s;
+  }
+
+  &:disabled {
+    &::-webkit-slider-runnable-track {
+      background: $gray-200;
+    }
+    &::-moz-range-track {
+      background: $gray-200;
+    }
+    &::-webkit-slider-thumb {
+      cursor: default;
+      opacity: 0.6;
+    }
+    &::-moz-range-thumb {
+      cursor: default;
+      opacity: 0.6;
+    }
+    &::-ms-track {
+      background-color: transparent;
+      height: auto;
+      opacity: 0.6;
+    }
+    &::-ms-thumb {
+      border: 0;
+      opacity: 0.6;
+    }
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: $primary;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    top: -5px;
+    opacity: 0.8;
+    position: relative;
+  }
+
+  &::-moz-range-thumb {
+    background: $primary;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    opacity: 0.8;
+  }
+  &::-ms-thumb {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: $primary;
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  &::-ms-thumb:active {
+    border-color: transparent;
+  }
+}
+
+.configerror {
+  color: $red;
+  font-size: $font-size-sm;
+  font-weight: bold;
+}
+.practice-test-message {
+  display: block;
+  padding: 30px;
+  border: 3px dashed #ddd;
+  color: #999;
+  position: relative;
+  i {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    font-size: 30px;
+    margin-top: -21px;
+  }
+  h4 {
+    margin-left: 55px
+  }
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .slider {
+    position: relative;
+    top: -15px;
+    padding: 0;
+  }
+  .seperator {
+    top: -5px;
+    position: relative;
+  }
+}
+@media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+  .slider {
+    position: relative;
+    top: -8px;
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .practice-mobile-view {
+    .slider {
+      +.col-lg-2 {
+        margin-top: 10px;
+      }
+    }
+  }
+}

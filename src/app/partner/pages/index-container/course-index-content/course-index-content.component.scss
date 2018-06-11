@@ -1,0 +1,153 @@
+@import 'theme-variables';
+
+$dropdown-con-color: rgba(0, 0, 0, .2);
+
+.list-group-item {
+  div {
+    &:first-child {
+      margin-bottom: -1px;
+    }
+  }
+}
+
+//content scss
+
+.add-meterial-section {
+  border: 2px dashed $gray-500;
+  display: block;
+
+  span,
+  p {
+    color: $gray-500;
+  }
+
+  .seperator {
+    border-left: 1px solid $gray-200;
+    margin-top: -3%;
+    margin-bottom: -5%;
+  }
+
+  .add-option {
+    a {
+      &:hover {
+        span {
+          color: $orange;
+        }
+     }
+   }
+  }
+}
+
+
+.badge {
+  font-size: 66%;
+  min-width: 120px;
+}
+
+.add-question-form {
+  &.col-xl-6 {
+    &.col-lg-12 {
+      &.col-md-12 {
+        &.col-sm-12 {
+          max-height: calc(100vh - 265px);
+          overflow: auto;
+        }
+      }
+    }
+  }
+}
+
+.question-preview-list {
+  &.col-xl-6 {
+    &.col-lg-12 {
+      &.col-md-12 {
+        &.col-sm-12 {
+          max-height: calc(100vh - 265px);
+          overflow: auto;
+        }
+      }
+   }
+  }
+}
+
+.coursepackbtn {
+  margin-bottom: -30px;
+}
+
+.dropzone-box {
+  border: 3px dashed $gray-200;
+}
+
+.course-detail {
+  flex-grow: 1;
+  max-width: 29.31rem;
+  min-width: 29.06rem;
+}
+
+.addcontent {
+  ul {
+    &.dropdown-menu {
+      &.show {
+        &::before {
+          border-bottom: 7px solid $gray-300;
+          border-bottom-color: $dropdown-con-color;
+          border-left: 7px solid transparent;
+          border-right: 7px solid transparent;
+          content: '';
+          display: inline-block;
+          left: 7px;
+          position: absolute;
+          right: unset;
+          top: -7px;
+        }
+
+        &::after {
+          border-bottom: 6px solid $white;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          content: '';
+          display: inline-block;
+          left: 8px;
+          position: absolute;
+          right: unset;
+          top: -6px;
+        }
+      }
+    }
+  }
+}
+
+.courceditimg {
+  img {
+    max-height: 230px;
+  }
+}
+@media screen and(max-width: 1200px) {
+  .upload-file-section {
+    &.col-xl-6 {
+      &:first-child {
+        border-right: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  // .course-detail-list > .col-lg-6.col-md-12.col-sm-12 {
+  //   padding-left: 10px !important;
+  //   padding-right: 10px !important;
+  // }
+
+  .coursepackbtn {
+    text-align: center;
+
+    button {
+      margin-bottom: 5px;
+      width: 150px;
+    }
+  }
+}
+
+.main-tab-margin {
+  margin-top: 6px;
+}

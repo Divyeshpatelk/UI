@@ -1,0 +1,51 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{'BULK_UPLOAD' | translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <span>{{'UPLOAD_QUE_FROM_CSV' | translate}}</span>
+  <div class="row row-eq-height">
+    <div class="bg-light p-3 col-sm-6 ml-4 mt-3" [ngClass]="droppableClasses" [pdgFileDrop] (fileDrop)="filesDropped($event)"
+      (fileDragOver)="filesDragOver($event)" (fileDragLeave)="filesDragLeave($event)">
+
+      <div class="ml-auto bg-white p-2 file-upload add-meterial-section">
+        <p class="mb-0 p-1 ml-2 ped-upload-font">
+          <small class="drag-drop-files">{{'DRAG_AND_DROP_YOUR_FILE_HERE' | translate}}</small>
+          <small>({{'ACCEPTED_FORMATS' | translate}}: .csv)</small>
+        </p>
+        <div class="d-flex flex-wrap p-1">
+
+          <div class="dropzone_text ml-2 mt-1 mr-auto ped-upload-font">
+            <div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="align-self-center">
+                    <button class="btn btn-dark btn-sm" type="" id="btn-browse" (click)="openFileSelect()">
+                      {{'BROWSE' | translate}}
+                    </button>
+                    <input #fileSelect style="display: none;" type="file" [pdgFileSelect] (fileSelect)="selectFiles($event)" />
+                    <span class="ml-2">
+                      <small>{{'UPLOAD_UPTO_16MB' | translate}}</small>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-dark btn-sm">
+                    {{'DOWNLOAD_TEMPLATE' | translate}}
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer bg-dark">
+  <button type="button " class="btn btn-outline-primary" (click)="close() ">{{'CANCEL' | translate}}</button>
+</div>

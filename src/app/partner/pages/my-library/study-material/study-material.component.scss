@@ -1,0 +1,143 @@
+@import 'theme-variables';
+
+.ngx-datatable {
+  &.material {
+    box-shadow: 1px 2px 4px 1px $gray-400;
+  }
+}
+
+:host /deep/ ngx-datatable {
+  .datatable-header-cell {
+    background: $gray-100;
+    border-right: 1px solid $gray-200;
+  }
+
+  .datatable-header-cell-wrapper {
+    font-size: $base-font-size * 1;
+    font-weight: bold;
+  }
+
+  .datatable-row-detail {
+    padding: 20px;
+  }
+
+  .datatable-body-cell-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  &.ngx-datatable {
+    &.fixed-row {
+      .datatable-scroll {
+        .datatable-body-row {
+          .datatable-row-left {
+            background-image: none;
+          }
+
+          .datatable-row-right {
+            background-image: none;
+          }
+
+          .datatable-body-cell {
+            padding: .5rem 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.filter {
+  .dropdown-toggle
+  &::after {
+    content: none;
+  }
+
+  .filter-link {
+    color: $white;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+//searchbar css
+.icon-addon {
+  color: $gray-600;
+  display: block;
+  position: relative;
+
+  &::before {
+    content: ' ';
+    display: table;
+  }
+
+  &::after {
+    content: ' ';
+    display: table;
+  }
+
+  .fa {
+    font-size: 14px;
+    margin-left: -2.5px;
+    padding: 10px 0;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 1px;
+    width: 20px;
+    z-index: 2;
+  }
+
+  .form-control {
+    float: left;
+    font-weight: normal;
+    padding-right: 30px;
+
+    &:focus {
+      border-color: $orange;
+    }
+
+    &:focus + .fa {
+      color: $orange;
+    }
+  }
+}
+
+//dropdown active arrow css
+ul {
+  &.dropdown-menu {
+    &.show {
+      &::before {
+        border-bottom: 10px solid $white;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        content: '';
+        left: 16px;
+        position: absolute;
+        right: unset;
+        top: -10px;
+        z-index: 10;
+      }
+
+      &::after {
+        border-bottom: 12px solid $gray-300;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        content: '';
+        left: 14px;
+        position: absolute;
+        right: unset;
+        top: -12px;
+        z-index: 9;
+      }
+    }
+  }
+}
+
+.disabled {
+  color: $gray-500;
+}

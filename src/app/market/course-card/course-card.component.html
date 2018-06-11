@@ -1,0 +1,54 @@
+<div class="card" (click)="openCourse()" [ngClass]="{'card-comingsoon':course.comingSoon}">
+  <div (mouseenter) ="mouseEnter() "  (mouseleave) ="mouseLeave()">
+    <div class="ped-comingsoon" *ngIf="course.comingSoon">
+      <label for="">{{ 'COMING_SOON' | translate }}</label>
+    </div>
+    <div class="ped-card-img text-center">
+      <img class="card-img-banner img-fluid" src="{{course.img}}" alt="Card image cap">
+    </div>
+    <div class="card-block">
+      <h4 class="card-title">{{course.title}}</h4>
+      <p class="card-text">
+        <!-- <b>Author:</b>  -->
+        {{course.author}}</p>
+      <div *ngIf="!isPurchased" class="d-flex flex-wrap ">
+        <!-- <div class="d-flex flex-wrap ">
+          <span class="ped-cost-course">Free</span>
+        </div> -->
+        <div class="ml-auto card-action" *ngIf="!course.comingSoon">
+          <a *ngIf="course.price; else free" href="javascrip:void(0);" (click)="initAddCourse($event)" class="btn btn-primary">
+            <span *ngIf="!course.priceRevised; else revisedPrice">₹{{ course.price }}</span> 
+            <ng-template #revisedPrice>
+              <span class="price-revised">₹{{course.price}}</span> ₹{{course.priceRevised}}
+            </ng-template> + GST
+          </a>
+          <ng-template #free>
+            <a href="javascrip:void(0);" (click)="initAddCourse($event)" class="btn btn-primary">
+              {{ 'GET_IT_FREE' | translate }}
+            </a>
+          </ng-template>
+          <!-- <a href="#" class="btn btn-primary">₹ 50 + GST</a> -->
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="cardTooltip && enableToolTip" class="{{(cardindex+1)%tipMode === 0?'ped-card-tooltip cardTip-left':'ped-card-tooltip'}}">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h5 class="card-title">{{course.title}}</h5>
+            <p classs="ped-mb-10">{{course.author}}</p>
+          </div>
+          <p class="mt-10 ped-course-description">{{course.testType}}</p>
+          <div class="ped-card-info-detail">
+            <p *ngIf="course.pageNo">Reading: {{course.pageNo}} pages</p>
+            <p *ngIf="course.hours">Videos: {{course.hours}} hours</p>
+            <p *ngIf="course.quizeCount">Practice: {{course.quizeCount}} MCQs</p>
+            <p *ngIf="course.testCount">Exams: {{course.testCount}} tests</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

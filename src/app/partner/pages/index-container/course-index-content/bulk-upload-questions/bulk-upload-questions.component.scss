@@ -1,0 +1,49 @@
+@import 'theme-variables';
+.modal-body {
+  height: calc(100vh - 235px);
+}
+
+.upload-file-section {
+  &.col-xl-6 {
+    &:first-child {
+      max-height: calc(100vh - 265px);
+      overflow: auto;
+    }
+  }
+}
+
+.ped-upload-font {
+  color: #9b9c9c;
+  line-height: 100%;
+  font-size: 15px;
+}
+
+.drag-drop-files {
+  font-weight: bold
+}
+
+.media-list {
+  li {
+    border: 1px solid $white;
+    &:hover {
+      border: 1px solid $orange;
+    }
+    &:focus {
+      box-shadow: 0 0 0 1px $orange;
+      outline: 0;
+    }
+    &.selected {
+      border: 1px solid $primary;
+    }
+  }
+}
+
+.file-upload {
+  border: 2px dashed $light-grey;
+  height: calc(100vh-100px);
+}
+
+.add-from-url,
+.file-upload-section {
+  min-height: 153px;
+}

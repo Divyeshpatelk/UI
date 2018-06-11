@@ -1,0 +1,79 @@
+<nav class="sidebar">
+  <div class="sidebar-header px-3 py-2 d-flex justify-content-between">
+    <div class="course-name align-self-center">
+      <h6 class="mb-0 text-truncate">{{course.courseName}}</h6>
+    </div>
+  </div>
+  <div class="sidebar-header subject-name px-3 py-2 bg-dark" ngbDropdown>
+    <div class="d-flex" ngbDropdownToggle>
+      <div>
+        <p class="mb-0 text-white">{{selectedSubject.subjectName}}</p>
+        <div class="d-flex justify-content-start meterial-list">
+          <p>
+            <span class="fa fa-play-circle-o"></span>{{total?.questions || 0}} {{(total?.questions > 1 ? 'QUESTIONS' : 'QUESTION')
+            | translate}}</p>
+        </div>
+      </div>
+      <!-- <div class="align-self-start mt-1 ml-auto">
+        <button class="btn btn-light btn-sm" ></button>
+      </div> -->
+    </div>
+    <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button class="dropdown-item" *ngFor="let subject of subjects" (click)="selectSubject(subject)">{{subject.subjectName}}</button>
+    </ul>
+  </div>
+  <div class="sidebar-menu-item">
+    <div class="list-group">
+      <div *ngFor="let index1 of indexes; let i1 = index">
+        <div class="list-group-item d-flex p-2 meterial-list-content justify-content-start"  [attr.aria-expanded]="!selectedIndexOpenState[i1]?.isCollapsed"
+          aria-controls="collapseExample" (click)="updateIndexSelection(index1, [i1]);" >
+            <label class="custom-control custom-checkbox student-custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [indeterminate]="index1.selected === null" [(ngModel)]="index1.selected" (click)="index1.selected = !index1.selected;">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"></span>
+          </label>
+          <pdg-practice-sidebar-item [index]="index1"></pdg-practice-sidebar-item>
+          <div class="arrow-sign ml-auto p2" (click)="selectIndex(index1, [i1], true);$event.stopPropagation();">
+            <span [ngClass]="getDecoration(selectedIndexOpenState[i1]?.isCollapsed)" *ngIf="index1.children"></span>
+          </div> 
+        </div>
+        <!-- second level -->
+        <div id="collapseExample" [ngbCollapse]="selectedIndexOpenState[i1]?.isCollapsed" *ngIf="index1.children">
+          <div class="list-group-item p-0" *ngFor="let index2 of index1.children; let i2 = index">
+            <div class="d-flex pl-4 py-2 meterial-list-content justify-content-start" [class.level2]="selectedIndex.indexId === index2.indexId" 
+              [attr.aria-expanded]="!selectedIndexOpenState[i1].children && selectedIndexOpenState[i1].children[i2]?.isCollapsed"
+              aria-controls="collapseExample1"  (click)="updateIndexSelection(index2, [i1, i2]);">
+              <label class="custom-control custom-checkbox student-custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [indeterminate]="index2.selected === null" [(ngModel)]="index2.selected" (click)="index2.selected = !index2.selected;">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+              </label>
+              <pdg-practice-sidebar-item [index]="index2"></pdg-practice-sidebar-item>
+              <div class="arrow-sign ml-auto arrow-sign-child" (click)="selectIndex(index2, [i1, i2], true);$event.stopPropagation();">
+                <span [ngClass]="getDecoration(selectedIndexOpenState[i1].children && selectedIndexOpenState[i1].children[i2]?.isCollapsed)"
+                  class="bullet"></span>
+              </div>
+            </div>
+            <div id="collapseExample1" [ngbCollapse]="selectedIndexOpenState[i1].children && selectedIndexOpenState[i1].children[i2]?.isCollapsed"
+              *ngIf="index2.children">
+              <div class="list-group-item p-0" *ngFor="let index3 of index2.children; let i3 = index">
+                <div class="d-flex pl-5 py-2 meterial-list-content justify-content-start" [class.level3]="selectedIndex.indexId === index3.indexId" (click)="updateIndexSelection(index3, [i1, i2, i3]);">
+                  <label class="custom-control custom-checkbox student-custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [indeterminate]="index3.selected === null" [(ngModel)]="index3.selected"  (click)="index3.selected = !index3.selected;">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>
+                  </label>
+                  <pdg-practice-sidebar-item [index]="index3"></pdg-practice-sidebar-item>
+                  <div class="arrow-sign ml-auto arrow-sign-child" (click)="selectIndex(index3, [i1, i2, i3], true);$event.stopPropagation();">
+                    <span [ngClass]="getDecoration(selectedIndexOpenState[i1].children && selectedIndexOpenState[i1].children[i2].children && selectedIndexOpenState[i1].children[i2].children[i3]?.isCollapsed)"
+                      class="bullet"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

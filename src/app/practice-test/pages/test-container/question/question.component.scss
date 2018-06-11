@@ -1,0 +1,148 @@
+@import  'theme-variables';
+
+$navbar-box-shadow: rgba(0, 0, 0, .27);
+$danger-rgb: rgba($danger, .27);
+$success-rgb: rgba($success, .27);
+
+.btn {
+  &.btn-outline-secondary {
+    border-color: lighten($gray-600, 2%);
+    color: $gray-600;
+
+    &:hover {
+      background-color: $white;
+      border-color: $primary;
+      color: $primary;
+
+      .btn-text {
+        color: $darkblue;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    &:not([disabled]) {
+      &:not(.disabled) {
+        &:active,
+        &.active {
+          background-color: $primary;
+          border-color: $primary;
+          box-shadow: none;
+          color: $white;
+
+          .btn-text {
+            color: $darkblue;
+            font-weight: $font-weight-bold;
+          }
+        }
+      }
+    }
+  }
+}
+.custom-quiz-container {
+  display: table;
+  width: 100%;
+  img {
+    max-width: 100%;
+  }
+}
+.card {
+  .card-footer {
+    .row {
+      .col-lg-6 {
+        &.col-md-12 {
+          &.col-sm-12 {
+            &.explaination-part {
+              // border-right: 1px solid $gray-300;
+            }
+
+            &.related-topic {
+              .list-group {
+                .list-group-item {
+                  background-color: lighten($primary, 40%);
+                  border-left: 2px solid $primary;
+
+                  small {
+                    color: $gray-600;
+                  }
+
+                  span {
+                    &.fa {
+                      color: $gray-600;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.custom-control-input:disabled ~ .custom-control-description {
+  color: $darkblue;
+}
+
+.custom-control-input:disabled:checked ~ .custom-control-indicator {
+  background-color: $orange;
+}
+
+.custom-control {
+  .status {
+    visibility: hidden;
+  }
+
+  &.custom-radio {
+    &.danger {
+      background-color: $danger-rgb;
+
+      .status {
+        color: $danger;
+        visibility: visible;
+      }
+    }
+
+    &.success {
+      background-color: $success-rgb;
+
+      .status {
+        color: $success;
+        visibility: visible;
+      }
+    }
+  }
+
+  &.custom-checkbox {
+    &.danger {
+      background-color: $danger-rgb;
+
+      .status {
+        color: $danger;
+        visibility: visible;
+      }
+    }
+
+    &.success {
+      background-color: $success-rgb;
+
+      .status {
+        color: $success;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.time {
+  .time-text {
+    color: $gray-500;
+    font-size: $base-font-size * .8;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .ped-mob-quiz {
+    margin-bottom: 120px !important;
+  }
+}

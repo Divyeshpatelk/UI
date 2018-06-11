@@ -1,0 +1,127 @@
+<div class="col-lg-12 col-md-12 col-sm-12 px-0">
+    <div class="card">
+        <div class="card-body p-2">
+            <div innerHTML="{{currentCourse?.description}}"></div>
+            <div innerHTML="{{currentCourse?.objectives}}"></div>
+            <div class="card bg-light">
+            <h6 class="card-title p-2"><big>{{ 'TEST_HISTORY' | translate }}</big></h6>
+            <hr class="my-1">
+            <div class="py-1 card-body dashboard-grid">
+                <p-table [value]="customTestRecords" [paginator]="true"
+                [rows]="[recordPerPage]" [totalRecords]="totalCustomTestElements"
+                [lazy]="true" (onLazyLoad)="loadCustomTestData($event)" selectionMode="single" [responsive]="true">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{ 'EXAMNAME' | translate }}</th>
+                            <th>{{ 'DURATION' | translate }}</th>
+                            <th>{{ 'SCORE' | translate }}</th>
+                            <th>{{ 'TOTAL_QUESTION' | translate }}</th>
+                            <th>{{ 'CORRECT_ANS' | translate }}</th>
+                            <th>{{ 'INCORRECT_ANS' | translate }}</th>
+                            <th>{{ 'UNANSWERED' | translate }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-exam>
+                            <tr *ngIf="exam.status==='FINISH' && (exam?.showResultToStudents===true ||  exam?.showResultToStudents===null)"  title="{{ 'VIEW_CT_DETAILS' | translate }}"  (click)="viewCustomTestDetailResult(exam.studentTestId,exam.testName)" style="cursor:pointer">
+                                <td> {{ exam.testName }}</td>
+                                <td> {{ exam.duration }} Mins</td>
+                                <td class="text-info">{{ exam.historyData?.totalMark ? exam.historyData?.totalMark : '-' }}</td>
+                                <td class="text-info">{{ exam.historyData?.total }}</td>
+                                <td class="text-success">{{ exam.historyData?.right }}</td>
+                                <td class="text-danger" >{{ exam.historyData?.wrong }}</td>
+                                <td class="text-warning">{{ exam.historyData?.unattended }}</td>
+                            </tr>
+                            <tr *ngIf="exam.status==='FINISH' && exam?.showResultToStudents===false"  title="{{ 'EXAM_COMPLETE_NO_RESULT' | translate }}"  (click)="viewLockedResultPopup(exam)" style="cursor:pointer">
+                                <td> {{ exam.testName }}</td>
+                                <td> {{ exam.duration }} Mins</td>
+                                <td colspan="5"  class="text-info">
+                                    <div>{{ 'EXAM_COMPLETE_NO_RESULT' | translate }}</div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="exam.status=='PARTNER_CREATED' && canStartExam(exam) === -1 " style="cursor:auto">
+                                <td> {{ exam.testName }}</td>
+                                <td> {{ exam.duration }} Mins</td>
+                                <td colspan="5"  class="text-info">
+                                    <div>{{ 'EXAM_TO_BE_START' | translate }} <span [textContent]="getFormateDT(exam.startTime)"></span> {{ 'TO' | translate }} <span [textContent]="getFormateDT(exam.endTime)"></span></div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="exam.status=='PARTNER_CREATED' && canStartExam(exam) === 0" style="cursor:pointer">
+                                <td> {{ exam.testName }}</td>
+                                <td> {{ exam.duration }} Mins</td>
+                                <td colspan="5"  class="text-info">
+                                    <div (click)="startCustomTest(exam)"><u>{{ 'START_TEST' | translate }} <span *ngIf="exam?.endTime">{{ 'EXAM_TIME_START_BEFORE' | translate }}</span><span *ngIf="exam?.endTime" [textContent]="getFormateDT(exam.endTime)"></span></u></div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="exam.status=='PARTNER_CREATED' && canStartExam(exam) === 1" style="cursor:auto">
+                                <td> {{ exam.testName }}</td>
+                                <td> {{ exam.duration }} Mins</td>
+                                <td colspan="5"  class="text-danger">
+                                    <div>{{ 'EXAM_TIME_FINISH' | translate }} <span [textContent]="getFormateDT(exam.startTime)"></span> {{ 'TO' | translate }} <span [textContent]="getFormateDT(exam.endTime)"></span></div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="exam.status=='RUNNING'" style="cursor:auto">
+                                <td> {{ exam.testName }}</td>
+                                <td> {{ exam.duration }} Mins</td>
+                                <td colspan="5"  class="text-warning"><div>{{ 'TEST_NOT_COMPLETE' | translate }}</div></td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr [hidden]="totalCustomTestElements || totalCustomTestElements>0">
+                                <td colspan="7  ">{{ 'NO_RECORD' | translate }}</td>
+                            </tr>
+                        </ng-template>
+                </p-table>
+            </div>
+            </div>
+            <br/>
+            <div *ngIf="currentCourse?.practiceEnable" class="card bg-light">
+            <h6 class="card-title p-2"><big>{{ 'PT_RESULT' | translate }}</big></h6>
+            <hr class="my-1">
+            <div class="py-1 card-body dashboard-grid">
+                <ngb-tabset (tabChange)="beforeChange($event)">
+                    <ngb-tab *ngFor="let subject of subjects" [id]=[subject.id]>
+                        <ng-template ngbTabTitle>
+                            <div title="{{ subject.subjectName }}">
+                                {{subject.subjectName}}
+                            </div>
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <p-table [value]="practiceTestRecords" [paginator]="true"
+                                [rows]="[recordPerPage]" [totalRecords]="totalPracticeTestElements"
+                                [lazy]="true" (onLazyLoad)="loadPracticeTestData($event)" selectionMode="single" [responsive]="true" >
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>{{ 'DATETIME' | translate }}</th>
+                                        <th>{{ 'TOTAL_QUESTION' | translate }}</th>
+                                        <th>{{ 'CORRECT_ANS' | translate }}</th>
+                                        <th>{{ 'INCORRECT_ANS' | translate }}</th>
+                                        <th>{{ 'UNANSWERED' | translate }}</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-exam>
+                                    <tr *ngIf="exam.status=='FINISH'" title="{{ 'VIEW_PT_DETAILS' | translate }}"  (click)="viewDetailResult(exam.id)" style="cursor:pointer">
+                                        <td> {{ exam.lastModifiedDate | dateTimeFormat}} </td>
+                                        <td class="text-info">{{ exam.historyData?.total }}</td>
+                                        <td class="text-success">{{ exam.historyData?.right }}</td>
+                                        <td class="text-danger" >{{ exam.historyData?.wrong }}</td>
+                                        <td class="text-warning">{{ exam.historyData?.unattended }}</td>
+                                    </tr>
+                                    <tr *ngIf="exam.status=='RUNNING'" style="cursor:auto">
+                                        <td title="{{ exam.lastModifiedDate | dateTimeFormat }}"> {{ exam.lastModifiedDate | dateTimeFormat}} </td>
+                                        <td colspan="4"  class="text-warning"><div>{{ 'TEST_NOT_COMPLETE' | translate }}</div></td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="footer">
+                                    <tr [hidden]="totalPracticeTestElements || totalPracticeTestElements>0">
+                                        <td colspan="5">{{ 'NO_RECORD' | translate }}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

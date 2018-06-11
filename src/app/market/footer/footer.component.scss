@@ -1,0 +1,123 @@
+.ped-footer {
+    background: #181818;
+    color:#fff;
+    .row {
+      min-height: 70px;
+        ul {
+            display: inline-block;
+            margin: 0;
+
+            li{
+                display: inline-block;
+                list-style:none;
+                margin: 0 10px;
+                a {
+                    color: #fff;
+                }
+            }
+        }
+
+        .ped-follow-social {
+            text-align: right;
+            margin: 5px 0;
+            ul {
+                li {
+                    span {
+                        color:#a1a1a1
+                    }
+                    a {
+                        span {
+                            &.rounded-circle {
+                                border-radius: 50%;
+                            }
+                            &.l-in{
+                                background: #1374a6;
+                                padding: 9px 10px;
+                            }
+                            &.fb{
+                                background: #42598b;
+                                padding: 9px 11px;
+                            }
+                            &.twit{
+                                background: #579cd0;
+                                padding: 9px 10px;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .ped-footer-links {
+            span {
+                color:#a1a1a1
+            }
+            ul {
+                padding-left: 10px;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .ped-footer-links {
+                text-align: center;
+            }
+            .ped-follow-social {
+                text-align: center
+            }
+        }
+
+    }
+}
+@media only screen and (max-width: 767px) {
+    .ped-footer-links {
+        span {
+            display: block;
+            padding: 10px 0
+        }
+        ul {
+            padding: 0;
+            width: 100%;
+            li {
+                display: block !important;
+                border-bottom: 1px solid #494949 !important;
+                padding: 10px 0;
+                &:last-child {
+                    border-bottom: 0px !important;
+                }
+            }
+        }
+    }
+    .ped-follow-social {
+        ul {
+            padding: 0;
+            margin: 10px 0;
+            li {
+                &:first-child {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    /* IE10+ CSS styles go here */
+    .ped-footer {
+        
+        .row {
+          height: 70px;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .ped-footer {
+        
+            .row {
+              height: auto;
+            }
+        }   
+    }
+}
+@media (min-width: 1366px){
+    .container {
+        max-width: 1002px;
+    }    
+}

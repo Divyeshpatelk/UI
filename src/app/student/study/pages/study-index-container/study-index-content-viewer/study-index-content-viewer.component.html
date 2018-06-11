@@ -1,0 +1,89 @@
+<div class="container-fluid px-0">
+  <div class="d-flex">
+    <div class="bg-white middle-part">
+      <div class="card border-0">
+        <div class="py-3 pr-2">
+          <div class="preview-section">
+            <pdg-video-player *ngIf="selectedContent?.type === 'video'" [src]="src"></pdg-video-player>
+            <pdg-pdf-reader *ngIf="selectedContent?.type === 'pdf'" [src]="src"></pdg-pdf-reader>
+            <pdg-youtube-player *ngIf="selectedContent?.type === 'refvideo'" [src]="src"></pdg-youtube-player>
+          </div>
+        </div>
+        <div class="card-body p-3">
+          <h5 class="">{{selectedContent?.title}}</h5>
+          <div class="d-flex social-info align-items-baseline">
+            <p class="mr-3 mb-2 gray-text">Published On May 05, 2017</p>
+            <p class="mr-3 mb-2">15
+              <span class="fa fa-thumbs-o-up"></span>
+            </p>
+            <p class="mr-3 mb-2">10
+              <span class="fa fa-thumbs-o-down"></span>
+            </p>
+            <ngb-rating [rate]="1" class="mb-0 text-primary"></ngb-rating>
+            <p class="ml-auto gray-text mb-0">Author: Kashyap B</p>
+          </div>
+          <div>
+            <p class="description mb-0">{{selectedContent?.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="javascript:void(0)" (click)="showContentBar = !showContentBar" class="d-block d-sm-block d-md-none ped-content-activator"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+    <div class="ml-1 right-part bg-white border ped-content-list-sidebar" [ngClass]="{'ped-active-content-list-sidebar': showContentBar}">
+      <div>
+        <a href="javascript:void(0)" (click)="showContentBar = !showContentBar" class="d-block d-sm-block d-md-none ped-content-activator"><i class="fa fa-times" aria-hidden="true"></i></a>
+        <div class="d-flex p-2 video-list-options">
+          <p class="pl-1 mb-0 text-primary mr-1">Up Next : </p>
+          <p class="pl-1 mb-0 mr-1 gray-text" [class.selected]="filterArgs === 'video'">
+            <a class="p-1" href="javascript:void(0);" (click)="filterContent('video')">
+              <span class="fa fa-play-circle-o"></span>
+              <span>{{contents | contentCount: 'video'}} {{((contents | contentCount: 'video') > 1 ? 'VIDEOS' : 'VIDEO') | translate}}</span>
+            </a>
+          </p>
+          <p class="pl-1 mb-0 mr-1 gray-text" [class.selected]="filterArgs === 'pdf'">
+            <a class="p-1" href="javascript:void(0);" (click)="filterContent('pdf')">
+              <span class="fa fa-book"></span>
+              <span>{{contents | contentCount: 'pdf'}} {{((contents | contentCount: 'pdf') > 1 ? 'PDFS' : 'PDF') | translate}}</span>
+            </a>
+          </p>
+        </div>
+
+        <div class="video-list p-1">
+          <ul class="list-unstyled mb-0">
+            <li class="media p-2" *ngFor="let content of contents | contentFilter: filterArgs" [class.active]="selectedContent === content"
+              (click)="selectContent(content)">
+              <pdg-thumbnail-video class="ped-thumb-mobile" [src]="content.thumbnailKeyNameInBucket" *ngIf="content.type === 'video'" [height]="70"></pdg-thumbnail-video>
+              <pdg-thumbnail-pdf class="ped-thumb-mobile" [src]="content.thumbnailKeyNameInBucket" *ngIf="content.type === 'pdf'" [height]="70"></pdg-thumbnail-pdf>
+              <pdg-thumbnail-youtube class="ped-thumb-mobile" [src]="content.thumbnailKeyNameInBucket" *ngIf="content.type === 'refvideo'" [height]="70"></pdg-thumbnail-youtube>
+              <div class="media-body ml-2">
+                <p class="mb-0 video-name" title="{{content.title}}">{{content.title}}</p>
+                <div class="d-none video-info">
+                  <div class="d-flex">
+                    <p class="mr-1 mb-1">
+                      <span class="gray-text mr-1">May 05, 2017</span>
+                    </p>
+                    <!-- <p class="ml-auto  mb-1 text-primary">
+                          <span class="fa fa-star"></span>
+                        </p> -->
+                  </div>
+                  <div class="d-flex">
+                    <p class="mr-2 mb-0">
+                      <span class="fa fa-play-circle-o"></span> 00:00:50</p>
+                    <p class="mr-2 mb-0">
+                      <span>15 </span>
+                      <span class="fa fa-thumbs-o-up"></span>
+                    </p>
+                    <p class="mb-0">
+                      <span>15 </span>
+                      <span class="fa fa-thumbs-o-down"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

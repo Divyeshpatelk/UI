@@ -1,0 +1,109 @@
+<!-- <ng-template #content let-c="close" let-d="dismiss"> -->
+<div class="modal-header">
+  <h4 class="modal-title">{{'ADD_STUDY_MATERIAL' | translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row row-eq-height h-100">
+    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 py-2 px-3 upload-file-section h-100">
+      <ngb-tabset #tabs="ngbTabset">
+        <ngb-tab title="{{'UPLOAD' | translate}}" id="upload">
+          <ng-template ngbTabContent>
+            <div class="bg-light p-3 file-upload-section" [ngClass]="droppableClasses" [pdgFileDrop] (fileDrop)="filesDropped($event)"
+              (fileDragOver)="filesDragOver($event)" (fileDragLeave)="filesDragLeave($event)">
+              <!-- <div class="align-self-center">
+                <button class="btn btn-dark btn-sm" (click)="addFromMyLibrary($event)">{{'UPLOAD_FROM_LIBRARY' | translate}}</button>
+              </div> -->
+              <div class="d-flex flex-wrap ml-auto bg-white p-4 file-upload">
+                <div class="align-self-center ml-auto">
+                  <button class="btn btn-dark btn-sm" type="" (click)="openFileSelect()">
+                    {{'CHOOSE_FILE_TO_UPLOAD' | translate}}
+                  </button>
+                  <input #fileSelect style="display: none;" type="file" [pdgFileSelect] (fileSelect)="selectFiles($event)" multiple/>
+                </div>
+                <div class="dropzone_text ml-2 mr-auto">
+                  <p class="mb-0">
+                    <small>{{'DRAG_AND_DROP_YOUR_FILE_HERE' | translate}}</small>
+                  </p>
+                  <p class="mb-0">
+                    <small>[{{'ACCEPTED_FORMATS' | translate}}: .mp4, .avi, .wmv]</small>
+                  </p>
+                  <p class="mb-0">
+                    <small>{{'UPLOAD_UPTO_512MB' | translate}}</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab id="reference">
+          <ng-template ngbTabTitle>{{'REFERENCES' | translate}}</ng-template>
+          <ng-template ngbTabContent>
+            <div class="bg-light p-3 add-from-url">
+              <form (ngSubmit)="addReferenceUrl()" [formGroup]="referenceForm" id="referenceForm">
+                <div class="form-group mb-2">
+                  <label for="reference" class="">{{'ENTER_REFERENCE_URL' | translate}}</label>
+                  <input type="text" class="form-control" placeholder="http://www.youtube.com/" formControlName="url">
+                  <div class="text-danger" *ngIf="referenceForm.controls.url.hasError('pattern') && referenceForm.controls.url.touched">
+                    <small>{{'ERROR.INVALID_REFERENCE_URL' | translate}}</small>
+                  </div>
+                  <div class="text-danger" *ngIf="referenceForm.controls.url.hasError('required') && referenceForm.controls.url.touched">
+                    <small>{{'ERROR.REFERENCE_URL_REQUIRED' | translate}}</small>
+                  </div>
+                </div>
+                <div class="form-group text-right mb-0">
+                  <input type="submit" [disabled]="referenceForm.invalid" class="btn btn-dark btn-sm" value="{{'ADD' | translate}}">
+                </div>
+              </form>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+
+      <ngb-alert *ngIf="showInfoMessage" [type]="'info'" [dismissible]="true" (close)="hideAddContentAlert()"> {{ alertMessage }} </ngb-alert>
+
+      <!--uploaded file list section-->
+      <form [formGroup]="contentListForm" (ngSubmit)="submit()" #listForm="ngForm">
+        <ul class="list-unstyled my-1 media-list" formArrayName="contentList">
+          <li class="media p-3" *ngFor="let content of contentListForm.get('contentList')['controls']; index as i" (click)="selectContent(content)"
+            [formGroupName]="i">
+            <button type="button" class="close mr-2 align-self-center" aria-label="Close" (click)="removeFromList(i, $event)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="align-self-center mr-3">
+              <pdg-thumbnail-video *ngIf="content.value.data.fileType === 'video'"></pdg-thumbnail-video>
+              <pdg-thumbnail-pdf *ngIf="content.value.data.fileType === 'pdf'"></pdg-thumbnail-pdf>
+              <pdg-thumbnail-youtube [src]="content.value.data.thumbnailUrl" *ngIf="content.value.data.fileType === 'refvideo'"></pdg-thumbnail-youtube>
+            </div>
+            <div class="media-body" formGroupName="data">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="{{'TITLE' | translate}}" formControlName="title">
+                <div class="text-danger" *ngIf="content.value.data.title.length < 3 || content.value.data.title.length > 64">
+                  <small>{{'TOOLTIP.CONTENT_TITLE' | translate}}</small>
+                </div>
+              </div>
+              <textarea class="form-control" placeholder="{{'DESCRIPTION' | translate}}" formControlName="description" rows="2"></textarea>
+              <div class="text-danger" *ngIf="content.value.data.description.length < 3 || content.value.data.description.length > 150">
+                <small>{{'TOOLTIP.CONTENT_DESC' | translate}}</small>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </form>
+      <!--uploaded file list section-->
+    </div>
+    <div class=" col-xl-6 col-lg-12 col-md-12 col-sm-12 px-3 py-2 text-center courceditimg h-100" *ngIf="selectedContent ">
+      <div class="player h-100">
+        <pdg-video-player *ngIf="selectedContent.data.fileType==='video' " [src]="selectedContentUrl "></pdg-video-player>
+        <pdg-pdf-reader *ngIf="selectedContent.data.fileType==='pdf' " [src]="selectedContentUrl "></pdg-pdf-reader>
+        <pdg-youtube-player *ngIf="selectedContent.data.fileType==='refvideo' " [src]="selectedContentUrl "></pdg-youtube-player>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer bg-dark">
+  <button type="submit" class="btn btn-primary" [disabled]="!this._contentList.length || listForm.invalid" (click)="listForm.ngSubmit.emit()">{{'SUBMIT' | translate}}</button>
+  <button type="button " class="btn btn-outline-primary" (click)="close() ">{{'CANCEL' | translate}}</button>
+</div>

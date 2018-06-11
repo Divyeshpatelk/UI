@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="conatainer studymeterial bg-white">
+    <div class="row py-2">
+      <div class="col-sm-1 align-self-center">
+        <label class="pl-3 text-primary mb-0">
+          <span class="fa fa-filter"></span>
+          <b>{{'FILTER' | translate}} :</b>
+        </label>
+      </div>
+      <div class="col-sm-1 mr-1">
+        <div ngbDropdown class="d-inline-block" autoClose="outside">
+          <button class="btn btn-link btn-block" id="dropdownBasic1" ngbDropdownToggle>{{'TYPE' | translate}}</button>
+          <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <li class="py-2 px-3 dropdown-item">
+              <label class="custom-control mb-0 custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedAllType" (change)="selectAllType();" />
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{'ALL' | translate}}</span>
+              </label>
+            </li>
+            <li class="py-2 px-3 dropdown-item" *ngFor="let type of typeFilterArray">
+              <label class="custom-control mb-0 custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="type.selected" (change)="updateTypeFilter()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">
+                  <span class="fa fa-file-pdf-o" *ngIf="type.value === 'pdf'"></span>
+                  <span class="fa fa-file-video-o" *ngIf="type.value === 'video' || type.value ==='refvideo'"></span>
+                  {{type.name}}
+                </span>
+              </label>
+            </li>
+            <li class="dropdown-divider m-0"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-1 mr-1">
+        <div ngbDropdown class="d-inline-block" autoClose="outside">
+          <button class="btn btn-link btn-block" id="dropdownBasic2" ngbDropdownToggle>{{'COURSE' | translate}}</button>
+          <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <div style="height: 250px;overflow-y: scroll;">
+              <li class="py-2 px-3 dropdown-item">
+                <label class="custom-control mb-0 custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedAllCourse" (change)="selectAllCourse();" />
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{'ALL' | translate}}</span>
+                </label>
+              </li>
+              <li class="py-2 px-3 dropdown-item" *ngFor="let course of courseFilterArray">
+                <label class="custom-control mb-0 custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" [(ngModel)]="course.selected" (change)="updateCourseFilter()">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{course.name}}</span>
+                </label>
+              </li>
+              <li class="dropdown-divider m-0"></li>
+            </div>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-1 px-2">
+        <div ngbDropdown class="d-inline-block" autoClose="outside">
+          <button class="btn btn-link btn-block" id="dropdownBasic3" ngbDropdownToggle>{{'STATUS' | translate}}</button>
+          <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <li class="py-2 px-3 dropdown-item">
+              <label class="custom-control mb-0 custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="selectedAllStatus" (change)="selectAllStatus();" />
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{'ALL' | translate}}</span>
+              </label>
+            </li>
+            <li class="py-2 px-3 dropdown-item" *ngFor="let status of statusFilterArray">
+              <label class="custom-control custom-checkbox mb-0">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="status.selected" (change)="updateStatusFilter()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{status.name}}</span>
+              </label>
+            </li>
+            <li class="dropdown-divider m-0"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-5 ml-auto">
+        <div class="search-bar mr-3">
+          <div class="form-group">
+            <div class="icon-addon addon-md">
+              <input #filter type="text" placeholder="{{'SEARCH' | translate}} {{'TITLE' | translate}}" class="form-control" id="search"
+                (keyup.enter)='search(filter.value)'>
+              <label for="search" class="fa fa-search" rel="tooltip" title="{{'SEARCH' | translate}}"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ngx-datatable #myTable class='material' [rows]='studyMaterial' [rowHeight]='70' [headerHeight]='50' [footerHeight]="50"
+    [columnMode]="'force'" [externalPaging]="true" [externalSorting]="true" [count]="page?.totalElements" [offset]="page?.number"
+    [limit]="page?.size" (page)="setPage($event)" (sort)="onSort($event)">
+
+    <ngx-datatable-column name="{{'TYPE' | translate}}" [width]="40" [minWidth]="60" [maxWidth]="60" [sortable]="false" [frozenLeft]="true">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <a href="javascript:void(0);" (click)="openEditModal(row)">
+          <span *ngIf="value === 'video' || value === 'refvideo' " class="fa fa-file-video-o"></span>
+          <span *ngIf="value === 'pdf' " class="fa fa-file-pdf-o"></span>
+        </a>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{'TITLE' | translate}}" [width]="250" [maxWidth]="300">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <a href="javascript:void(0);" (click)="openEditModal(row)">
+          <span title="{{value}}">{{value}}</span>
+        </a>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{'DESCRIPTION' | translate}}" [width]="300" [maxWidth]="350" [sortable]="false">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <a href="javascript:void(0);" (click)="openEditModal(row)">
+          <span title="{{value}}">{{value}}</span>
+        </a>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{'COURSES' | translate}}" [width]="200" [maxWidth]="250" [sortable]="false">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        <ul *ngIf="value.length <= 2; else morecourses">
+          <li *ngFor="let coursename of value">
+            {{coursename}}
+          </li>
+        </ul>
+        <ng-template #morecourses>
+          <ul>
+            <li>{{value[0]}}</li>
+            <li>{{value[1]}}</li>
+            <span class="more-courses" title="{{value | slice:2}}">+{{value.length - 2}}</span>
+          </ul>
+        </ng-template>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{'UPDATED' | translate}}" [width]="150" [maxWidth]="200" [sortable]="false">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span title="{{ value | dateTimeFormat }}">{{ value | dateTimeFormat }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{'PUBLISHED' | translate}}" [width]="70" [maxWidth]="100" [sortable]="false">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        <span *ngIf="value === 'PUBLISH'" class="fa fa-check" title="{{value}}"></span>
+        <span *ngIf="value === 'DRAFT'" class="fa fa-times" title="{{value}}"></span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{'ACTION' | translate}}" [width]="70" [sortable]="false">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <a href="javascript:void(0);" *ngIf="row?.published === 'DRAFT'; else publishedEdit" class="mr-2">
+          <i class="fa fa-pencil" (click)="openEditModal(row)"></i>
+        </a>
+        <ng-template #publishedEdit>
+          <a title="The content cannot be edited as it is already published" class="mr-2">
+            <i class="fa fa-pencil disabled"></i>
+          </a>
+        </ng-template>
+
+        <a href="javascript:void(0);" *ngIf="row?.published === 'DRAFT'; else publishedDelete" [pdgConfirm]="options" (confirm)="delete(row)">
+          <i class="fa fa-trash-o"></i>
+        </a>
+        <ng-template #publishedDelete>
+          <a title="The content cannot be deleted as it is already published">
+            <i class="fa fa-trash-o disabled" aria-hidden="true"></i>
+          </a>
+        </ng-template>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

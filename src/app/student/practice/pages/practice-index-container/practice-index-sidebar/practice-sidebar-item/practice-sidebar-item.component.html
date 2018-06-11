@@ -1,0 +1,9 @@
+<div class="material-list-content-inner">
+  <p class="mb-0" [class.font-weight-bold]="index.indexLevel === '1'">{{index.title}}</p>
+  <div class="d-flex justify-content-start meterial-list">
+    <p class="mb-0">
+      <span class="fa fa-play-circle-o"></span>{{accumulatedCount?.questions || 0}} {{(accumulatedCount?.questions > 1 ? 'QUESTIONS' : 'QUESTION')
+      | translate}}
+    </p>
+  </div>
+</div>

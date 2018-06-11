@@ -1,0 +1,257 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white">
+  <div class="container-fluid">
+    <a class="navbar-brand mr-3" href="#">
+      <img src="{{staticContentPath}}/images/logo.svg" height="43" />
+    </a>
+    <div class="mobile-menu ml-auto mr-2">
+      <a href="javascript:void(0);">
+        <span class="fa fa-bell mr-2"></span>
+      </a>
+      <a href="javascript:void(0);" class="shoppingcart-dropdown">
+        <span class="fa fa-shopping-cart"></span>
+      </a>
+      <a href="javascript:void(0);">
+        <span ngbDropdown placement="bottom-right">
+          <a class="pl-3 pr-0" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">
+            <span>
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            </span>
+          </a>
+          <div ngbDropdownMenu class="topbar_dropdown">
+            <button class="dropdown-item px-3 py-2 bg-light">
+              <div class="d-flex">
+                <img src="{{staticContentPath}}/images/profile-default.jpg" class="rounded-circle mr-2" alt="" height="40" width="40">
+                <div>
+                  <p class="mb-0">{{user.firstname}} {{user.lastname}}</p>
+                  <a href="javascript:void(0);">
+                    <small>
+                      <p class="mb-0">{{'VIEW_PROFILE'| translate}}</p>
+                    </small>
+                  </a>
+                </div>
+              </div>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item">
+              <a href="javascript:void(0);">
+                <small>{{'SETTINGS' | translate}}</small>
+              </a>
+            </button>
+            <button class="dropdown-item">
+              <a href="javascript:void(0);">
+                <small>{{'ACCOUNT_DETAILS' | translate}}</small>
+              </a>
+            </button>
+            <button class="dropdown-item">
+              <a href="javascript:void(0);">
+                <small>{{'LOGOUT' | translate}}</small>
+              </a>
+            </button>
+          </div>
+        </span>
+      </a>
+    </div>
+    <button class="navbar-toggler" (click)="navbarCollapsed = !navbarCollapsed" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <div class="divider"></div>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="#">
+            <span class="fa fa-home mr-2"></span>{{'DASHBOARD' | translate}}</a>
+        </li>
+        <div class="divider"></div>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="javascript:void(0);" (click)="selectMode('study')">
+            <span class="fa fa-graduation-cap mr-2"></span>{{'STUDY' | translate}}</a>
+        </li>
+        <div class="divider"></div>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="javascript:void(0);" (click)="selectMode('practice')">
+            <span class="fa fa-pencil mr-2"></span>{{'PRACTICE' | translate}}
+          </a>
+        </li>
+        <div class="divider"></div>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="#">
+            <span class="fa fa-file-text-o mr-2"></span>{{'TEST' | translate}}
+          </a>
+        </li>
+        <div class="divider"></div>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <button class="btn btn-sm btn-dark mt-1 ml-3 mb-2 mr-3" [routerLink]="['/partner']">{{'LAUNCH_YOUR_COURSE' | translate}}</button>
+          <!-- <button class="btn btn-sm btn-dark mt-1 ml-3 mb-2 mr-3">Course Partner
+          </button> -->
+
+        </li>
+        <!-- <li class="nav-item visible_in_mobile">
+            <a class="nav-link px-3" href="javascript:void(0);"><span class="fa fa-graduation-cap mr-2"></span>Student</a>
+        </li> -->
+        <div class="divider"></div>
+
+        <!-- <li class="nav-item align-self-center hide-in-mobile shoppingcart-dropdown" ngbDropdown placement="bottom-right">
+          <a class="nav-link pl-3 pr-3" href="javascript:void(0);" id="shoppingcart" ngbDropdownToggle>
+            <span>
+              <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+            </span>
+          </a>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <div class="dropdown-item p-2">
+              <div class="media">
+                <div class="align-self-center mr-2">
+                  <p class="mb-0">
+                    <span class="fa fa-times-circle"></span>
+                  </p>
+                </div>
+                <img src="assets/images/commingsoon.png" height="45px" alt="" srcset="" class="mr-2">
+                <div class="media-body d-flex">
+                  <div>
+                    <h6>EM Spectrum and Narrowband</h6>
+                    <p class="mb-0">Author : Navneet Publication</p>
+                  </div>
+                  <div class="ml-auto align-self-center">
+                    <h6 class="price-text">$150</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider m-0"></div>
+            <div class="dropdown-item p-2">
+              <div class="media">
+                <div class="align-self-center mr-2">
+                  <p class="mb-0">
+                    <span class="fa fa-times-circle"></span>
+                  </p>
+                </div>
+                <img src="assets/images/commingsoon.png" height="45px" alt="" srcset="" class="mr-2">
+                <div class="media-body d-flex">
+                  <div>
+                    <h6>EM Spectrum and Narrowband</h6>
+                    <p class="mb-0">Author : Navneet Publication</p>
+                  </div>
+                  <div class="ml-auto align-self-center">
+                    <h6 class="price-text">$150</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider m-0"></div>
+            <div class="dropdown-item p-2">
+              <div class="media">
+                <div class="align-self-center mr-2">
+                  <p class="mb-0">
+                    <span class="fa fa-times-circle"></span>
+                  </p>
+                </div>
+                <img src="assets/images/commingsoon.png" height="45px" alt="" srcset="" class="mr-2">
+                <div class="media-body d-flex">
+                  <div>
+                    <h6>EM Spectrum and Narrowband</h6>
+                    <p class="mb-0">Author : Navneet Publication</p>
+                  </div>
+                  <div class="ml-4 align-self-center">
+                    <h6 class="price-text">$150</h6>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-divider m-0"></div>
+            <div class="p-2">
+              <p class="text-right mb-0">Payable Amount :
+                <span class="text-primary font-weight-bold">$450</span>
+              </p>
+            </div>
+            <div class="dropdown-divider m-0"></div>
+            <div class="p-2 d-flex">
+              <button class="btn btn-block btn-sm btn-primary mr-2">View Cart</button>
+              <button class="btn btn-block btn-sm btn-dark mt-0">Buy Now</button>
+            </div>
+          </div>
+        </li> -->
+        <div class="divider hide-in-mobile"></div>
+        <li class="nav-item align-self-center hide-in-mobile">
+          <a class="nav-link px-3" href="javascript:void(0);">
+            <span>
+              <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
+            </span>
+          </a>
+        </li>
+        <div class="divider hide-in-mobile"></div>
+        <li class="nav-item align-self-center hide-in-mobile" ngbDropdown placement="bottom-right">
+          <a class="nav-link px-3" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true" href="javascript:void(0);" aria-expanded="false">
+            <span>
+              <i class="fa fa-folder fa-lg" aria-hidden="true"></i>
+            </span>
+            {{course?.courseName}}
+          </a>
+          <div ngbDropdownMenu class="topbar_dropdown">
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item">
+              <a href="javascript:void(0);">
+                <small>{{'COURSE_DETAIL' | translate}}</small>
+              </a>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item" [routerLink]="['/student', 'courses']">
+              <a href="javascript:void(0);">
+                <small>{{'CHANGE_COURSE' | translate}}</small>
+              </a>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item">
+              <a href="javascript:void(0);">
+                <small>{{'BUY_NEW_COURSE' | translate}}</small>
+              </a>
+            </button>
+          </div>
+        </li>
+        <div class="divider hide-in-mobile"></div>
+        <li class="nav-item hide-in-mobile" ngbDropdown placement="bottom-right">
+          <a class="nav-link pl-3 pr-0" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true" href="javascript:void(0);"
+            aria-expanded="false">
+            <span>
+              <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+            </span> {{user.firstname}} {{user.lastname}}
+          </a>
+          <div ngbDropdownMenu class="topbar_dropdown">
+            <button class="dropdown-item px-3 py-2 bg-light">
+              <div class="d-flex ">
+                <img src="{{staticContentPath}}/images/profile-default.jpg" class="rounded-circle mr-2" alt="" height="40" width="40">
+                <div>
+                  <p class="mb-0">{{user.firstname}} {{user.lastname}}</p>
+                  <a href="javascript:void(0);">
+                    <small>
+                      <p class="mb-0">{{'VIEW_PROFILE'| translate}}</p>
+                    </small>
+                  </a>
+                </div>
+              </div>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item">
+              <a href="javascript:void(0);">
+                <small>{{'SETTINGS' | translate}}</small>
+              </a>
+            </button>
+            <button class="dropdown-item">
+              <a href="javascript:void(0);">
+                <small>{{'ACCOUNT_DETAILS' | translate}}</small>
+              </a>
+            </button>
+            <button class="dropdown-item" (click)="logout()">
+              <a href="javascript:void(0);">
+                <small>{{'LOGOUT' | translate}}</small>
+              </a>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,23 @@
+.ped-info-img {
+    min-height: 135px;
+}
+h3 {
+    color: #fb7b2b;
+    margin: 20px 0;
+    font-size: 22px;
+}
+p {
+    max-width: 260px;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+.ped-info-box{
+  margin-top: 55px;
+  margin-bottom: 55px;
+}
+@media (min-width: 1366px){
+    .container {
+        max-width: 1002px;
+    }    
+}

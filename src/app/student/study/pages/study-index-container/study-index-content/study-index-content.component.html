@@ -1,0 +1,13 @@
+<div class="d-flex m-2 flex-wrap course-detail-list" *ngIf="contents?.length > 0; else nocontent">
+  <div class="col-sm-6 p-0 course-detail" *ngFor="let content of contents">
+    <pdg-study-course-content-item [content]="content" (click)="selectContent(content)"></pdg-study-course-content-item>
+  </div>
+</div>
+<ng-template #nocontent>
+  <div class="text-center p-5 empty-box">
+    <h1>
+      <span class="fa fa-dropbox fa-4x"></span>
+    </h1>
+    <p>{{'NO_CONTENT' | translate}}</p>
+  </div>
+</ng-template>

@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-start page-headingdark mb-3 py-2 bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 d-flex">
+        <h5 class="mb-0 text-light align-self-center">{{'MY_LIBRARY' | translate}}</h5>
+      </div>
+      <div class="col-sm-6 d-flex">
+        <div class="ml-auto mylibs-heading">
+          <p class="mb-0 text-white">
+            <a href="javascript:void(0);" routerLinkActive="active" [routerLink]="['/partner', 'library', 'study']">{{'STUDY_MATERIAL' | translate}}</a>            |
+            <a href="javascript:void(0);" routerLinkActive="active" [routerLink]="['/partner', 'library', 'questions']">{{'QUESTIONS' | translate}}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

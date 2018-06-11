@@ -1,0 +1,39 @@
+@import 'theme-variables';
+$navbar-box-shadow: rgba(0, 0, 0, .27);
+$dropdown-con-color: rgba(0, 0, 0, .2);
+.navbar {
+    &.topbar {
+        .ped-wrapper {
+            width: 100%;
+        }
+    }
+    background: url('/assets/images/topbarbg.png') repeat-y;
+    box-shadow: 0 3px 8px 1px $navbar-box-shadow;
+    .ped-logo {
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: -20px 0px 47px #bdbdbd;
+        height: 53px;
+        padding: 3px 6px;
+    }
+    .navbar-brand {
+        width: 280px;
+    }
+}
+@media only screen and (max-width: 930px) {
+    .hide-in-mobile {
+        display: none !important;
+    }
+    .ped-mobile-spacing {
+        margin-right: 14px;
+    }
+}
+@media only screen and (max-width: 515px) {
+    .navbar {
+      background: url('/assets/images/topbarbg.png') repeat-y -147px 0;
+      .navbar-brand {
+        width: 150px;
+      }
+    }
+  }
+  

@@ -1,0 +1,35 @@
+@import 'theme-variables';
+
+.breadcrumb {
+  background: none;
+
+  .breadcrumb-item {
+    color: $white;
+    font-size: $base-font-size * .9;
+
+    a {
+      color: $white;
+      font-size: $base-font-size * .9;
+    }
+  }
+
+  .breadcrumb-item+.breadcrumb-item {
+    ::before {
+      color: $white;
+    }
+  }
+}
+
+.mylibs-heading {
+  a {
+    color: $white;
+
+    &:hover {
+      color: $orange;
+    }
+
+    &.active {
+      color: $orange;
+    }
+  }
+}

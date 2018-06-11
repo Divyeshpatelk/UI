@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{'ADD_FROM_MY_LIBRARY' | translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container-fluid">
+    <div *ngIf="isLoading">{{'LOADING' | translate}}</div>
+    
+    
+      <div class="bg-white">
+        <div class="row">
+          <div class="col-sm-7">
+            <ngb-pagination [pageSize]="page.size" *ngIf="page.totalElements" [collectionSize]="page.totalElements" [(page)]="currentPage"
+              [rotate]="true" [boundaryLinks]="true" (pageChange)="onClickPagination($event)"></ngb-pagination>
+          </div>
+          <div class="col-sm-5" *ngIf="recordCount !== 0">
+            <input #filter type="text" placeholder="{{'SEARCH' | translate}}" class="form-control" id="search"
+              (keyup.enter)='search(filter.value)'>
+          </div>
+        </div>
+        <div class="container">
+          <div *ngIf="!isLoading && contents?.length === 0">{{'NO_CONTENT_FOUND' | translate}}</div>
+          <div class="row">
+            <div class="col-xl-2 col-md-4 col-lg-3 col-xs-6 col-sm-6 px-0" *ngFor="let content of contents; index as i">
+              <div class="d-flex flex-column py-2 px-3 video-thumb">
+                <pdg-thumbnail-video [src]="contents[i].thumbnailKeyNameInBucket" *ngIf="contents[i].type === 'video'"></pdg-thumbnail-video>
+                <pdg-thumbnail-pdf [src]="contents[i].thumbnailKeyNameInBucket" *ngIf="contents[i].type === 'pdf'"></pdg-thumbnail-pdf>
+                <pdg-thumbnail-youtube [src]="contents[i].thumbnailKeyNameInBucket" *ngIf="contents[i].type === 'refvideo'"></pdg-thumbnail-youtube>
+                <div class="mt-1">
+                  <label class="custom-control custom-checkbox mb-0">
+                    <input type="checkbox" class="custom-control-input" [checked]="selectionList[contents[i]._id] !== undefined" (change)="setSelection(contents[i])" />
+                    <span class="custom-control-indicator"></span>
+                    <span class="content-title custom-control-description d-inline-block text-truncate" title="{{contents[i].title}}">{{contents[i].title}}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <ngb-pagination [pageSize]="page.size" *ngIf="page.totalElements" [collectionSize]="page.totalElements" [(page)]="currentPage"
+              [rotate]="true" [boundaryLinks]="true" (pageChange)="onClickPagination($event)"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="modal-footer bg-dark">
+  <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="submitDisable">{{'SUBMIT' | translate}}</button>
+  <button type="button" class="btn btn-outline-primary" (click)="close()">{{'CANCEL' | translate}}</button>
+</div>

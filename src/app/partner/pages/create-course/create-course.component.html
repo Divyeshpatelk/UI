@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-start page-headingdark mb-3 py-2 bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h5 class="mb-0 text-light">{{'CREATE_COURSE' | translate}}</h5>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb p-0 mb-0 pull-right">
+          <li class="breadcrumb-item">
+            <a href="#">{{'HOME' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#">{{'COURSE'| translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{'CREATE_COURSE' | translate}}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="">
+    <div class="row  px-2">
+      <div class="col-lg py-3 mr-2 bg-white course_section">
+        <!-- Course Section form part-->
+        <form [formGroup]="createCourseForm" id="createCourseForm" (submit)="createCourse()">
+          <div class="mb-4">
+            <div class="">
+              <h6>{{'CHOOSE_TEMPLATE' | translate}}</h6>
+            </div>
+            <div class="form-group">
+              <input class="form-control" id="courseName" name="courseName" placeholder="{{'PLACEHOLDERS.COURSE_NAME' | translate }} *"
+                formControlName="courseName">
+              <div [class.invisible]="!((createCourseForm.controls['courseName'].hasError('minlength') || createCourseForm.controls['courseName'].hasError('maxlength')) && createCourseForm.controls['courseName'].dirty)"
+                class="field-error">{{'ERROR.COURSE_NAME_LEN' | translate}}</div>
+            </div>
+          </div>
+          <!-- Course Section part-->
+          <h6 class="">{{'COURSE_SELECTION'| translate}} :</h6>
+          <div class="available-course p-2">
+            <div class="p-2 course-list" *ngFor="let course of offeredCourses; let ndx= index" title="{{course?.description}}" (click)="courseSelected=course; pageSelected=course?.pages[0]; tab.select(pageSelected.title)"
+              [class.selected]="courseSelected === course">
+              <p class="mb-0">
+                <span class="clr-white px-2 py-1">{{ndx + 1}}</span>{{course?.courseName}}</p>
+            </div>
+          </div>
+          <div class="mt-2">
+            <a href="javascript:void(0);" class="font-italic">
+              <small>
+                <u>{{'DONT_FIND_YOUR_COURSE' | translate}}</u>
+              </small>
+            </a>
+            <button type="submit" class="btn btn-dark btn-block btn-sm mt-2" [disabled]="!createCourseForm.valid" id="addContentBtn">{{'CREATE_COURSE' | translate}}</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-8 py-3 bg-white">
+        <div class="row">
+          <div class="col-sm-12">
+            <h6 class="mb-1">{{'HOW_CONFIGURE' | translate}} {{courseSelected?.courseName}}</h6>
+          </div>
+        </div>
+        <ngb-tabset [orientation]="'vertical'" class="d-flex mt-1 flex-wrap course_detail" (tabChange)="showTabContent($event)">
+          <div class="px-0" *ngFor="let page of courseSelected?.pages">
+            <ngb-tab id="{{[page.title]}}">
+              <ng-template ngbTabTitle>{{page.title}}</ng-template>
+              <ng-template ngbTabContent>
+                <embed [src]="htmlPageUrl" width="100%" />
+              </ng-template>
+            </ngb-tab>
+          </div>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>

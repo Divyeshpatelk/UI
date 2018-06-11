@@ -1,0 +1,125 @@
+@import 'theme-variables';
+
+$ribion-shadow-color: rgba(0, 0, 0, 1);
+
+.dot {
+  color: $orange;
+  font-size: 5px;
+}
+
+.card-footer {
+  background-color: $white;
+  border-top: 0;
+}
+
+.card-img-top {
+  max-height: 164px;
+  min-height: 164px;
+  object-fit: contain;
+}
+
+.card > .card-img-overlay {
+  top: 14px;
+}
+
+.sm-font {
+  p {
+    font-size: 10px;
+    margin-bottom: 0;
+  }
+}
+
+.card  {
+  .ribbon {
+    height: 75px;
+    left: -5px;
+    overflow: hidden;
+    position: absolute;
+    text-align: right;
+    top: -5px;
+    width: 75px;
+    z-index: 1;
+
+    span {
+      -webkit-transform: rotate(-45deg);
+      background: linear-gradient($primary 0%, darken($primary, 15%) 100%);
+      box-shadow: 0 3px 10px -5px $ribion-shadow-color;
+      color: $white;
+      display: block;
+      font-size: $base-font-size * .8;
+      left: -21px;
+      line-height: 20px;
+      position: absolute;
+      text-align: center;
+      text-transform: uppercase;
+      top: 19px;
+      transform: rotate(-45deg);
+      width: 100px;
+
+      &::before {
+        border: 3px solid;
+        border-bottom-color: transparent;
+        border-left-color: darken($primary, 15%);
+        border-right-color: transparent;
+        border-top-color: darken($primary, 15%);
+        content: ' ';
+        left: 0;
+        position: absolute;
+        top: 100%;
+        z-index: -1;
+      }
+
+      &::after {
+        border: 3px solid;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-right-color: darken($primary, 15%);
+        border-top-color: darken($primary, 15%);
+        content: ' ';
+        position: absolute;
+        right: 0;
+        top: 100%;
+        z-index: -1;
+      }
+    }
+  }
+  .card-footer {
+  a {
+    color: $dark-grey;
+
+    &:hover {
+      color: $orange;
+    }
+
+    &.disabled {
+      color: $gray-300;
+    }
+  }
+}
+}
+
+.img-top-text {
+  margin-top: -25%;
+}
+
+@media (min-width: 1200px) and (max-width: 1349px) {
+  .img-top-text {
+    margin-top: -27%;
+  }
+}
+
+.list-group {
+  h6 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    font-size: $font-size-base;
+    height: $font-size-base * $line-height-lg * 2; /* Fallback for non-webkit */
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+}

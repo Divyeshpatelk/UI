@@ -1,0 +1,189 @@
+@import '../../../sass/theme-variables';
+.card {
+  box-shadow: 0 0 3px 0 $gray-400;
+  .ped-social-register {
+    margin-top: 25px;
+
+    .ped-google-social-login{
+      background:#cf4431 ;
+      color:#fff;
+      border-color:#cf4431;
+      font-size: 13px;
+      margin: 0 5px;
+      padding: .5rem .5rem;
+    }
+    
+    .ped-facebook-social-login{
+      background:#3c5997;
+      color:#fff;
+      border-color:#3c5997;
+      font-size: 13px;
+      margin: 0 5px;
+      padding: .5rem .5rem;
+    }
+    span {
+      margin-right: 2px;
+    }
+  }
+  
+  .ped-signup-divider {
+    text-align: center;
+    position:relative;
+    padding: 10px;
+    span {
+      background: #fff;
+      position:relative;
+      z-index: 999;
+      padding: 2px 20px;
+    }
+    &::before {
+      content: '';
+      height:1px;
+      width:100%;
+      position: absolute;
+      background: #ddd;
+      left:0;
+      top:50%;
+      margin-top: -1px;
+    }
+
+  }
+}
+
+.icon-fb {
+  background: $fb;
+  color: $white;
+  padding: 14px 17px;
+}
+
+.icon-twitter {
+  background: $twitter;
+  color: $white;
+  padding: 14px;
+}
+
+.icon-google {
+  background-color: $google;
+  color: $white;
+  padding: 14px 12px;
+}
+
+.icon-lin {
+  background-color: $linkin;
+  color: $white;
+  padding: 14px 15px;
+}
+
+.spinner {
+  display: none;
+}
+
+.seperator {
+  h6 {
+    position: relative;
+    z-index: 1;
+    &::before {
+      border-top: 2px solid $gray-200;
+      bottom: 0;
+      content: '';
+      left: 0;
+      margin: 0 auto; // this centers the line to the full width specified
+      position: absolute; // positioning must be absolute here, and relative positioning must be applied to the parent */
+      right: 0;
+      top: 50%;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+  span {
+    background: $white;
+    padding: 0 15px;
+  }
+}
+
+// //spinner
+.icon-addon {
+  color: $gray-600;
+  display: block;
+  position: relative;
+  &.addon-md {
+    .form-control {
+      //float: left;
+      font-weight: normal;
+      padding-right: 30px;
+    }
+    .fa {
+      font-size: 14px;
+      margin-left: -2.5px;
+      padding: 10px 0;
+      position: absolute;
+      right: 10px;
+      text-align: center;
+      top: 1px;
+      width: 20px;
+      z-index: 2;
+    }
+  }
+  &::before {
+    content: ' ';
+    display: table;
+  }
+  &::after {
+    content: ' ';
+    display: table;
+  }
+  .fa {
+    font-size: 14px;
+    margin-left: -2.5px;
+    padding: 10px 0;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 1px;
+    width: 20px;
+    z-index: 2;
+  }
+  .form-control {
+    //float: left;
+    font-weight: normal;
+    padding-right: 30px;
+    &:focus+.fa {
+      color: $orange;
+    }
+  }
+}
+
+.fa-icon-green {
+  color: $green;
+}
+
+.fa-icon-red {
+  color: $red;
+}
+.custom-radio-div{
+  height: 37px;
+}
+
+.ped-submit-btn {
+  padding-left: 0;
+  padding-right: 0;
+  .tooltip {
+    .tooltip-inner {
+      width: auto;
+      white-space: normal;
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .icon {
+    margin-left: 0;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1080px) {
+  .icon {
+    margin-left: 0;
+  }
+}

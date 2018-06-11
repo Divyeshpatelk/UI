@@ -1,0 +1,304 @@
+<!-- <div class="d-flex justify-content-start page-headingdark py-2 bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 d-flex">
+        <h5 class="mb-0 text-light align-self-center">{{'PUBLISH_COURSE' | translate}}</h5>
+      </div>
+      <div class="col-sm-6 d-flex">
+        <ol class=" ml-auto breadcrumb p-0 mb-0">
+          <li class="breadcrumb-item">
+            <a href="#">{{'HOME' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#">{{'COURSE' | translate}}</a>
+          </li>
+          <li class="breadcrumb-item active">{{'PUBLISH_COURSE' | translate}}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="bg-white mb-3">
+  <div class="container-fluid">
+    <div class="row form-wizard">
+      <div class="col-sm-4 d-flex align-items-center finish">
+        <button [routerLink]="['/partner', 'course', course?.course.id, 'edit']" class="btn btn-link">
+          <span class="fa fa-arrow-left"></span> {{'PREV' | translate}}</button>
+        <p class="mb-0 ml-auto">Create & Upload</p>
+        <div class="shape"></div>
+      </div>
+      <div class="col-sm-4 d-flex active">
+        <p class="mb-0 mx-auto align-self-center">Cover Page</p>
+      </div>
+      <div class="col-sm-4 pl-5 d-flex align-items-center">
+        <p class="mb-0 ">Pricing</p>
+        <button id="p-course-publish" *ngIf="course?.course.status === 'DRAFT'" title="Publish" (click)="checkProgressUpload()" class="btn btn-link ml-auto">
+          {{'PUBLISH' | translate}}
+        </button>
+        <button *ngIf="course?.course.status === 'PUBLISH'" title="Course is already published" class="btn btn-link pub-btn"> {{'PUBLISH' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container pb-3">
+  <div class="row row-eq-height">
+    <div class="col-lg-12 col-md-12 col-sm-12 pl-3 pr-2">
+      <div class="row row-eq-height mx-0">
+        <div class="col-lg-8 col-md-8 col-sm-8 pl-0 pr-2">
+          <div class="card">
+            <div class="col-lg-12 col-md-12 col-sm-12 pl-0 pr-2">
+              <div class="card-body p-2 mr-2">
+                <div class="d-flex course-img">
+                  <div class="dropzone text-center">
+                    <div class="dropzone-inside bg-light">
+                      <img [hidden]="imageUploaded" [src]="imageSrc" [width]="300" [height]="164" class="coursecoverimg" (load)="onImageUpload()"
+                      />
+                      <div class="custom-loader" *ngIf="imageUploaded">
+                        <i class="m-auto fa fa-spinner fa-spin fa-3x"></i>
+                      </div>
+                      <pdg-file-upload *ngIf="isEditable && !imageUploaded" [acceptedFileFormats]="acceptedFileFormats" (uploadedContent)="showImageEditor($event)"
+                        class="align-self-center">
+                      </pdg-file-upload>
+                    </div>
+                  </div>
+                  <div class="px-2 fullwidth">
+                    <h6 class="header-text-margin">
+                      <pdg-inline-text-editor id="p-course-name" type="text" [(ngModel)]="courseName" label="{{'PLACEHOLDERS.COURSE_NAME' | translate}}"
+                        name="courseTitle" [minLength]="3" [maxLength]="30" [disabled]="course?.course.status === 'PUBLISH'"
+                        [required]="true" (save)="saveCourseName($event)" (error)="handleError($event)" tooltip="{{'ERROR.COURSE_NAME_LEN' | translate}}"
+                        placement="top"></pdg-inline-text-editor>
+                    </h6>
+                    <div class="description-container">
+                      <pdg-inline-quill-editor id="p-course-desc" [(ngModel)]="courseDescription" label="{{'ENTER_COURSE_DESCRIPTION' | translate}}"
+                        name="courseDescription" [minLength]="50" [disabled]="course?.course.status === 'PUBLISH'" [required]="true"
+                        (save)="saveCourseDescription($event)" (error)="handleError($event)"></pdg-inline-quill-editor>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 px-0">
+          <div class="card">
+            <div class="card-body p-2">
+              <h6 class="card-title">
+                {{ 'COURSE_CONFIGURATION' | translate }}
+                <span class="mandatory-field">*</span>
+              </h6>
+              <hr _ngcontent-c8="" class="my-1">
+              <div>
+                <form #configForm="ngForm" (ngSubmit)="saveStudentDisplayOptions(configForm)">
+                  <div class="ped-course-config-form">
+                    <div class="row">
+                      <div class="col ped-config-heading">
+                        <h6>Enabled Modules</h6>
+                      </div>
+                      <div class="col ped-left-br">
+                        <h6>Course Listing</h6>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                          <label class="custom-control custom-checkbox mr-0" for="chkTestEnable">
+                            <input type="checkbox" id="chkTestEnable" name="testEnable" class="custom-control-input" [(ngModel)]="testEnable" />
+                            <span class="pl-1"> {{ 'TEST_ENABLED' | translate }}</span>
+                            <span class="custom-control-indicator"></span>
+                          </label>  
+                      </div>
+                      <div class="col ped-left-br">
+                        <label class="custom-control custom-radio mb-0">
+                          <input id="radioDoNotList" name="visibility" value="NONE" type="radio" class="custom-control-input" [(ngModel)]="visibility">
+                          <span class="custom-control-indicator"></span>
+                          <ng-template #first>
+                            <ul class="ped-list-info">
+                              <li class="d-flex">
+                                <div class="icon"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                <div>This course can be subscribed to using Coupon Codes</div>
+                              </li>
+                              <li class="d-flex">
+                                  <div class="icon cross"><i class="fa fa-times" aria-hidden="true"></i></div>
+                                  <div>This course will not be listed on Your Page.</div>
+                              </li>
+                              <li class="d-flex">
+                                <div class="icon cross"><i class="fa fa-times" aria-hidden="true"></i></div>
+                                <div>This course will not be listed on Pedagogy Marketplace.</div>
+                              </li>
+                            </ul>
+                          </ng-template>
+                          <span class="custom-control-description">{{ 'DO_NOT_LIST' | translate }}<span class="ped-question-mark" placement="left" [ngbTooltip]="first">?</span></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                          <label class="custom-control custom-checkbox mr-0" for="chkstudy">
+                            <input type="checkbox" id="chkstudy" name="studyEnable" class="custom-control-input" [(ngModel)]="studyEnable" />
+                            <span class="pl-1">{{ 'STUDY' | translate }}</span>
+                            <span class="custom-control-indicator"></span>
+                          </label>
+                      </div>
+                      <div class="col ped-left-br">
+                        <label class="custom-control custom-radio mb-0">
+                          <input id="radioOnlyMe" name="visibility" value="ONLY_PARTNER" type="radio" class="custom-control-input" [(ngModel)]="visibility">
+                          <span class="custom-control-indicator"></span>
+                          <ng-template #second>
+                            <ul class="ped-list-info">
+                              <li class="d-flex">
+                                <div class="icon"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                <div>This course can be subscribed using Coupon Codes.</div>
+                              </li>
+                              <li class="d-flex">
+                                  <div class="icon"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                  <div>This course will be listed on Your Page.</div>
+                              </li>
+                              <li class="d-flex">
+                                <div class="icon cross"><i class="fa fa-times" aria-hidden="true"></i></div>
+                                <div>This course will not be listed on Pedagogy Marketplace.</div>
+                              </li>
+                            </ul>
+                          </ng-template>
+                          <span class="custom-control-description">{{ 'ONLY_ON_MY_PAGE' | translate }}<span class="ped-question-mark" placement="left" [ngbTooltip]="second">?</span></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label class="custom-control custom-checkbox mr-0" for="chkpractice">
+                          <input type="checkbox" id="chkpractice" name="practiceEnable" class="custom-control-input" [(ngModel)]="practiceEnable" />
+                          <span class="pl-1">{{ 'PRACTICE' | translate }}</span>
+                          <span class="custom-control-indicator"></span>
+                        </label>
+                      </div>
+                      <div class="col ped-left-br">
+                        <label class="custom-control custom-radio mb-0">
+                          <input id="radioPublic" name="visibility" value="ALL" type="radio" class="custom-control-input" [(ngModel)]="visibility">
+                          <span class="custom-control-indicator"></span>
+                          <ng-template #third>
+                            <ul class="ped-list-info">
+                              <li class="d-flex">
+                                <div class="icon"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                <div>This course can be subscribed using Coupon Codes.</div>
+                              </li>
+                              <li class="d-flex">
+                                  <div class="icon"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                <div>This course will be listed on Your Page.</div>
+                              </li>
+                              <li class="d-flex">
+                                  <div class="icon"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                <div>This course will be listed on Pedagogy Marketplace.</div>
+                              </li>
+                            </ul>
+                          </ng-template>
+                          <span class="custom-control-description">{{ 'PUBLIC' | translate }}<span class="ped-question-mark" placement="left" [ngbTooltip]="third">?</span></span>
+                        </label>
+                      </div>
+                    </div>      
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <button class="btn btn-primary">{{ 'SAVE' | translate }}</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mx-0 mt-2 mx-0">
+        <div class="col-lg-8 col-md-12 col-sm-12 pl-0 pr-2">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="header-text-margin">{{'COURSE_OBJECTIVES' | translate}}
+                <span class="mandatory-field">*</span>
+              </h6>
+              <div class="p-2 objective-container">
+                <pdg-inline-quill-editor id="p-course-objectives" [(ngModel)]="courseObjectives" label="{{'ENTER_COURSE_OBJECTIVES' | translate}}"
+                  name="courseObjectives" [disabled]="course?.course.status === 'PUBLISH'" [required]="true" (save)="saveCourseObjectives($event)"
+                  (error)="handleError($event)"></pdg-inline-quill-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 px-0">
+          <div class="card">
+            <div class="card-body p-2">
+              <h6 class="card-title">{{'SUBJECT_LIST' | translate}}</h6>
+              <hr class="my-1">
+              <div class="py-1">
+                <ngb-tabset>
+                  <ngb-tab *ngFor="let subject of course?.subjects">
+                    <ng-template ngbTabTitle>{{subject.subjectName.length > 16 ? subject.subjectName.substring(0, 13) + '...' : subject.subjectName}}</ng-template>
+                    <ng-template ngbTabContent>
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <span>{{'QUESTIONS' | translate}}</span>
+                          <span class="pull-right">{{subject?.contentUnitCount?.questions}}</span>
+                        </li>
+                        <li class="list-group-item">
+                          <span>{{'VIDEOS_AND_REFS' | translate}}</span>
+                          <span class="pull-right">{{subject?.contentUnitCount?.videos}}</span>
+                        </li>
+                        <li class="list-group-item">
+                          <span>{{'PDFS' | translate}}</span>
+                          <span class="pull-right">{{subject?.contentUnitCount?.books}}</span>
+                        </li>
+                        <!--<li class="list-group-item">
+                          <span>{{'REFERENCES' | translate}}</span>
+                          <span class="pull-right">{{(subject?.contentUnitCount?.references)?subject?.contentUnitCount?.references:0}}</span>
+                        </li> -->
+                      </ul>
+                    </ng-template>
+                  </ngb-tab>
+                </ngb-tabset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-lg-3 col-md-12 col-sm-12 pl-0 pr-3">
+      <div class="">
+        <div class="card">
+          <div class="card-header bg-white text-center">
+            <img src="/assets/images/profile-default.jpg" alt="" height="80" class="rounded-circle mb-2">
+            <h6>Orazio Attanasio</h6>
+            <h6 class="text-primary mb-0">Biography</h6>
+          </div>
+          <div class="card-body p-2">
+            Orazio Attanasio is an Italian economist and the Jeremy Bentham Chair of Economics at University College London. He graduated
+            from the University of Bologna in 1982 and London School of Economics in 1988...
+          </div>
+          <div class="card-footer bg-white border-0 text-center">
+            <a href="javascript:void(0);">Read More</a>
+          </div>
+        </div>
+      </div>
+      <div class="pt-2">
+        <div class="card">
+          <div class="card-header bg-white">
+            <h6 class="mb-0">Pricing</h6>
+          </div>
+          <div class="card-body">
+            <ul class="list-group text-center">
+              <li class="list-group-item">$50 <span>for </span>
+                <sapn class="text-primary">50 Users</sapn>
+              </li>
+              <li class="list-group-item">$100 for
+                <sapn class="text-primary">100 Users</sapn>
+              </li>
+              <li class="list-group-item">$1000 for
+                <sapn class="text-primary">1000 Users</sapn>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer bg-white">
+            <h6>Preview available for <span class="text-primary">10 Hours</span></h6>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="floating" *ngIf="displayIndicator">
+  <div class="upload-header bg-dark p-3 d-flex">
+    <p class="mb-0 mr-2">{{uploadStatus}}</p>
+    <span class="mr-2" *ngIf="completedItem">
+      <i class="mb-0 fa fa-check-circle-o text-success" aria-hidden="true"></i> {{completedItem}}
+    </span>
+    <span class="ml-1" *ngIf="failedItem">
+      <i class="mb-0 fa fa-exclamation-circle text-danger"></i> {{failedItem}}
+    </span>
+    <p class="m-0 ml-auto cancelAll" *ngIf="!showCloseBtn" (click)="cancelAll()">{{'CANCEL_ALL' | translate}}</p>
+    <p class="m-0 ml-auto" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      <span class="fa" [class.fa-chevron-up]="!isCollapsed" [class.fa-chevron-down]="isCollapsed"></span>
+    </p>
+
+    <p class="mb-0 ml-3" *ngIf="showCloseBtn">
+      <span class="fa fa-times" title="Close" (click)="clearQueue()"></span>
+    </p>
+  </div>
+  <div [ngbCollapse]="!isCollapsed" class="uploading-list bg-white border">
+    <div class="p-3 uploading-item" *ngFor="let item of queue; let ndx=index;">
+      <div class="d-flex">
+        <div class="mr-auto mb-1 text-dark">{{item.data.title}}</div>
+        <div class="mb-1">
+          <!-- <i class="fa fa-arrow-circle-up fa-fw text-info animated" aria-hidden="true"></i> -->
+          <!-- <i class="fa fa-clock-o text-muted" aria-hidden="true"></i> -->
+          <i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true" *ngIf="item.progress.status === 'Uploading'"></i>
+          <i class="fa fa-check-circle-o text-success" aria-hidden="true" *ngIf="item.progress.status === 'Completed'"></i>
+          <i class="fa fa-exclamation-circle text-danger" aria-hidden="true" *ngIf="item.progress.status === 'Failed' || item.progress.status === 'Cancelled'"></i>
+          <i class="fa fa-times" aria-hidden="true" *ngIf="item.progress.data.percentage !== 100" (click)="cancel(ndx)"></i>
+        </div>
+      </div>
+      <div>
+        <ngb-progressbar *ngIf="item.progress.status === 'Uploading'" type="info" [value]="item.progress.data.percentage" [striped]="item.progress.status === 'Uploading'"
+          [animated]="item.progress.status === 'Uploading'"></ngb-progressbar>
+      </div>
+    </div>
+  </div>
+</div>

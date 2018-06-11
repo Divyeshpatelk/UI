@@ -1,0 +1,74 @@
+<form [formGroup]="sectionForm" (ngSubmit)="submitForm()" class="ped-subjectmarks-field">
+  <div class="form-group">
+    <strong>
+      <label class="section-title">
+          <span *ngIf="!selectedSection">{{'ADD_SECTION' | translate}}</span>
+          <span *ngIf="selectedSection">{{'UPDATE_SECTION' | translate}}</span>
+      </label>
+    </strong>
+    <input type="text" id="name" name="name" class="form-control" placeholder="{{'SECTION_NAME' | translate}}" formControlName="name" />
+    <div *ngIf="sectionForm.controls['name'].hasError('minlength') || sectionForm.controls['name'].hasError('maxlength')" class="text-danger mt-1">
+      <small>{{'ERROR.SECTION_NAME_LENGTH' | translate}}</small>
+    </div>
+  </div>
+  <div class="form-group form-group-title">
+    <strong>
+      <label>
+        {{'MARKING_SCHEME' | translate}}
+      </label>
+    </strong>
+  </div>
+  <div>
+    <div class="">
+      <div class="form-group col">
+        <div class="row">
+          <div class="col-sm-5 section-lable p-0">
+            <label for="">{{'CORRECT_ANSWER_GET' | translate}}</label>
+          </div>
+          <div class="col p-0">
+            <input type="number" id="correct" name="correct" class="form-control" formControlName="right" />
+            <span>{{'MARKS' | translate}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div class="form-group col">
+        <div class="row">
+          <div class="col-sm-5 section-lable  p-0">
+            <label for="">{{'INCORRECT_ANSWER_GET' | translate}}</label>
+          </div>
+          <div class="col p-0">
+            <input type="number" id="in_correct" name="in_correct" class="form-control" formControlName="wrong"
+              />
+              <span>{{'MARKS' | translate}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div class="form-group col">
+        <div class="row">
+          <div class="col-sm-5 section-lable  p-0">
+            <label for="">{{'OTHER_CASE_ANSWER_GET' | translate}}</label>
+          </div>
+          <div class="col p-0">
+            <input type="number" id="un_answered" name="un_answered" class="form-control" formControlName="unAnswered"
+              />
+              <span>{{'MARKS' | translate}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="form-group col mark-save">
+            <!--button type="button" (click)="cancelSection()" class="btn btn-primary" >{{'CANCEL_SECTION' | translate}}</button-->
+          <button type="submit" class="btn btn-primary" [disabled]="!sectionForm.valid">
+              <span>{{'SAVE' | translate}}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,197 @@
+@import 'theme-variables';
+
+$navbar-box-shadow: rgba(0, 0, 0, .27);
+$dropdown-con-color: rgba(0, 0, 0, .2);
+
+.navbar {
+  box-shadow: 0 3px 8px 1px $navbar-box-shadow;
+}
+.ped-navbar {
+  .navbar-collapse {
+    border-left: 1px solid #a5a5a5;
+    button {
+      margin-left: 15px;
+      border:0;
+      color:#a5a5a5;
+      &::after {
+        color: #f26222;
+      }
+    }
+  }
+
+  .ped-signupbtn {
+    input {
+      padding: 7px 25px;
+    }
+  }
+
+  .ped-topbar-actions {
+    button {
+      margin: 0 10px;
+      cursor: pointer;
+      &:last-child {
+        margin-right: 0;
+      }
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+    
+    .divider {
+      height: 50px;
+    }
+  }
+}
+.divider {
+  border-left: 1px solid $gray-200;
+  margin-bottom: -6px;
+  margin-top: -7px;
+}
+
+//dropdown on hover link color css in menu
+.dropdown-item {
+  &.active {
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  &:active {
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+}
+
+
+
+//navbar hover effact css
+.navbar-light {
+  .navbar-nav {
+    .show {
+      .nav-link {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+
+    .active {
+      .nav-link {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+
+    .nav-link {
+      &.show {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &.active {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &:focus {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &:hover {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+  }
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.navbar-brand {
+  width: 150px;
+}
+@media (min-width: 1366px){
+  .container {
+      max-width: 1002px;
+  }    
+}
+@media only screen and (max-width: 991px) {
+  .collapse {
+    &.navbar-collapse {
+      &.sticky-top {
+        padding: 0 6px;
+      }
+      &.show {
+        padding: 15px 0;
+      }
+    }
+  }
+  .navbar {
+    &.sticky-top {
+      padding: 0 6px;
+    }
+  }
+  .mobile-menu {
+    display: inline;
+  }
+
+  .hide-in-mobile {
+    display: none;
+  }
+}
+@media (max-width: 485px){
+  .ped-navbar {
+    padding-right: 0;
+  }
+  .ped-topbar-actions  {
+    margin: 6px 0;
+    button {
+      font-size: 10px;
+    }
+  }    
+  .navbar-brand {
+    width: 100px;
+    margin-right: .2rem;
+    img {
+      width:100%;
+      height: auto;
+    }
+  }
+}
+@media (max-width: 370px){
+  .ped-min-d-show {
+    display: block !important;
+  }
+  .ped-min-d-hide {
+    display: none;
+  }
+}

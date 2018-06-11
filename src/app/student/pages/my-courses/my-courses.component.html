@@ -1,0 +1,18 @@
+<pdg-breadcrumb-bar></pdg-breadcrumb-bar>
+<div class="container">
+  <div class="content-part">
+    <div class="row row-eq-height px-3">
+      <div class="col-xl-3 col-lg-4 col-md-6 card add-coupon text-center">
+        <a href="javascript:void(0);" (click)="openCouponRedemptionModal()" class="my-auto">
+          <span>
+            <i class="fa fa-plus-circle fa-5x" aria-hidden="true"></i>
+            <h5 class="mt-3">{{'GOT_COUPON' | translate}}</h5>
+          </span>
+        </a>
+      </div>
+      <div *ngFor="let course of courses | async" class="col-xl-3 col-lg-4 col-md-6 px-0">
+        <pdg-course-item [course]="course" [selected]="selectedCourse === course.course" (click)="selectCourse(course.course)"></pdg-course-item>
+      </div>
+    </div>
+  </div>
+</div>

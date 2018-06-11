@@ -1,0 +1,26 @@
+@import 'theme-variables';
+
+$overlay-clr: rgba($black, .3);
+
+.default-thumbnail {
+  background: lighten($primary, 30%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 1px solid $gray-500;
+  width: 100%;
+  .transparent {
+    opacity: 0;
+  }
+
+  .thumbnail-overlay {
+    &:hover {
+      background-color: $overlay-clr;
+      opacity: 1;
+    }
+
+    .icon-shadow {
+      text-shadow: 0 0 40px theme-color('primary');
+    }
+  }
+}

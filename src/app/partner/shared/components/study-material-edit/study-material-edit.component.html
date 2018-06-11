@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{'STUDY_MATERIAL' | translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Cross Click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body row">
+  <div class="col-sm-6 h-100">
+    <div class="player h-100">
+      <pdg-video-player *ngIf="content.type === 'video'" [src]="src"></pdg-video-player>
+      <pdg-pdf-reader *ngIf="content.type === 'pdf'" [src]="src"></pdg-pdf-reader>
+      <pdg-youtube-player *ngIf="content.type === 'refvideo'" [src]="src"></pdg-youtube-player>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <h6>
+        <pdg-inline-text-editor type="text" [(ngModel)]="title" label="Title" name="title" [minLength]="titleMinLength" [maxLength]="titleMaxLength"
+          [disabled]="content.status ==='PUBLISH'" [required]="true" (save)="saveTitle($event)" (error)="handleError($event)"
+          tooltip="{{'TOOLTIP.CONTENT_TITLE' | translate}}"></pdg-inline-text-editor>
+      </h6>
+      <pdg-inline-text-editor type="textarea" [(ngModel)]="description" label="Description" name="description" [minLength]="descMinLength"
+        [maxLength]="descMaxLength" [disabled]="content.status ==='PUBLISH'" [required]="true" (save)="saveDescription($event)" (error)="handleError($event)"
+        tooltip="{{'TOOLTIP.CONTENT_DESC' | translate}}"></pdg-inline-text-editor>
+    </div>
+  </div>
+</div>
+<div class="modal-footer bg-dark">
+  <button type="button" class="btn btn-outline-primary" (click)="activeModal.close('Close Click')">{{'CLOSE' | translate}}</button>
+</div>

@@ -1,0 +1,124 @@
+@import 'theme-variables';
+
+$navbar-box-shadow: rgba(0, 0, 0, .27);
+$dropdown-con-color: rgba(0, 0, 0, .2);
+
+.navbar {
+  box-shadow: 0 3px 8px 1px $navbar-box-shadow;
+}
+
+.divider {
+  border-left: 1px solid $gray-200;
+  margin-bottom: -6px;
+  margin-top: -7px;
+}
+
+//dropdown on hover link color css in menu
+.dropdown-item {
+  &.active {
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  &:active {
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+}
+
+
+
+//navbar hover effact css
+.navbar-light {
+  .navbar-nav {
+    .show {
+      .nav-link {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+
+    .active {
+      .nav-link {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+
+    .nav-link {
+      &.show {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &.active {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &:focus {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+
+      &:hover {
+        color: $gray-700;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
+  }
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.navbar-brand {
+  width: 150px;
+}
+
+@media only screen and (max-width: 991px) {
+  .collapse {
+    &.navbar-collapse {
+      &.show {
+        padding: 15px 0;
+      }
+    }
+  }
+
+  .mobile-menu {
+    display: inline;
+  }
+
+  .hide-in-mobile {
+    display: none;
+  }
+}

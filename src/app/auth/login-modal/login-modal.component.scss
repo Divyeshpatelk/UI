@@ -1,0 +1,83 @@
+@import '../../../sass/theme-variables';
+
+.card {
+  .logo {
+    width: 70%;
+    margin: auto;
+  }
+  box-shadow: 0 0 3px 0 $gray-400;
+}
+
+.icon-fb {
+  background: $fb;
+  color: $white;
+  padding: 14px 17px;
+}
+
+.icon-twitter {
+  background: $twitter;
+  color: $white;
+}
+
+.icon-google {
+  background-color: $google;
+  color: $white;
+  padding: 14px 12px;
+}
+
+.ped-google-social-login{
+  background:#cf4431 ;
+  color:#fff;
+  border-color:#cf4431;
+}
+
+.ped-facebook-social-login{
+  background:#3c5997;
+  color:#fff;
+  border-color:#3c5997;
+}
+
+.icon-lin {
+  background-color: $linkin;
+  color: $white;
+  padding: 14px 15px;
+}
+
+.seperator {
+  h6 {
+    position: relative;
+    z-index: 1;
+
+    &::before {
+      border-top: 2px solid $gray-200;
+      bottom: 0;
+      content: '';
+      left: 0;
+      margin: 0 auto;
+      // this centers the line to the full width specified
+      position: absolute;
+      // positioning must be absolute here, and relative positioning must be applied to the parent */
+      right: 0;
+      top: 50%;
+      width: 95%;
+      z-index: -1;
+    }
+  }
+
+  span {
+    background: $white;
+    padding: 0 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .icon {
+    margin-left: 0;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1080px) {
+  .icon {
+    margin-left: 0;
+  }
+}

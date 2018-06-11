@@ -1,0 +1,57 @@
+@import 'theme-variables';
+
+.floating {
+  background: theme-color('primary');
+  bottom: 1rem;
+  margin: 0;
+  position: fixed;
+  right: 1rem;
+  width: 30rem;
+  z-index: 2;
+
+  .upload-header {
+    color: $white;
+  }
+
+  .uploading-list {
+    max-height: 280px;
+    overflow-y: auto;
+
+    .title {
+      word-break: break-word;
+      word-wrap: break-word;
+    }
+  }
+
+  .cancelAll {
+    cursor: pointer;
+  }
+}
+
+:host /deep/ .progress {
+  border-radius: 4px;
+  height: .5rem;
+}
+
+.uploading-item {
+  border-bottom: 1px solid $gray-200;
+}
+
+.animated {
+  animation: mycustomanimation infinite 1s linear;
+}
+
+@keyframes mycustomanimation {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+
+

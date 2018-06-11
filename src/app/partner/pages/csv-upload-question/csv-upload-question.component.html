@@ -1,0 +1,149 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{'ADD_PRACTICE_QUES' | translate}}</h4>
+
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body question_modal_body">
+  <div class="row row-eq-height">
+    <!-- Question left side part-->
+    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 add-question-form">
+      <div class="row">
+        <div class="col-sm-12">
+          <form [formGroup]="addCsvQuestionForm" *ngIf="!editing">
+            <div class="form-group">
+              <strong>
+                <label for="">{{'QUESTION' | translate}}
+                  <span class="mandatory-field">*</span>
+                </label>
+              </strong>
+              <a class="reset" href="javascript:void(0);" (click)="resetAddCsvQuestionForm">
+                <u>{{'RESET' | translate}}</u>
+              </a>
+              <quill-editor #editor formControlName="question" [modules]="editorConfig">
+              </quill-editor>
+            </div>
+            <div class="form-group mb-0">
+              <strong>
+                <label for="">{{'DIFFICULTY_LEVEL' | translate}}
+                  <span class="mandatory-field">*</span> &nbsp;&nbsp;</label>
+              </strong>
+              <label class="custom-control custom-radio">
+                <input formControlName="difficulty" id="radio1" name="difficulty" type="radio" value="0" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{'EASY' | translate}}</span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input formControlName="difficulty" id="radio2" name="difficulty" type="radio" value="1" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{'AVERAGE' | translate}}</span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input formControlName="difficulty" id="radio3" name="difficulty" type="radio" value="2" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{'DIFFICULT' | translate}}</span>
+              </label>
+            </div>
+            <div class="form-group mb-0">
+              <strong>
+                <label for="">{{'ANSWER_CHOICES' | translate}}
+                  <span class="mandatory-field">*</span>
+                </label>
+              </strong>
+              <div formArrayName="choices">
+                <div [formGroupName]="i" class="answer-choice-container mt-2" *ngFor="let choice of choices.controls; let i = index;">
+                  <div class="row m-0 pt-1 answer-choice-header bg-dark">
+                    <span class="col-sm-4 choice-number-text">{{'CHOICE' | translate}} {{i + 1}}</span>
+                    <div class="col-sm-6">
+                      <label class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" value="" formControlName="choiceCheckBox">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{'THIS_IS_RIGHT_ANS' | translate}}</span>
+                      </label>
+                    </div>
+                    <div class="col-sm-2 text-right">
+                      <a href="javascript:void(0);" (click)="removeChoice(i)">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="editor-div">
+                    <quill-editor #editor formControlName="choiceText" [modules]="editorConfig">
+                    </quill-editor>
+                  </div>
+                </div>
+              </div>
+              <a href="javascript:void(0);" class="align-self-center mt-3" (click)="addAnotherChoice()">
+                <i class="fa fa-plus"></i>
+                <label>&nbsp;{{'ADD_ANOTHER_CHOICE' | translate}}</label>
+              </a>
+            </div>
+            <div class="form-group mb-0">
+              <strong>
+                <label for="">{{'EXPLANATION' | translate}}</label>
+                <br/>
+              </strong>
+              <quill-editor formControlName="explanation" [modules]="editorConfig">
+              </quill-editor>
+            </div>
+            <br/>
+            <div class="form-group mb-0">
+              <strong>
+                <label for="">{{'PAST_EXAM' | translate}}</label>
+              </strong>
+              <br/>
+              <div class="form-inline">
+                <select #monthSelect class="form-control mr-2" id="exampleFormControlSelect1" formControlName="pastExamMonth">
+                  <option value="-1">{{'SELECT_MONTH' | translate}}</option>
+                  <option value="Jan">January</option>
+                  <option value="Feb">Febuary</option>
+                  <option value="March">March</option>
+                  <option value="April">April</option>
+                  <option value="May">May</option>
+                  <option value="June">June</option>
+                  <option value="July">July</option>
+                  <option value="Aug">August</option>
+                  <option value="Sept">September</option>
+                  <option value="Oct">October</option>
+                  <option value="Nov">November</option>
+                  <option value="Dec">December</option>
+                </select>
+                <select #yearSelect class="form-control" id="exampleFormControlSelect2" formControlName="pastExamYear">
+                  <option value="-1">{{'SELECT_YEAR' | translate}}</option>
+                  <option *ngFor="let year of yearsArray" [value]="year">{{year}}</option>
+                </select>
+                <button type="button" (click)="addPastExam()" class="btn btn-link">{{'ADD' | translate}}</button>
+              </div>
+              <div formArrayName="pastExams">
+                <span *ngFor="let obj of pastExams.controls; let i = index;" class="badge badge-pill badge-light">{{obj.value}}
+                  <a href="javascript:void(0);">
+                    <i class="fa fa-trash" (click)="removePastExam(i)"></i>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <br/>
+          </form>
+        </div>
+        <div class="col-sm-12" *ngIf="editing">
+          <pdg-update-question [question]="selectedQuestion" [isCsvQuestion]="true" (update)="onQuestionUpdate($event)" (cancel)="onQuestionUpdateCancel($event)"></pdg-update-question>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Qusetion Right side part-->
+    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 question-preview-list">
+      <h6>{{'PREVIEW' | translate}} - {{'SELECT_QUESTION_UPDATE'| translate}}</h6>
+      <div class="bg-light p-2" *ngFor="let question of parsedQuestionList">
+        <pdg-ques-item [content]="question" [selected]="selectedQuestion === question" (click)="selectedQuestion=question;editing=true"></pdg-ques-item>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer bg-dark">
+  <button type="button" class="btn btn-primary" (click)="submit()">{{'SUBMIT' | translate}}</button>
+  <button type="button" class="btn btn-outline-primary" (click)="close()">{{'CANCEL' | translate}}</button>
+</div>

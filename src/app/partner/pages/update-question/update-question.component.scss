@@ -1,0 +1,29 @@
+@import 'theme-variables';
+
+.answer-choice-header {
+  border: 1px solid $gray-500;
+  border-bottom: 0;
+  color: $white;
+  font-size: $font-size-sm;
+  font-weight: bold;
+
+  label {
+    margin-bottom: 0;
+  }
+
+  .custom-control-indicator {
+    top: .15rem;
+  }
+
+  a {
+    color: $white;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+.editor-div {
+  width: 100%;
+}

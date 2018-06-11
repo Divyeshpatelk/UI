@@ -1,0 +1,123 @@
+@import 'theme-variables';
+
+.card {
+
+  .card-body {
+    .filter-div {
+      border-bottom: 1px solid $gray-300;
+    }
+
+    .question-no {
+      span {
+        background-color: $gray-200;
+        color: $white;
+        font-size: $base-font-size * .9;
+        height: 23px;
+        margin: .25rem;
+        padding: .1rem;
+        text-align: center;
+        width: 23px;
+
+        &.skip {
+          background-color: $white;
+          border: 1px solid $gray-600;
+          color: $gray-600;
+        }
+
+        &.attended {
+          background-color: lighten($primary, 25%);
+          color: $white;
+        }
+
+        &.marked {
+          background-color: $darkblue;
+
+          a {
+            color: $white;
+          }
+        }
+
+        &.success {
+          background-color: lighten($success, 20%);
+          color: $white;
+        }
+
+        &.danger {
+          background-color: lighten($danger, 10%);
+          color: $white;
+        }
+
+        &.active {
+          border: 1px solid $primary;
+        }
+      }
+    }
+  }
+}
+
+.btn-group {
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .ped-mob-sidebar {
+    border: 0;
+  }
+  .ped-mob-timer {
+    position: fixed;
+    bottom: 0;
+    z-index: 99999999;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    background-color: transparent !important;
+    border-bottom: 0;
+    .time-text {
+      display: none;
+    }
+    h5 {
+      font-size: 14px;
+    }
+  }
+  .card-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999999;
+  }
+  .card-body {
+    right: 0;
+    max-height: 77px;
+    overflow-x: scroll;
+    position: fixed;
+    bottom: 47px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    z-index: 99999;
+    padding: 5px !important;
+    .filter-div {
+      display: none !important;
+    }
+    .question-no {
+      white-space: nowrap;
+      overflow-y: hidden;
+      padding-top: 0 !important;
+      flex-wrap: nowrap !important;
+      span {
+        background-color: #e9ecef;
+        color: #fff;
+        font-size: 0.81rem;
+        height: auto !important;
+        margin: .25rem;
+        padding: .7rem 1rem !important;
+        text-align: center;
+        width: auto !important;
+      }
+    }
+  }
+}

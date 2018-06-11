@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-start page-headingdark mb-3 py-2 bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 d-flex">
+        <h5 class="mb-0 text-light align-self-center">{{'COURSE_LIST' | translate}}</h5>
+      </div>
+      <div class="col-sm-6 text-right">
+        <div ngbDropdown class="d-inline-block" placement="bottom-right">
+          <button class="btn btn-link text-white" id="dropdownBasic1" ngbDropdownToggle>
+            <span class="fa fa-filter"></span>
+            <span class="text-white">{{'FILTER' | translate}}</span>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="dropdown-item" [class.active]="courseFilterArg === 'ALL'" (click)="filterCourses('ALL')">{{'ALL' | translate}}</button>
+            <button class="dropdown-item" [class.active]="courseFilterArg === 'DRAFT'" (click)="filterCourses('DRAFT')">{{'DRAFT' | translate}}</button>
+            <button class="dropdown-item" [class.active]="courseFilterArg === 'PUBLISH'" (click)="filterCourses('PUBLISH')">{{'PUBLISHED' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="content-part">
+    <div class="row row-eq-height px-3">
+      <div class="col-xl-3 col-lg-4 col-md-6 card add-course-card text-center">
+        <a [routerLink]="['/partner', 'course', 'create']" class="my-auto">
+          <span>
+            <i class="fa fa-plus-circle fa-5x" aria-hidden="true"></i>
+            <h5 class="mt-3">{{'ADD_COURSE'| translate}}</h5>
+          </span>
+        </a>
+      </div>
+      <div *ngFor="let mycourse of myCourses | courseFilter: courseFilterArg" class="col-xl-3 col-lg-4 col-md-6 px-0">
+        <pdg-course-item [course]="mycourse" (remove)="onCourseDelete($event)"></pdg-course-item>
+      </div>
+    </div>
+  </div>
+</div>

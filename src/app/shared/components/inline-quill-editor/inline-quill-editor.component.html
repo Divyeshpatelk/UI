@@ -1,0 +1,48 @@
+<div *ngIf="editing" class="inline-quill-editor-container">
+  <quill-editor #inlineEditControl [name]="label" [(ngModel)]="value" [placeholder]="label" (ngModelChange)="validationError=false;">
+    <div quill-editor-toolbar [class.show-toolbar]="showHideToolbar">
+      <span class="ql-formats">
+        <button class="ql-bold" [title]="'Bold'"></button>
+        <button class="ql-italic" [title]="'Italic'"></button>
+        <button class="ql-underline" [title]="'Underline'"></button>
+        <button class="ql-strike" [title]="'Strike'"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-blockquote"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-list" value="ordered"></button>
+        <button class="ql-list" value="bullet"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-script" value="sub"></button>
+        <button class="ql-script" value="super"></button>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-clean" [title]="'Clean'"></button>
+      </span>
+    </div>
+  </quill-editor>
+  <div class="text-right mt-1">
+    <div class="custom-tooltip">{{tooltip}}</div>
+    <a href="javascript:void(0);" class="mr-3">
+      <span (click)="showHideToolbar = !showHideToolbar">
+        <u>{{showHideToolbar?'Show Toolbar': 'Hide Toolbar'}}</u>
+      </span>
+    </a>
+    <button type="button" class="btn btn-primary btn-sm" (click)="validate()" [disabled]="validationError">
+      <span class="fa fa-check"></span>
+    </button>
+    <button type="button" class="btn btn-outline-primary btn-sm" (click)="cancel()">
+      <span class="fa fa-remove"></span>
+    </button>
+  </div>
+</div>
+<div *ngIf="!editing" class="inline-quill-editor-preview" [class.disabled]="disabled">
+  <div class="inline-quill-edit-text">
+    <div class="quill-text-div pl-2 pt-2 pb-2" [ngClass]="{'quill-text-div-label' : !value}" [innerHTML]="value || label" (click)="!disabled && edit(value)"></div>
+    <div class="quill-icon-div">
+      <span class="fa fa-pencil" (click)="!disabled && edit(value)"></span>
+    </div>
+  </div>
+</div>

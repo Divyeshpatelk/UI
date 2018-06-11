@@ -1,0 +1,222 @@
+// You can add global styles to this file, and also import other style files */
+@import 'sass/variables';
+@import '~@typopro/web-open-sans/TypoPRO-OpenSans-Regular.css';
+@import url(//fonts.googleapis.com/earlyaccess/notosansgujarati.css);
+@import 'fonts/stylesheet.css';
+@import 'sass/theme-variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/functions';
+@import '~font-awesome/scss/font-awesome';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~videogular2/fonts/videogular.css';
+@import '~quill/dist/quill.snow.css';
+@import '~primeng/resources/themes/omega/theme.css';
+@import '~primeng/resources/primeng.css';
+
+
+$dropdown-con-color: rgba(0, 0, 0, .2);
+
+// Temporarily Added
+body {
+  background-color: $gray-200;
+
+  *:focus {
+    outline: 0;
+  }
+}
+
+.tab-pane {
+  padding: 10px 0;
+}
+
+.custom-control-input {
+  &:focus~.custom-control-indicator {
+    box-shadow: 0 0 0 0.2rem rgba(242, 98, 34, 0.25);
+  }
+}
+
+//all tabs common css
+.nav-tabs {
+  .nav-link {
+    background: $gray-100; // border: 1px solid $gray-500;
+    border: 1px solid $gray-200;
+    border-bottom-color: $orange;
+  }
+}
+
+.field-error {
+  color: $red;
+  font-size: .7rem;
+  font-style: italic;
+}
+
+.close {
+  &:hover {
+    color: $orange;
+  }
+}
+
+.btn {
+  &.focus ,
+  &:focus {
+    box-shadow: none;
+    outline: 0;
+  }
+
+  &.disabled ,
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.mandatory-field {
+  color: $orange;
+}
+
+.ped-carousel {
+  width: 100%;
+  .ngxcarousel {
+      margin-left: -10px;
+      margin-right: -10px;
+  }
+}
+
+.ped-notification {
+  .icon {
+      height:50px !important;
+      width:50px !important;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background-color: $gray-100;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  background-color: $gray-100;
+  height: 5px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $gray-600;
+  border-radius: 10px;
+}
+
+.px-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.ped-course-list-spacing {
+  margin-bottom: 30px;
+}
+@media screen and (max-width: 1380px) {
+  .ngxcarousel {
+    margin-left: 0px !important;
+    margin-right: 0px  !important;
+  }
+}
+
+/* Set default font-family */
+
+/* Set content font-families */
+.ql-font-gopika-two-2 {
+  font-family: "GopikaTwo";
+  font-size: 18px;
+}
+.ql-font-bharati-gopika {
+  font-family: "B Bharati GopikaTwo";
+  font-size: 18px;
+}
+.ql-font-euclid-symbol {
+  font-family: "Euclid Symbol", "MT Symbol";
+  font-size: 18px;
+}
+.ql-font-MT-symbol {
+  font-family: "MT Symbol";
+  font-size: 18px;
+}
+.ql-font-euclid-extra {
+  font-family: "Euclid Extra", "MT Extra";
+  font-size: 18px;
+}
+/* User Dashbord Responsive Design over-write */
+
+.dashboard-grid {
+  .ui-table-wrapper {
+      min-height: .01%;
+      overflow-x: auto;
+      table {
+          width: 100%;
+          max-width: 100%;
+          margin-bottom: 20px;
+          table-layout: auto;
+          tr {
+            th, td {
+              padding: 8px;
+              line-height: 1.42857143;
+              vertical-align: top;
+              border-top: 1px solid #ddd;
+              white-space: nowrap;
+              display: table-cell !important;
+              border: 1px solid #D5D5D5;
+              float: none;
+            }
+          }
+          
+      }
+  }
+  @media only screen and (max-width: 991px){
+    .nav-tabs {
+      border-bottom: 0;
+      .nav-item {
+        display: block;
+        width: 100%;
+        margin-bottom: 0px;
+        .nav-link {
+          border-bottom: 1px solid #e9ecef;
+          &.active {
+            border-bottom: 1px solid #f26222;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/* loading spinner on body part START */
+.loading-overlay {
+  position: fixed;
+  z-index: 999;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.5;
+
+  .spinner {
+    position: absolute;
+    color: #17a2b8;
+    left: 50%;
+    top: 50%;
+    margin: 0px auto;
+  }
+}
+/* loading spinner on body part END */
+
+.pdg-p-t-c {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}

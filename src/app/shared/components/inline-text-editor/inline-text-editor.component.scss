@@ -1,0 +1,59 @@
+@import 'theme-variables';
+
+.inline-editor-container {
+  display: inline-block;
+  width: 80%;
+  word-break: break-all;
+  word-wrap: break-all;
+
+  input {
+    height: 30px;
+    width: 100%;
+  }
+
+  textarea {
+    width: 100%;
+  }
+}
+
+.custom-tooltip {
+  color: $orange;
+  font-size: $font-size-sm;
+  font-weight: normal;
+  opacity: 1;
+  position: absolute;
+}
+
+.icon-div {
+  background: $gray-300;
+  cursor: pointer;
+  display: inline-block;
+  visibility: hidden;
+}
+
+.inline-editor-preview {
+  border: 1px solid $white;
+  display: inline-block;
+  word-break: break-all;
+  word-wrap: break-all;
+
+  &:hover {
+    border: 1px solid;
+
+    .icon-div {
+      visibility: visible;
+    }
+
+    &.disabled {
+      border: 1px solid $white;
+
+      .icon-div {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.inline-edit-text {
+  display: inline-block;
+}

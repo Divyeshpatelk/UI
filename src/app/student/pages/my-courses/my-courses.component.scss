@@ -1,0 +1,57 @@
+@import 'theme-variables';
+
+.add-coupon {
+  &.card {
+    background-color: $gray-200;
+    border: 3px dashed $gray-500;
+  }
+
+  span,
+  h5 {
+    color: $gray-600;
+  }
+}
+
+.col-xl-3 {
+  max-width: 23.7%;
+
+  &.col-lg-4 {
+    &.col-md-6 {
+      margin: 0 .4rem 1rem .571rem;
+      min-height: 14rem;
+    }
+  }
+}
+
+//responsive card media query
+@media (max-width: 767px) {
+  .add-course-card {
+    min-height: 400px;
+  }
+
+  .col-xl-3 {
+    &.col-lg-4 {
+      &.col-md-6 {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .col-md-6 {
+    max-width: 47%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .col-lg-4 {
+    max-width: 31.5%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1349px) {
+  .col-xl-3 {
+    max-width: 23.5%;
+  }
+}

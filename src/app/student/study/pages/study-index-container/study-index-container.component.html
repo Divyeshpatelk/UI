@@ -1,0 +1,25 @@
+<div class="d-flex index-fixed-height bg-white">
+  <!-- Sidebar start -->
+  <a href="javascript:void(0)" (click)="makeSidebarActive = !makeSidebarActive" class="d-block d-sm-block d-md-none ped-sidbar-activater"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+  <div style="overflow: auto; width: 480px;" class="ped-flex-sidebar" [ngClass]="{'active-sidebar': makeSidebarActive}" >
+      <a href="javascript:void(0)" (click)="makeSidebarActive = !makeSidebarActive" class="d-block d-sm-block d-md-none ped-sidbar-activater close"><i class="fa fa-times" aria-hidden="true"></i></a>
+    <pdg-study-index-sidebar></pdg-study-index-sidebar>
+  </div>
+  <!-- Sidebar end -->
+  <div class="container-fluid ped-mob-height" style="overflow: auto;">
+    <div class="page-headingdark ">
+      <div class="row bg-dark py-2">
+        <div class="col-sm-6 d-flex pb-1">
+          <h6 class="mb-0 ped-mob-icon-space text-light align-self-center">{{subjectIndex?.title}}</h6>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!content;else contentViewer">
+      <pdg-study-index-content *ngIf="!content"></pdg-study-index-content>
+    </div>
+    <ng-template #contentViewer>
+      <pdg-study-index-content-viewer *ngIf="content"></pdg-study-index-content-viewer>
+    </ng-template>
+    <!-- <router-outlet></router-outlet> -->
+  </div>
+</div>

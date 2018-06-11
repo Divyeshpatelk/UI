@@ -1,0 +1,27 @@
+<div class="bg-white main-tab-margin">
+  <!-- <div class="coursepackbtn d-flex flex-wrap">
+    <a href="javascript:void(0);" class="ml-auto">
+      <button class="btn btn-dark btn-sm mr-2">View as Student</button>
+    </a>
+  </div> -->
+  <ngb-tabset>
+    <ngb-tab title="{{'STUDY_MATERIAL' | translate}}">
+      <ng-template ngbTabContent>
+        <pdg-course-study-material [course]="course" [subject]="subject" [index]="subjectIndex"></pdg-course-study-material>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <!--Practice Question Tab-->
+      <ng-template ngbTabTitle>{{'PRACTICE_QUESTION' | translate}}</ng-template>
+      <ng-template ngbTabContent>
+        <pdg-course-ques-tab [course]="course" [subject]="subject" [index]="subjectIndex"></pdg-course-ques-tab>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-test">
+      <ng-template ngbTabTitle>{{'TEST' | translate}}</ng-template>
+      <ng-template ngbTabContent>
+        <pdg-course-test-tab [course]="course" [subject]="subject" [index]="subjectIndex"></pdg-course-test-tab>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

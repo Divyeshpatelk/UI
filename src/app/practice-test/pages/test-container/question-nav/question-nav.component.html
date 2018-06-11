@@ -1,0 +1,69 @@
+<div class="card ml-2 ped-mob-sidebar">
+  <div class="card-header bg-white">
+    <div class="text-center ped-mob-timer">
+      <span class="time-text">{{'TIME' | translate}}</span>
+      <h5 class="text-primary text-center mb-0">{{timer | formatTimer}}</h5>
+    </div>
+  </div>
+  <div class="card-body p-3">
+    <div class="filter-div py-0">
+      <div class="d-flex">
+        <h6>{{'FILTER' | translate}}</h6>
+        <a href="javascript:void(0);" class="ml-2" (click)="clearFilter()">
+          <h6>
+            <small>
+              <u>{{'CLEAR_FILTER' | translate}}</u>
+            </small>
+          </h6>
+        </a>
+      </div>
+      <div class="pb-2" data-toggle="buttons">
+        <div class="row m-auto">
+          <!-- Unattended -->
+          <label class="btn-sm btn-light m-2" ngbButtonLabel>
+            <input type="checkbox" class="d-none" ngbButton [(ngModel)]="filters.unattended" (change)="addRemoveFilterArgs()">{{'UNATTENDED' | translate}}
+          </label>
+
+          <!-- Skipped -->
+          <label class="btn-sm btn-outline-secondary m-2" *ngIf="!isShowRightAnsOptionEnabled" ngbButtonLabel>
+            <input type="checkbox" class="d-none" ngbButton [(ngModel)]="filters.skipped" (change)="addRemoveFilterArgs()">{{'SKIPPED' | translate}}
+          </label>
+
+          <label class="btn-sm btn-dark m-2" *ngIf="!isShowRightAnsOptionEnabled" ngbButtonLabel>
+            <input type="checkbox" class="d-none" ngbButton [(ngModel)]="filters.markedReview" (change)="addRemoveFilterArgs()">{{'REVIEW' | translate}}
+          </label>
+
+          <label class="btn-sm btn-success m-2" *ngIf="isShowRightAnsOptionEnabled" ngbButtonLabel>
+            <input type="checkbox" class="d-none" ngbButton [(ngModel)]="filters.correct" (change)="addRemoveFilterArgs()">{{'CORRECT' | translate}}
+          </label>
+
+          <label class="btn-sm btn-danger m-2" *ngIf="isShowRightAnsOptionEnabled" ngbButtonLabel>
+            <input type="checkbox" class="d-none" ngbButton [(ngModel)]="filters.incorrect" (change)="addRemoveFilterArgs()">{{'INCORRECT' | translate}}
+          </label>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="(questionFlagsData | questionFilter: filterArgs) as filteredData">
+      <div class="question-no flex-wrap align-items-center d-flex pt-3">
+        <span class="rounded" [class.active]="question?.index === quesIndex" [class.success]="question?.correct" [class.danger]="question?.incorrect"
+          [class.skip]="question?.skipped" [class.marked]="question?.markedReview" [class.attended]="question?.attended" *ngFor="let question of filteredData"
+          (click)="jumpToQues(question?.index)">
+          <a href="javascript:void(0);">{{question?.index+1}}</a>
+        </span>
+      </div>
+      <div *ngIf="filteredData.length === 0">
+        <small>{{'NO_QUESTION_ON_FILTER' | translate}}</small>
+      </div>
+    </ng-container>
+  </div>
+  <div class="card-footer bg-white">
+    <div class="d-flex">
+      <button class="btn btn-dark btn-sm" [disabled]="quesIndex === 0" (click)="showPreviousQues()">
+        <span class="fa fa-chevron-left mr-2 text-primary"></span>{{'PREV' | translate}}
+      </button>
+      <button class="btn btn-dark btn-sm ml-auto" [disabled]="quesIndex === questionFlagsData?.length - 1" (click)="showNextQues()">{{'NEXT' | translate}}
+        <span class="fa fa-chevron-right ml-2 text-primary"></span>
+      </button>
+    </div>
+  </div>
+</div>

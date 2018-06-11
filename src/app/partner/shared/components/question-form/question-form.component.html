@@ -1,0 +1,108 @@
+<form [formGroup]="questionForm" (ngSubmit)="submitForm()">
+  <div class="form-group">
+
+    <strong>
+
+      <label for="">{{'QUESTION' | translate}}
+        <span class="mandatory-field">*</span>
+      </label>
+    </strong>
+    <pdg-question-editor formControlName="question"></pdg-question-editor>
+  </div>
+  <div class="form-group mb-0">
+    <strong>
+      <label for="">{{'DIFFICULTY_LEVEL' | translate}}
+        <span class="mandatory-field">*</span> &nbsp;&nbsp;</label>
+    </strong>
+    <label class="custom-control custom-radio">
+      <input formControlName="difficulty" id="radio1" name="difficulty" type="radio" value="0" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">{{'EASY' | translate}}</span>
+    </label>
+    <label class="custom-control custom-radio">
+      <input formControlName="difficulty" id="radio2" name="difficulty" type="radio" value="1" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">{{'AVERAGE' | translate}}</span>
+    </label>
+    <label class="custom-control custom-radio">
+      <input formControlName="difficulty" id="radio3" name="difficulty" type="radio" value="2" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">{{'DIFFICULT' | translate}}</span>
+    </label>
+  </div>
+  <div class="form-group mb-0">
+    <strong>
+      <label for="">{{'ANSWER_CHOICES' | translate}}
+        <span class="mandatory-field">*</span>
+      </label>
+    </strong>
+    <div formArrayName="choices">
+      <div [formGroupName]="i" class="answer-choice-container mt-2" *ngFor="let choice of choices.controls; let i = index;">
+        <div class="row m-0 pt-2 answer-choice-header bg-dark">
+          <span class="col-sm-4 choice-number-text">{{'CHOICE' | translate}} {{i + 1}}</span>
+          <div class="col-sm-6">
+            <label class="custom-control custom-checkbox">
+              <input class="custom-control-input" type="checkbox" value="" formControlName="choiceCheckBox">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">{{'THIS_IS_RIGHT_ANS' | translate}}</span>
+            </label>
+          </div>
+          <div class="col-sm-2 text-right">
+            <a href="javascript:void(0);" (click)="removeChoice(i)">
+              <i class="fa fa-trash"></i>
+            </a>
+          </div>
+        </div>
+        <div class="editor-div">
+          <pdg-question-editor formControlName="choiceText"></pdg-question-editor>
+        </div>
+      </div>
+    </div>
+    <a href="javascript:void(0);" (click)="addChoice()" class="align-self-center mt-3">
+      <i class="fa fa-plus"></i>
+      <label>&nbsp;{{'ADD_ANOTHER_CHOICE' | translate}}</label>
+    </a>
+  </div>
+  <div class="form-group mb-0">
+    <strong>
+      <label for="">{{'EXPLANATION' | translate}}</label>
+      <br/>
+    </strong>
+    <pdg-question-editor formControlName="explanation"></pdg-question-editor>
+  </div>
+  <br/>
+  <div class="form-group mb-0">
+    <strong>
+      <label for="">{{'PAST_EXAM' | translate}}</label>
+    </strong>
+    <br/>
+    <div class="form-inline">
+      <input type="text" id="pastExamName" class="form-control" name="pastExamName" formControlName="pastExamName" placeholder="{{'PLACEHOLDERS.PASTEXAM' | translate}}">
+      <button (click)="addPastExam()" type="button" class="btn btn-link">{{'ADD' | translate}}</button>
+    </div>
+    <div formArrayName="pastExams">
+      <span *ngFor="let obj of pastExams.controls; let i = index;" class="badge badge-pill badge-light">{{obj.value}}
+        <a href="javascript:void(0);">
+          <i class="fa fa-trash" (click)="removePastExam(i)"></i>
+        </a>
+      </span>
+    </div>
+  </div>
+  <br/>
+  <div class="text-right">
+    <a class="mr-2" href="javascript:void(0);" (click)="resetQuestionForm()">
+      <u>{{'RESET' | translate}}</u>
+    </a>
+    <label *ngIf="questionForm.invalid; else validForm" class="tooltiplabel" ngbTooltip="One or more mandatory fields are left blank">
+      <button type="submit" class="btn btn-primary btn-sm" [disabled]="!questionForm.valid">{{ (isUpdate ? 'UPDATE_QUESTION' : 'ADD_NEXT_QUES') | translate}}
+      </button>
+    </label>
+    <ng-template #validForm>
+      <button type="submit" class="btn btn-primary btn-sm">{{(isUpdate ? 'UPDATE_QUESTION' : 'ADD_NEXT_QUES') | translate}}
+      </button>
+    </ng-template>
+    <!-- <a href="javascript:void(0);" (click)="emitCancel()">
+      <u>{{'CANCEL' | translate}}</u>
+    </a> -->
+  </div>
+</form>

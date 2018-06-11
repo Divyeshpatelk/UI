@@ -1,0 +1,123 @@
+.ped-mob-background {
+    background: #1b344a url('/assets/images/app-banner-new.png') no-repeat top center;
+    color: #fff;
+
+    .container {
+        .row {
+            min-height: 432px;
+            .col-md-8 {
+                padding-left: 90px;
+                line-height: 23pt;
+                h1{
+                    margin-bottom: 35px;
+                    font-size: 42px;
+                    font-weight: normal;
+                }
+
+                p {
+                    margin-bottom:2px;
+                    font-size: 23px;
+                }
+                .ped-download-links {
+                    background: #125c84;
+                    padding: 12px;
+                    border-radius: 4px;
+                    display:inline-block;
+                    margin-top:40px;
+                    width: auto;
+
+                    p {
+                        font-size: 23px;
+                        margin-bottom: 5px;
+                    }
+
+                    .ped-download-iphone {
+                        background: url('/assets/images/downloadApp-new.png') no-repeat 0 0;
+                        width: 205px;
+                        height: 70px;
+                        border: 0
+                    }
+
+                    .ped-download-android {
+                        background: url('/assets/images/downloadApp-new.png') no-repeat -228px 0;
+                        width: 204px;
+                        height: 70px;
+                        border:0;
+                        margin-left: 15px;
+                    }
+                }
+                @media screen and (max-width: 750px) {
+                  .ped-download-links {
+                      button {
+                          margin-bottom:10px;
+                      }
+                      .ped-download-iphone {
+                            background: url('/assets/images/downloadApp-new.png') no-repeat 0 0;
+                            width: 150px;
+                            height: 48px;
+                            border: 0;
+                            background-size: 200%;
+                        }
+                        .ped-download-android {
+                            background: url('/assets/images/downloadApp-new.png') no-repeat -158px 0;
+                            width: 150px;
+                            height: 48px;
+                            border: 0;
+                            margin-left: 0px;
+                            background-size: 200%;
+                        }
+                  }
+                }
+                @media only screen and (max-width:991px) {
+                    .ped-download-links {
+                        .ped-download-iphone {
+                            background: url('/assets/images/downloadApp-new.png') no-repeat 0 0;
+                            width: 150px;
+                            height: 48px;
+                            border: 0;
+                            background-size: 200%;
+                        }
+                        .ped-download-android {
+                            background: url('/assets/images/downloadApp-new.png') no-repeat -158px 0;
+                            width: 150px;
+                            height: 48px;
+                            border: 0;
+                            margin-left: 0px;
+                            background-size: 200%;
+                        }
+                    }
+                }
+                @media only screen and (max-width:991px) {
+                    .ped-download-links {
+                        .ped-download-iphone {
+                            background: url('/assets/images/downloadApp-new.png') no-repeat 0 0;
+                            width: 120px;
+                            height: 40px;
+                            border: 0;
+                            background-size: 200%;
+                        }
+                        .ped-download-android {
+                            background: url('/assets/images/downloadApp-new.png') no-repeat -126px 0;
+                            width: 120px;
+                            height: 40px;
+                            border: 0;
+                            margin-left: 0px;
+                            background-size: 200%;
+                        }
+                    }
+                }
+            }
+            @media only screen and (max-width: 767px) {
+                .col-md-8 {
+                    padding-left: 40px;
+                }
+            }
+            @media only screen and (max-width: 370px) {
+                .col-md-8 {
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
+
+}

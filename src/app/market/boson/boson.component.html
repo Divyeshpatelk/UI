@@ -1,0 +1,97 @@
+<pdg-topbar></pdg-topbar>
+<div class="ped-partner-banner">
+  <div class="container">
+    <div class="row align-items-end">
+      <div class="col-sm-3 col-xs-12 ped-partner-logo text-center d-flex justify-content-center">
+        <img src="{{partnerdata.img}}" class="align-self-center img-fluid" />
+      </div>
+      <div class="col-sm-9 col-xs-12 ped-partner-content d-flex">
+        <div class="align-self-top mt-30">
+          <h1>{{partnerdata.title}}</h1>
+          <p>Contact us in person at our Vastrapur or Naranpura Branches.</p>
+          <p>Or call us at: +919724770434</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container ped-partner-include">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 d-flex" *ngIf="!isLoggedIn">
+      <div class="ped-partner-includes ped-adpt-addCoupon">
+        <h3 class="ml-10">Available Courses:
+          <a href="javascript:void(0)" (click)="showLogin()">{{'GOT_COUPON' | translate}}</a>
+        </h3>
+      </div>
+    </div>
+    <div class="col-sm-12 col-xs-12 d-flex" *ngIf="isLoggedIn">
+      <div class="ped-partner-includes ped-adpt-addCoupon">
+        <h3>{{'MY_SUBJECTS' | translate}}</h3>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-12 ped-course-list-spacing d-flex px-20" *ngIf="isLoggedIn">
+      <div class="card add-course-card text-center w-100" [ngClass]="(myCourses && myCourses.length === 0)? 'ped-card-defaultheight' : ''">
+        <a class="my-auto" href="javascript:void(0)" (click)="showCouponRedemptionModal()">
+          <span>
+            <i aria-hidden="true" class="fa fa-plus-circle fa-5x"></i>
+            <h5 class="mt-3">{{'GOT_COUPON' | translate}}</h5>
+          </span>
+        </a>
+      </div>
+      <!--div class="ped-partner-includes ped-adpt-addCoupon mb-5">
+        <img src="{{staticContentPath}}/images/add-coupon.png" class="m-auto" alt="">
+      </div-->
+    </div>
+    <div class="col-sm-9 col-xs-12 ped-course-list-spacing" *ngIf="isLoggedIn && myCourses">
+      <div>
+        <div class="container px-30">
+          <div class="row">
+            <ngx-carousel [inputs]="carouselOne" class="ped-carousel">
+              <ngx-item NgxCarouselItem *ngFor="let course of myCourses">
+                <pdg-course-card [course]="course" [isPurchased]='true'></pdg-course-card>
+              </ngx-item>
+              <button NgxCarouselPrev class='leftRs ped-ltrt-btn'>
+                <i class="fa fa-chevron-left"></i>
+              </button>
+              <button NgxCarouselNext class='rightRs ped-ltrt-btn'>
+                <i class="fa fa-chevron-right"></i>
+              </button>
+            </ngx-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-xs-12">
+      <div class="container ped-spacer px-30" *ngIf="isLoggedIn">
+        <div class="row align-items-start justify-content-center ped-course-title">
+          <div class="col">
+            <h3>Available Courses:</h3>
+          </div>
+        </div>
+      </div>
+      <div class="container px-30">
+        <div class="row">
+          <ngx-carousel *ngIf="availableCourses?.length; else nocourse" [inputs]="carouselTwo" class="ped-carousel">
+            <ngx-item NgxCarouselItem *ngFor="let course of availableCourses">
+              <pdg-course-card [course]="course" (courseAdded)="displayCourses()"></pdg-course-card>
+            </ngx-item>
+            <button NgxCarouselPrev class='leftRs ped-ltrt-btn'>
+              <i class="fa fa-chevron-left"></i>
+            </button>
+            <button NgxCarouselNext class='rightRs ped-ltrt-btn'>
+              <i class="fa fa-chevron-right"></i>
+            </button>
+          </ngx-carousel>
+          <ng-template #nocourse>
+            <div class="col">
+              <h4 class="mb-4 pb-4 text-muted">{{'MORE_COURSES_COMING_SOON' | translate}}</h4>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<pdg-mobile-banner></pdg-mobile-banner>
+<pdg-info-box></pdg-info-box>
+<pdg-footer></pdg-footer>

@@ -1,0 +1,59 @@
+<div class="card ped-mob-quiz">
+  <div class="card-header bg-white">
+    <div class="d-flex flex-wrap align-items-center">
+      <div class="mr-2 text-primary"><h5 class="m-1">{{'QUESTION'}} {{quesIndex + 1}}</h5></div>
+      <!--<label class="btn btn-sm btn-outline-secondary m-1" ngbButtonLabel>
+        <span class="fa fa fa-flag-o mr-1"></span>
+        <input type="checkbox" class="d-none" ngbButton [(ngModel)]="flags.flag" (change)="markFlagged()">{{'FLAG' | translate}}
+      </label> -->
+      <label class="btn btn-sm btn-outline-secondary-custom-test m-1" ngbButtonLabel *ngIf="!isShowRightAnsEnabled">
+        <span class="fa fa-thumb-tack mr-1"></span>
+        <input type="checkbox" class="d-none" ngbButton [(ngModel)]="flags.markedReview" (change)="markForReview()">{{'REVIEW' | translate}}
+      </label>
+      <div class="ped-reset-button-container">
+        <button class="btn btn-dark btn-sm" [disabled]="!enableReset" (click)="resetAnswerChoices(true)">{{ 'RESET_ANSWERS' | translate}}</button>
+      </div>
+      <!-- <div class="time ml-auto">
+        <span class="time-text">{{'TIME_SPENT_PER_QUES' | translate}}</span>
+        <h5 class="text-primary text-center mb-0">
+          <span class="fa fa-clock-o"></span> {{timer | formatTimer}}</h5>
+      </div> -->
+    </div>
+  </div>
+  <div class="card-body p-3">
+    <div class="pdg-p-t-c custom-quiz-container" innerHTML="{{question?.question}}"></div>
+    <div class="custom-controls-stacked" *ngFor="let choice of question?.choices">
+      <label class="custom-control mr-0 py-1 custom-radio pr-1" *ngIf="question?.rightAnswers.length === 1; else multiplecorrect"
+        [class.success]="showDetails && question?.rightAnswers.indexOf(choice.id) !== -1" [class.danger]="showDetails && choice.selected && question?.rightAnswers.indexOf(choice.id) === -1">
+        <input id="radio2" name="radio" type="checkbox" class="custom-control-input" value="{{choice.id}}" [(ngModel)]="choice.selected"
+          (change)="onUserAnswerChange(choice.id)" [disabled]="showDetails">
+        <span class="custom-control-indicator ml-1 mt-1"></span>
+        <span  innerHTML="{{choice.text}}" class="custom-control-description ml-1 pdg-p-t-c"></span>
+        <span class="ml-auto status px-2 align-self-center" *ngIf="showDetails && (selectedAns == choice.id) && question?.rightAnswers.indexOf(choice.id) === -1">{{'INCORRECT' | translate}}</span>
+        <span class="ml-auto status px-2 align-self-center" *ngIf="showDetails && question?.rightAnswers.indexOf(choice.id) !== -1">{{'CORRECT' | translate}}</span>
+      </label>
+
+      <ng-template #multiplecorrect>
+        <label class="custom-control custom-checkbox mr-0 py-1 pr-1" [class.success]="showDetails && question?.rightAnswers.indexOf(choice.id) !== -1"
+          [class.danger]="showDetails && choice.selected && question?.rightAnswers.indexOf(choice.id) === -1">
+          <input id="checkbox" name="checkbox" type="checkbox" class="custom-control-input" [(ngModel)]="choice.selected" (change)="onUserAnswerChange()"
+            [disabled]="showDetails">
+          <span class="custom-control-indicator ml-1 mt-1"></span>
+          <span innerHTML="{{choice.text}}" class="custom-control-description ml-1 pdg-p-t-c"></span>
+          <span class="ml-auto status px-2 align-self-center" *ngIf="showDetails && choice.selected && question?.rightAnswers.indexOf(choice.id) === -1">{{'INCORRECT' | translate}}</span>
+          <span class="ml-auto status px-2 align-self-center" *ngIf="showDetails && question?.rightAnswers.indexOf(choice.id) !== -1">{{'CORRECT' | translate}}</span>
+        </label>
+      </ng-template>
+    </div>
+  </div>
+  <div class="card-footer py-3 bg-white" *ngIf="isShowRightAnsEnabled">
+    <button class="btn btn-dark btn-primary btn-small" (click)="validateAnswer()">Show Right Answer</button>
+    <div class="row mt-2" *ngIf="showDetails">
+      <div class="col-lg-12 col-md-12 col-sm-12 explaination-part pdg-p-t-c">
+        <h6>{{'EXPLANATION' | translate}}:</h6>
+        <p class="mb-0" innerHTML="{{question?.explanation}}">
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

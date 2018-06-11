@@ -1,0 +1,175 @@
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="test?.testName; else title">{{test?.testName}}</h4>
+  <ng-template #title>
+    <h4 class="modal-title">{{'ADD_NEW_TEST' | translate}}</h4>
+  </ng-template>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body question_modal_body">
+  <div class="d-flex justify-content-center" *ngIf="displayTestConfiguration">
+    <div style="width: 400px;">
+      <form [formGroup]="testConfigFormGroup" id="testConfigForm" (ngSubmit)="createOrUpdateTestConfig()" #testConfigFormRef="ngForm">
+        <div class="form-group">
+          <label for="test-name">{{'TEST_NAME' | translate}}</label>
+          <input id="test-name" class="form-control" type="text" formControlName="testName" name="testName" autofocus placeholder="{{'TEST_NAME' | translate}}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="test-name">{{'DURATION' | translate}} ({{'IN_MINUTES' | translate}})</label>
+          <input id="duration" class="form-control" type="text" formControlName="duration" name="duration" placeholder="{{'DURATION' | translate}}"
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="displayTestTimeWindowConfig" class="d-flex justify-content-center">
+    <div style="width: 500px;">
+      <form id="testWindowConfigForm" #testWindowConfigForm="ngForm" (ngSubmit)="publishTest(testWindowConfigForm)">
+          <div class="form-group">
+            <label for="test-name">{{'TEST_NAME' | translate}}</label>
+            <input id="tname" class="form-control" type="text"  name="tname" autofocus required [(ngModel)]="test.testName"/>
+          </div>
+          <div class="form-group">
+              <label for="test-name">{{'DURATION' | translate}} ({{'IN_MINUTES' | translate}})</label>
+              <input id="tduration" class="form-control" type="text"  name="tduration" required [(ngModel)]="test.duration"/>
+          </div>
+          <div class="form-group">
+            <label class="custom-control custom-checkbox mr-0 py-1 pr-1" for="chkshowresult">
+              <input type="checkbox" class="custom-control-input" id="chkshowresult" name="chkshowresult" [(ngModel)]="test.showResultToStudents" #chkshowresult="ngModel"/>
+              <span class="pl-1">{{ 'SHOWRESULT' | translate }}</span>
+              <span class="custom-control-indicator ml-1 mt-1"></span>
+            </label>
+          </div>
+          <div class="form-group"  *ngIf="!chkshowresult?.value || chkshowresult?.value === false" >
+            <label>
+              <span class="pl-1">{{ 'CUSTOM_MESSAGE' | translate }}</span>
+            </label>
+            <pdg-question-editor name="customMsg" [(ngModel)]="customMsgModel"></pdg-question-editor>
+          </div>
+          <div class="form-group">
+              <label class="custom-control custom-checkbox mr-0 py-1 pr-1" for="chkdtconfig">
+                <input type="checkbox" class="custom-control-input" id="chkdtconfig" name="chkdtconfig" [(ngModel)]="chkdtconfigModel" #chkdtconfig="ngModel"/>
+                <span class="pl-1">{{ 'TEST_TIME_CONFIG' | translate }}</span>
+                <span class="custom-control-indicator ml-1 mt-1"></span>
+              </label>
+            </div>
+          <div id="dateTimeConfig" *ngIf="chkdtconfig && chkdtconfig.value === true">
+            <div class="form-group">
+                <label>{{ 'TEST_START_FROMTDATE' | translate }}</label><br/>
+                <div style="display: inline-flex">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                          name="testStartFromDate" ngbDatepicker #testStartFromDate="ngbDatepicker" [(ngModel)]="testStartFromDateModel" >
+                  <span class="input-group-addon" id="sizing-addon1" (click)="toggleDatePicker1($event)">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </span>
+                  <div class="px-2">
+                      <ngb-timepicker name="testStartFromTime" [(ngModel)]="testStartFromTime"  [size]="large" [spinners]="false">
+                      </ngb-timepicker>
+                  </div>
+                  <span class="py-1"><big>IST</big></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{ 'TEST_START_TODATE' | translate }}</label><br/>
+                <div style="display: inline-flex">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                          name="testStartToDate" ngbDatepicker #testStartToDate="ngbDatepicker" [(ngModel)]="testStartToDateModel" >
+                  <span class="input-group-addon" id="sizing-addon2" (click)="toggleDatePicker2($event)">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </span>
+                  <div class="px-2">
+                    <ngb-timepicker name="testStartToTime" [(ngModel)]="testStartToTime" [size]="large" [spinners]="false" >
+                    </ngb-timepicker>
+                  </div>
+                  <span class="pt-1"><big>IST</big></span>
+                </div>
+                <div>
+              </div>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+
+  <div *ngIf="displayTestConfiguration==false && displayTestTimeWindowConfig==false">
+    <div class="row row-eq-height">
+      <!-- Question left side part-->
+
+      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 add-question-form" *ngIf="displaySectionForm; else displayQuestionForm">
+
+        <div class="row">
+
+          <div class="col-sm-12" *ngIf="uploadQuestionsFlag">
+              <button type="button" class="btn btn-primary" (click)="uploadQuestions()">Upload Questions</button>
+            <pdg-section-form [test]="test" (createSection)="createSection($event)" (updateSection)="updateSection($event)"></pdg-section-form>
+          </div>
+          <div class="col-sm-12" *ngIf="!uploadQuestionsFlag">
+              <button type="button" class="btn btn-primary" (click)="uploadQuestions()">Cancel</button>
+              <input-textbox></input-textbox>
+          </div>
+        </div>
+      </div>
+      <ng-template #displayQuestionForm>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 add-question-form" #questionFormDiv>
+          <div class="row">
+
+            <div class="col-sm-12" *ngIf="uploadQuestionsFlag">
+                <button type="button" class="btn btn-primary" (click)="uploadQuestions()">Upload Questions</button>
+              <pdg-question-form [question]="selectedQuestion" (submitEvent)="addOrUpdateQuestion($event)" (resetEvent)="deselectQuestion()"></pdg-question-form>
+            </div>
+            <div class="col-sm-12" *ngIf="!uploadQuestionsFlag">
+                <button type="button" class="btn btn-primary" (click)="uploadQuestions()">Cancel</button>
+                <pdg-input-textbox></pdg-input-textbox>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Qusetion Right side part-->
+      <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 question-preview-list">
+
+        <ngb-tabset #sectionTabSet (tabChange)="handleTabChange($event)">
+
+          <ngb-tab *ngFor="let section of test?.sections; index as i" [id]="section.id">
+            <ng-template ngbTabTitle>
+              {{section.name}}
+              <span *ngIf="section.id===selectedSectionId" class="ml-2" (click)="editSection(section)"><i class="fa fa-edit"></i></span>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <div class="bg-light p-2" *ngFor="let question of sectionQuestions[selectedSectionId]; index as i">
+                <pdg-ques-item *ngIf="test.status==='PARTNER_DRAFT'" [content]="question" [selected]="question.id === selectedQuestion?.id"
+                  [showRemoveButton]="true" (click)="selectQuestion(selectedSectionId, i)" (remove)="removeQuestion(selectedSectionId, i)"></pdg-ques-item>
+                <pdg-ques-item *ngIf="test.status!=='PARTNER_DRAFT'" [content]="question" [selected]="question.id === selectedQuestion?.id"
+                  (click)="selectQuestion(selectedSectionId, i)"></pdg-ques-item>
+              </div>
+            </ng-template>
+          </ngb-tab>
+
+          <ngb-tab id="add-sec-btn">
+            <ng-template ngbTabTitle>
+              <i class="fa fa-plus"></i>
+            </ng-template>
+            <ng-template ngbTabContent>
+            </ng-template>
+          </ngb-tab>
+
+        </ngb-tabset>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal-footer bg-dark">
+  <button type="submit" class="btn btn-primary" form="testConfigForm" *ngIf="displayTestConfiguration"  [disabled]="!testConfigFormGroup.valid">{{'NEXT' | translate}}</button>
+  <button  class="btn btn-primary" (click)="backToQuestionForm()" *ngIf="displayTestTimeWindowConfig">{{'BACK' | translate}}</button>
+  <button type="submit" class="btn btn-primary" form="testWindowConfigForm" *ngIf="displayTestTimeWindowConfig">{{'PUBLISH' | translate}}</button>
+  <div *ngIf="displayTestConfiguration===false && displayTestTimeWindowConfig===false">
+    <button type="button" *ngIf="testStatus!=='PARTNER_PUBLISH'" class="btn btn-primary" (click)="saveTestAsDraft()">{{'SAVE_AS_DRAFT' | translate}}</button>
+    <button type="button" *ngIf="testStatus==='PARTNER_PUBLISH'" class="btn btn-primary" (click)="activeModal.close('Close click')">{{'CANCEL' | translate}}</button>
+    <button type="button" *ngIf="testStatus!=='PARTNER_PUBLISH'" class="btn btn-primary" (click)="proceedToPublish()">{{'PROCEED_TO_PUBLISH' | translate}}</button>
+    <button type="button" *ngIf="testStatus==='PARTNER_PUBLISH'" class="btn btn-primary" (click)="proceedToPublish()">{{'SAVE_AND_NEXT' | translate}}</button>
+  </div>
+</div>

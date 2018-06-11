@@ -1,0 +1,10 @@
+<div class="material-list-content-inner" [class.active]="active">
+  <p class="mb-0" [class.font-weight-bold]="index.indexLevel === '1'">{{index.title}}</p>
+  <div class="d-flex justify-content-start meterial-list" >
+    <p class="mb-0">
+      <span class="fa fa-play-circle-o"></span>{{index.contentUnitCount?.videos || 0}} {{(index.contentUnitCount?.videos > 1 ? 'VIDEOS' : 'VIDEO') | translate}}
+    </p>
+    <p class="mb-0">
+      <span class="fa fa-book"></span>{{index.contentUnitCount?.books || 0}} {{(index.contentUnitCount?.books > 1 ? 'PDFS' : 'PDF') | translate}}</p>
+  </div>
+</div>

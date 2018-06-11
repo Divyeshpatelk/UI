@@ -1,0 +1,27 @@
+<div class="ped-section-tab">
+  <div class="container">
+    <ngb-tabset (tabChange)="beforeSectionChange($event)">
+      <ngb-tab *ngFor="let sec of sections" [id]=[sec.id]>
+          <ng-template ngbTabTitle>
+              <div title="{{ sec.name }}">
+                  {{sec.name}}
+              </div>
+          </ng-template>
+          <ng-template ngbTabContent>
+            <div class="container">
+              <div class="row">
+                <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 px-0">
+                  <pdg-question></pdg-question>
+                </div>
+                <div class="col-xl-3 col-lg-8 col-md-12 col-sm-12 px-0">
+                  <pdg-question-nav></pdg-question-nav>
+                </div>
+              </div>
+            </div>            
+          </ng-template>
+      </ngb-tab>
+  </ngb-tabset>
+  </div>
+</div>
+
+

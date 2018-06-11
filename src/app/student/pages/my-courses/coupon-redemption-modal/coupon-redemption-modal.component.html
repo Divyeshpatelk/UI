@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{'COUPON_CODE_REDEEM_TITLE' | translate}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form (ngSubmit)="redeemCouponCode(couponCodeForm.value)" [formGroup]="couponCodeForm">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="coupon">{{'COUPON_CODE' | translate}}</label>
+      <input type="text" name="coupon" formControlName="couponCode" class="form-control" placeholder="Enter Coupon Code" id="coupon">
+      <div class="text-danger" *ngIf="couponCodeForm.get('couponCode').touched && couponCodeForm.get('couponCode').hasError('required')">
+        <small>{{'COUPON_CODE_REQUIRED' | translate}}</small>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer bg-dark">
+    <button class="btn btn-primary btn-sm" [disabled]="!couponCodeForm.valid" type="submit">{{'SUBMIT' | translate}}</button>
+    <button class="btn btn-outline-primary btn-sm" (click)="activeModal.dismiss()" type="button">{{'CANCEL' | translate}}</button>
+  </div>
+</form>

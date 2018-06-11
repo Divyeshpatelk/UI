@@ -1,0 +1,71 @@
+<div class="card">
+  <div *ngIf="course?.course.status === 'DRAFT'" class="ribbon">
+    <span>{{course?.course.status}}</span>
+  </div>
+  <div class="text-center">
+    <img *ngIf="course?.course.coverImage === null; else show_image" class="card-img-top" src="{{staticContentPath}}/images/simple-image.png"
+      alt="" />
+    <ng-template #show_image>
+      <img class="card-img-top" src="{{course?.course.coverImage.url}}" alt="" />
+    </ng-template>
+  </div>
+  <!--<div class="img-top-text text-center pb-1">
+    <span class="p-3 bg-warning rounded-circle">85</span>
+    <h6 class="text-light mt-3">ACTIVE STUDENT</h6>
+  </div>-->
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h6>{{course?.course.courseName}} </h6>
+      <div class="d-flex sm-font">
+        <a class="pr-2">
+          <p>{{'VIDEOS' | translate}}:
+            <span class="font-weight-bold">{{course?.contentUnitCount.videos}}</span>
+          </p>
+        </a>
+        <span class="dot mt-1 mr-2">
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </span>
+        <a class="pr-2">
+          <p>{{'PDFS' | translate}}:
+            <span class="font-weight-bold">{{course?.contentUnitCount.books}}</span>
+          </p>
+        </a>
+        <span class="dot mt-1 mr-2">
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </span>
+        <a class="pr-2">
+          <p>{{'QUESTIONS' | translate}}:
+            <span class="font-weight-bold">{{course?.contentUnitCount.questions}}</span>
+          </p>
+        </a>
+      </div>
+    </li>
+  </ul>
+  <!--<div class="card-body">
+    <h6 class="mb-1">Licensed Content</h6>
+    <div class="media mt-3">
+      <img class="d-flex mr-3 rounded-circle" src="assets/images/simple-image.png" alt="Generic placeholder image" height="50"
+        width="50">
+      <div class="media-body">
+        <h6 class="mt-2">Author Name</h6>
+      </div>
+    </div>
+  </div>-->
+  <div class="card-footer">
+    <a *ngIf="course?.course.status !== 'DRAFT'" href="javascript:void(0);" [routerLink]="['/partner', 'course', course?.course.id, 'view']">
+      <i class="cursor fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
+    </a>
+    <a *ngIf="course?.course.status === 'DRAFT'" href="javascript:void(0);" [routerLink]="['/partner', 'course', course?.course.id, 'edit']">
+      <i class="cursor fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
+    </a>
+    <!--<a href="#"><i class="fa fa-files-o" aria-hidden="true"></i></a>-->
+    <a href="javascript:void(0);" *ngIf="course?.course.status === 'DRAFT'; else published" [pdgConfirm]="options" (confirm)="delete()">
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </a>
+    <ng-template #published>
+      <a class="disabled" title="{{'ERROR.COURSE_PUBLISH_DELETE' | translate}}">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </a>
+    </ng-template>
+  </div>
+</div>

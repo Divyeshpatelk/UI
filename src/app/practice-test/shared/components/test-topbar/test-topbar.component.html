@@ -1,0 +1,30 @@
+<div class="navbar navbar-expand-lg sticky-top navbar-light bg-white topbar ">
+  <div class="container-fluid">
+    <div class="d-flex flex-wrap ped-wrapper">
+      <!--img src="{{staticContentPath}}/images/logo.svg" class="mr-2" alt="" srcset="" height="40px"-->
+      <a *ngIf="brandinginfo?.logoUrl" class="navbar-brand mr-3 text-center" href="javascript:void(0)" (click)="routeToPartnerPage()">
+        <img src="{{brandinginfo?.logoUrl}}" height="43" />
+      </a>
+      <a *ngIf="!brandinginfo?.logoUrl" class="navbar-brand mr-3 text-center">
+        <img src="{{staticContentPath}}/images/trans-dumy.png" height="43" />
+      </a>
+      <span class="ped-logo">
+        <a class="" href="javascript:void(0);" routerLink="/" pdgLogoClickHandle>
+          <img src="{{staticContentPath}}/images/logo-small.png" alt="" />
+        </a>
+      </span>
+      <div class="d-flex flex-wrap ml-2 align-items-center hide-in-mobile">
+        <h6 class="mb-0 mr-1">{{'COURSE' | translate}} : {{course?.courseName}} </h6>|
+        <h6 class="mb-0 ml-1">{{'SUBJECT' | translate}} : {{subject?.subjectName}}</h6>
+      </div>
+      <div class="align-self-center ml-auto ped-mobile-spacing" *ngIf="!testFinished; else close">
+        <button class="btn btn-sm btn-primary" (click)="finishTest()">FINISH</button>
+      </div>
+      <ng-template #close>
+        <div class="align-self-center ml-auto justify-content-end ped-mobile-spacing">
+          <button class="btn btn-sm btn-primary" (click)="closePracticeResult()">CLOSE</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

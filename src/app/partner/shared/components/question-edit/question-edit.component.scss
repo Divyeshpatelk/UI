@@ -1,0 +1,48 @@
+@import 'theme-variables';
+
+.modal-body {
+  height: calc(100vh - 225px);
+  overflow-y: auto;
+  width: 100%;
+}
+
+// :host /deep/ quill-editor {
+//   .ql-container {
+//     font-family: $font-family-sans-serif;
+//     font-size: $font-size-sm;
+//   }
+
+//   .ql-toolbar.ql-snow {
+//     padding: 0;
+//   }
+
+//   .ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+//     height: 19px;
+//     width: 19px;
+//   }
+// }
+
+.answer-choice-header {
+  border: 1px solid $gray-500;
+  border-bottom: 0;
+  color: $white;
+  font-size: $font-size-sm;
+  font-weight: bold;
+
+  label {
+    margin-bottom: 0;
+  }
+
+  .custom-control-indicator {
+    top: .15rem;
+  }
+
+  a {
+    color: $white;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+
+}

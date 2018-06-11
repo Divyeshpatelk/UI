@@ -1,0 +1,15 @@
+@import 'theme-variables';
+
+.modal-body {
+  max-height: calc(100vh - 235px);
+  min-height: calc(100vh - 235px);
+  overflow: auto;
+}
+
+.content-title {
+  font-size: $font-size-sm;
+  width: 155px;
+}
+.custom-control-description{
+  padding: 4px 0px;
+}

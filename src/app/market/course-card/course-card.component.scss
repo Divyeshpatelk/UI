@@ -1,0 +1,136 @@
+@import 'theme-variables';
+.ped-course-description {
+    font-size:12px;
+    color:#676767;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.ped-mb-10 {
+    margin-bottom: 10px;
+}
+.card{
+    margin: 0px 20px;
+    cursor: pointer;
+    .ped-card-tooltip {
+        padding: 10px;
+        position: absolute;
+        right: -225px;
+        width: 225px;
+        top: -10px;
+        z-index: 99;
+        &.cardTip-left {
+            left: -225px !important;
+            right: auto;
+            >:before{
+                right: -33px !important;
+                left: auto !important;
+                border-left: 23px solid #fff;
+                border-right: 23px solid transparent;
+            }
+        }
+        .card {
+            background: #fff;
+            color: #000;
+            box-shadow: 4px 8px 20px #888;
+            min-height: 353px;
+            border: 1px solid #cacaca
+        }
+        .ped-card-status-count {
+            font-size:12px;
+        }
+        .ped-card-sub-type{
+            min-height: 60px;
+            margin-top: 1rem;
+        }
+        .ped-card-info-detail {
+            border-top: 1px dashed #fff;
+            p {
+                margin-bottom: .3rem;
+            }
+        }
+        .card {
+            margin:0;
+            border-radius: 4px;
+        }
+        >:before{
+            position: absolute;
+            content:'';
+            height: 0;
+            width: 0;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid transparent;
+            border-right: 23px solid #fff;
+            top: 28%;
+            transform: translate(0, -50%);
+            left: -7px;
+        }
+    }
+    &.card-comingsoon {
+        cursor: default;
+    }
+    .ped-card-img {
+        padding: 12px;
+        min-height: 290px;
+    }
+    .ped-comingsoon {
+        label {
+            background: #f26222;
+            color: #fff;
+            padding: 3px 19px;
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 22px;
+            left: -28px;
+        }
+    }
+    .card-block {
+        padding: 0 10px;
+        text-align: center;
+        .card-title{
+            font-size: 14px;
+            color: #09344b;
+            font-weight: bold;
+            margin-bottom: 5px;
+            line-height: 120%;
+            min-height: 32px;
+        }
+        
+        .card-text {
+            color: #09344b;
+            font-size:12px;
+            margin-bottom: 8px;
+            min-height: 18px;
+
+        }
+        .card-action {
+            margin-bottom: 8px;
+            a {
+                padding: 4px 6px;
+                .price-revised {
+                    text-decoration: line-through;
+                }
+            }
+        }
+        .ped-cost-course {
+            font-size: 20px;
+            font-weight: bold;
+            color: #f26222;
+        }
+    
+        .ped-cart {
+            font-size: 25px;
+            color: #adacac;
+        }
+        .card-comingsoon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            span {
+                position: absolute;
+                background: #f26222;
+            }
+        }
+    }
+}

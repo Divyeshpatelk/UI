@@ -1,0 +1,24 @@
+.privacy-list {
+    font-size: 1.25rem;
+    h4 {
+        font-size: 1.70rem;
+    }
+    ol {
+        padding-left: 15px;
+        margin-top: 10px;
+        li {
+            margin-bottom:10px;
+            &:before {
+                content: counters(item);
+                counter-increment: item;
+                margin-right: .4rem;
+                display: block;
+            }
+        }
+        p {
+            &.mt-10 {
+                margin-top: 10px;
+            }
+        }
+    }
+}

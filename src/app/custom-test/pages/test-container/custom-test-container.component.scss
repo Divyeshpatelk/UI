@@ -1,0 +1,53 @@
+.ped-section-tab {
+    margin-top: 15px;
+    ul {
+        padding: 0;
+        li {
+            list-style: none;
+            cursor: pointer;
+            padding: 13px 0;
+            background: #fff;
+            position: relative;
+            text-align: center;
+            border-right: 1px solid #ddd;
+            text-transform: uppercase;
+            span {
+                position: relative;
+                padding-left: 24px;
+                &::before {
+                    background: url('../../../../assets/images/section-deactive.png') no-repeat;
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 1px;
+                    height: 13px;
+                    width: 20px;
+                }
+            }
+            &.active {
+                background: #f26222;
+                color: #fff;
+                &::before{
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-top: 10px solid #f26222;
+                    position: absolute;
+                    bottom: -10px;
+                    left: 50%;
+                    transform: translate(-50%, 0);
+                }
+                span {
+                    &::before {
+                        background: url('../../../../assets/images/section-active.png') no-repeat;
+                    }
+                }
+            }
+            &:last-child {
+                border-right: 0;
+            }
+        }
+    }
+}

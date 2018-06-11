@@ -1,0 +1,252 @@
+@import 'theme-variables';
+
+.breadcrumb {
+  background: none;
+
+  .breadcrumb-item {
+    color: $white;
+    font-size: $base-font-size * .9;
+
+    a {
+      color: $white;
+      font-size: $base-font-size * .9;
+    }
+  }
+  
+  .breadcrumb-item+.breadcrumb-item {
+    ::before {
+      color: $white;
+    }
+  }
+}
+
+.form-wizard {
+  .col-sm-4 {
+    background: lighten($orange, 28%);
+
+    &:after {
+      border-bottom: 18px inset transparent;
+      border-left: 30px solid lighten($orange, 28%);
+      border-top: 19px inset transparent;
+      content: '';
+      position: absolute;
+      right: -30px;
+      top: 0;
+      width: 0;
+      z-index: 2;
+    }
+
+    &.finish {
+      background: $orange;
+
+      &:after {
+        border-bottom: 18px inset transparent;
+        border-left: 30px solid $orange;
+        border-top: 19px inset transparent;
+        content: '';
+        position: absolute;
+        right: -30px;
+        top: 0;
+        width: 0;
+        z-index: 2;
+      }
+    }
+
+    &.active {
+      background: lighten($orange, 20%);
+
+      &:after {
+        border-bottom: 18px inset transparent;
+        border-left: 30px solid lighten($orange, 20%);
+        border-top: 19px inset transparent;
+        content: "";
+        position: absolute;
+        right: -30px;
+        top: 0;
+        width: 0;
+        z-index: 2;
+      }
+    }
+
+    &:last-child {
+      &:after {
+        content: none;
+      }
+    }
+
+    p,
+    span,
+    .btn {
+      color: $white;
+    }
+  }
+}
+
+:host /deep/ ngb-tabset {
+  .tab-pane {
+    padding: 10px;
+  }
+}
+.ped-list-info {
+  width: 180px;
+  padding: 10px;
+  text-align: left;
+  word-wrap: break-word;
+  margin: 0;
+  li {
+    list-style: none;
+    margin-bottom: 5px;
+    .icon {
+      background: $orange;
+      color: $white;
+      border-radius: 50%;
+      height: 16px;
+      width: 16px;
+      text-align: center;
+      padding:1px 3px;
+      font-size: 10px;
+      margin-right: 5px;
+      margin-left:0;
+      margin-top: 5px;
+      &.cross {
+        width: 16px;
+        height: 15.5px;
+        padding: 0px 4px;
+      }
+    }
+  }
+}
+.list-group-item {
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  margin-bottom: 0;
+
+  &:last-child {
+    border: 0;
+  }
+}
+
+.card {
+  max-height: 320px;
+}
+
+.col-lg-12 {
+  &.col-md-12 {
+    &.col-sm-12 {
+      .card {
+        width: 100%;
+      }
+    }
+  }
+}
+.ped-left-br {
+  border-left: 1px solid #ddd;
+}
+.ped-question-mark {
+  background: $orange;
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px;
+  height: 16px;
+  width: 16px;
+  margin-left: 10px;
+  text-align: center;
+  top: -1px;
+  position: relative;
+}
+.ped-course-config-form {
+  min-height: 203px;
+  margin-top:  15px;
+}
+.ped-config-heading {
+  h6 {
+    margin-bottom: 15px;
+  }
+}
+.form-wizard {
+  .steps {
+    background: $darkblue;
+    padding: .2rem .6rem;
+
+    &.finish {
+      background: lighten($orange, 20%);
+    }
+
+    &.active {
+      background: $orange;
+    }
+
+    &:last-child {
+      &.active ~ .pub-btn {
+        display: block;
+      }
+    }
+  }
+}
+
+.objective-icon {
+  height: 30px;
+
+  button {
+    float: right;
+    margin: 3px;
+  }
+}
+
+.hover {
+  border: .5px solid $dark-grey;
+}
+
+.objective-container {
+  height: 240px;
+  overflow-y: auto;
+}
+
+.course-img {
+  display: inline-block;
+  position: relative;
+
+  .dropzone {
+    .dropzone-inside {
+
+      border: 2px dashed $gray-400;
+      min-height: 8rem;
+
+      pdg-file-upload {
+        display: inline-block;
+        left: 76px;
+        position: absolute;
+        top: 50px;
+      }
+
+      .custom-loader {
+        display: inline-block;
+        height: 164px;
+        width: 300px;
+
+        i {
+          left: 125px;
+          position: absolute;
+          top: 55px;
+        }
+      }
+    }
+  }
+
+  .fullwidth {
+    width: 60%;
+  }
+}
+
+.description-container {
+  height: 250px;
+  overflow-y: auto;
+}
+
+.header-text-margin {
+  margin-bottom: 0;
+}

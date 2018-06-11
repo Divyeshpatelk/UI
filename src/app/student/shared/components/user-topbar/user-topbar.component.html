@@ -1,0 +1,173 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white">
+  <div class="container-fluid">
+    <a *ngIf="brandinginfo?.logoUrl" class="navbar-brand mr-3 text-center" href="javascript:void(0)" (click)="routeToPartnerPage()">
+      <img src="{{brandinginfo?.logoUrl}}" height="43" />
+    </a>
+    <a *ngIf="!brandinginfo?.logoUrl" class="navbar-brand mr-3 text-center">
+      <img src="{{staticContentPath}}/images/trans-dumy.png" height="43" />
+    </a>
+    <span class="ped-logo">
+      <a class="" href="javascript:void(0);" routerLink="/" pdgLogoClickHandle>
+        <img src="{{staticContentPath}}/images/logo-small.png" alt="" />
+      </a>
+    </span>
+    <!-- <h5 class="nav-link px-3 my-2 d-none d-sm-none d-md-block" href="javascript:void(0);" [routerLink]="['dashboard',course?.id]" style="cursor: pointer">
+      {{course?.courseName}}
+    </h5> -->
+    <div class="mobile-menu ml-auto mr-2">
+      <a href="javascript:void(0);">
+        <span ngbDropdown placement="bottom-right">
+          <a class="pl-3 pr-0" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">
+            <span>
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            </span>
+          </a>
+          <div ngbDropdownMenu class="topbar_dropdown">
+            <button class="dropdown-item px-3 py-2 bg-light">
+              <div class="d-flex">
+                <img src="{{staticContentPath}}/images/profile-default.jpg" class="rounded-circle mr-2" alt="" height="40" width="40">
+              </div>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item" (click)="openChangePassword()">
+              <a href="javascript:void(0);">
+                <small>{{'CHANGE_PASSWORD' | translate}}</small>
+              </a>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item">
+              <a href="javascript:void(0);" (click)="logout()">
+                <small>Logout</small>
+              </a>
+            </button>
+          </div>
+        </span>
+      </a>
+
+    </div>
+    <button class="navbar-toggler" (click)="navbarCollapsed = !navbarCollapsed" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse bg-white p-0" [ngbCollapse]="navbarCollapsed" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <h6 class="nav-link px-3 my-2" href="javascript:void(0);" [routerLink]="['dashboard', course?.id]" style="cursor: pointer;">
+            <span class="fa fa-home mr-2"></span>{{ 'DASHBOARD' | translate }}
+          </h6>
+        </li>
+        <div class="dropdown-divider m-0 d-sm-block d-md-block d-lg-none"></div>
+        <div class="divider d-none d-sm-none d-md-block" style="margin-bottom:-4px;"></div>
+        <li *ngIf="course?.studyEnable && course?.studyEnable === true" class="nav-item">
+          <h6 class="nav-link px-3 my-2" href="javascript:void(0);" [routerLink]="['/student','study','course',course?.id]" style="cursor: pointer">
+            <span class="fa fa-graduation-cap mr-2"></span>{{'STUDY' | translate}}
+          </h6>
+        </li>
+        <div class="divider d-none d-sm-none d-md-block" *ngIf="course?.studyEnable && course?.studyEnable === true" style="margin-bottom:-4px;"></div>
+        <div class="dropdown-divider m-0 d-sm-block d-md-block d-lg-none"></div>
+        <li *ngIf="course?.practiceEnable && course?.practiceEnable === true" class="nav-item">
+          <h6 class="nav-link px-3 my-2" href="javascript:void(0);" [routerLink]="['/student','practice','course',course?.id]" style="cursor: pointer">
+            <span class="fa fa-pencil mr-2"></span>{{'PRACTICE' | translate}}
+          </h6>
+        </li>
+        <div class="dropdown-divider m-0 d-sm-block d-md-block d-lg-none"></div>
+        <li class="d-none d-sm-none d-md-block d-lg-none">
+          <div class="">
+            <button class="dropdown-item" [routerLink]="['/student', 'courses']">
+              <a href="javascript:void(0);">
+                <small>{{'CHANGE_COURSE' | translate}}</small>
+              </a>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item" [routerLink]="['/']">
+              <a href="javascript:void(0);">
+                <small>{{'BUY_NEW_COURSE' | translate}}</small>
+              </a>
+            </button>
+          </div>
+        </li>
+        <li class="nav-item d-sm-block d-md-none">
+          <div>
+            <button class="dropdown-item" [routerLink]="['/student', 'courses']">
+              <a href="javascript:void(0);">
+                <small>{{'CHANGE_COURSE' | translate}}</small>
+              </a>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+          </div>
+        </li>
+        <li class="nav-item d-sm-block d-md-none">
+          <div>
+            <button class="dropdown-item" [routerLink]="['/']">
+              <a href="javascript:void(0);">
+                <small>{{'BUY_NEW_COURSE' | translate}}</small>
+              </a>
+            </button>
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <div class="divider  d-sm-none d-md-block"></div>
+        <li class="nav-item align-self-center  d-sm-none d-md-block" ngbDropdown placement="bottom-right">
+          <a class="nav-link px-3 hide-in-mobile" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true" href="javascript:void(0);"
+            aria-expanded="false">
+            <span>
+              <i class="fa fa-folder fa-lg" aria-hidden="true"></i>
+            </span>
+            {{course?.courseName}}
+          </a>
+          <div ngbDropdownMenu class="topbar_dropdown ">
+            <button class="dropdown-item" [routerLink]="['/student', 'courses']">
+              <a href="javascript:void(0);">
+                <small>{{'CHANGE_COURSE' | translate}}</small>
+              </a>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item" [routerLink]="['/']">
+              <a href="javascript:void(0);">
+                <small>{{'BUY_NEW_COURSE' | translate}}</small>
+              </a>
+            </button>
+          </div>
+        </li>
+        <div class="divider hide-in-mobile"></div>
+        <li class="nav-item hide-in-mobile" ngbDropdown placement="bottom-right">
+          <a class="nav-link pl-3 pr-0" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true" href="javascript:void(0);"
+            aria-expanded="false">
+            <span>
+              <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+            </span> {{user.firstname}} {{user.lastname}}
+          </a>
+          <div ngbDropdownMenu class="topbar_dropdown">
+            <button class="dropdown-item px-3 py-2 bg-light">
+              <div class="d-flex ">
+                <img src="{{staticContentPath}}/images/profile-default.jpg" class="rounded-circle mr-2" alt="" height="40" width="40">
+                <div>
+                  <p class="mb-0">{{user.firstname}} {{user.lastname}}</p>
+                  <a href="javascript:void(0);">
+                    <small>
+                      <p class="mb-0">{{'VIEW_PROFILE'| translate}}</p>
+                    </small>
+                  </a>
+                </div>
+              </div>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item" (click)="openChangePassword()">
+              <a href="javascript:void(0);">
+                <small>{{'CHANGE_PASSWORD' | translate}}</small>
+              </a>
+            </button>
+            <div class="dropdown-divider m-0"></div>
+            <button class="dropdown-item" (click)="logout()">
+              <a href="javascript:void(0);">
+                <small>{{'LOGOUT' | translate}}</small>
+              </a>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

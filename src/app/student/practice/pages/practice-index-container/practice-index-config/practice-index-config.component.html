@@ -1,0 +1,108 @@
+<div class="p-1 pt-2 practice-mobile-view">
+  <form (ngSubmit)="generatePracticeTest()" [formGroup]="practiceTestConfigForm">
+    <div class="row px-2 practice-test-message"  *ngIf="!selectedQuestionCount">
+      <i class="fa fa-hand-o-left"></i>
+      <h4>{{ 'SELECT_CHAP_BEFORE_PRACTICE' | translate }}</h4>
+    </div>
+    <div [hidden]="!selectedQuestionCount">
+    <div class="row px-2">
+      <h6>{{'STEP_1' | translate}} : {{'SELECT_TYPE_OF_QUES' | translate}}</h6>
+      <span class="px-2 configerror" *ngIf="!selectedQuestionCount">{{'NO_QUESTIONS_ERROR' | translate}}</span>
+    </div>
+    <div class="row mb-3">
+      <div class="col px-2">
+        <div class="card">
+          <div class="card-header bg-white">
+            <h6 class="mb-0">{{'CONFIGURE_PRACTICE' | translate}}</h6>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <label class="custom-control custom-radio">
+                  <input id="option4" name="questionType" formControlName="questionType" value="random" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{'RANDOM_QUES' | translate}}</span>
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="custom-control custom-radio">
+                  <input id="option3" name="questionType" formControlName="questionType" value="previousincorrect" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{'PREV_ANSWERED_INCORRECT_QUES' | translate}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="custom-control custom-radio">
+                  <input id="option1" name="questionType" formControlName="questionType" value="pastExam" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{'PAST_EXAM_QUES' | translate}}</span>
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label class="custom-control custom-radio">
+                  <input id="option2" name="questionType" formControlName="questionType" value="flag" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{'FLAGGED_QUES' | translate}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer bg-white">
+            <label class="custom-control custom-checkbox mb-0">
+              <input type="checkbox" class="custom-control-input" id="checkbox1" name="showRightAns" formControlName="showRightAns">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">{{'SHOW_RIGHT_ANS_AND_EXP_OPTION' | translate}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <div [hidden]="!selectedQuestionCount || !practiceTestConfigForm.get('questionType').value">
+    <div class="row px-2">
+      <h6>{{'STEP_2' | translate}} : {{'TIME_CONFIG' | translate}}</h6>
+    </div>
+    <div class="row">
+      <div class="col px-2">
+        <div class="card">
+          <div class="card-header bg-white">
+            <h6 class="mb-0">{{'PICK_ONE' | translate}}</h6>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="row">
+                  <p class="col-lg-2">{{'QUESTIONS' | translate}}</p>
+                  <!-- <div class="row"> -->
+                  <input type="range" min="0"  max="{{selectedQuestionCount}}" id="numOfQues" #numOfQues  step="1" name="numOfQues" formControlName="numOfQues"
+                    class="col-lg-8 px-md-0 mt-1 slider"  (change)="resetOtherConfig(practiceTestConfigForm.controls['timeConfig'])">
+                  <!-- </div> -->
+                  <p class="col-lg-2" >{{practiceTestConfigForm.value.numOfQues}} / {{selectedQuestionCount}}</p>
+                </div>
+                <div class="seperator text-center mb-3">
+                  <h6 class="mb-0">
+                    <span>or</span>
+                  </h6>
+                </div>
+                <div class="row">
+                  <p class="col-lg-2">{{'TIME' | translate}}</p>
+                  <input type="range" min="0" max="90" value="0" step="15" name="timeConfig" formControlName="timeConfig" class="col-lg-8 px-md-0 mt-1 slider"
+                    id="timeConfig" (change)="resetOtherConfig(practiceTestConfigForm.controls['numOfQues'])">
+                  <p class="col-lg-2">{{practiceTestConfigForm.value.timeConfig}} {{'MINUTES' | translate}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row px-2">
+  <button type="submit" class="mt-2 btn btn-dark btn-block" [hidden]="!(practiceTestConfigForm.valid && selectedQuestionCount != 0 && (practiceTestConfigForm.controls['timeConfig'].value !== 0 || practiceTestConfigForm.controls['numOfQues'].value !== 0))">{{'START' | translate}}
+    <span class="fa fa-chevron-right ml-2"></span>
+  </button>
+</div>
+</form>
+</div>

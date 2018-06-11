@@ -1,0 +1,69 @@
+@import 'theme-variables';
+
+$card-shadow-color: rgba($gray-800, .5);
+
+.dot {
+  color: $orange;
+  font-size: 5px;
+}
+
+.card-footer {
+  background-color: $white;
+  border-top: 0;
+}
+
+.card-img-top {
+  max-height: 164px;
+  min-height: 164px;
+  object-fit: contain;
+}
+
+.card > .card-img-overlay {
+  top: 14px;
+}
+
+.sm-font {
+  p {
+    font-size: 10px;
+    margin-bottom: 0;
+  }
+}
+
+.card {
+  transition: transform .2s linear, box-shadow .2s linear, -webkit-transform .2s linear;
+
+  &:hover {
+    border: 1px solid $primary;
+    box-shadow: 2px 2px 4px $card-shadow-color;
+  }
+
+  &.selected {
+    border: 1px solid $primary;
+  }
+}
+
+.img-top-text {
+  margin-top: -25%;
+}
+
+@media (min-width: 1200px) and (max-width: 1349px) {
+  .img-top-text {
+    margin-top: -27%;
+  }
+}
+
+.list-group {
+  h6 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    font-size: $font-size-base;
+    height: $font-size-base * $line-height-lg * 2; /* Fallback for non-webkit */
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+}

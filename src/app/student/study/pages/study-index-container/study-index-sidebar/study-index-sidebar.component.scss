@@ -1,0 +1,162 @@
+@import 'theme-variables';
+
+$dropdown-con-color: rgba(0, 0, 0, .2);
+
+.sidebar {
+  background: lighten($gray-800, 25%);
+
+  .subject-name {
+    cursor: pointer;
+  }
+
+  .sidebar-menu-item {
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+  }
+
+  .sidebar-header {
+    background: $white;
+
+    .course-name {
+      width: 17rem;
+    }
+
+    h6 {
+      line-height: $line-height-lg;
+    }
+
+    .meterial-list {
+      p {
+        color: $white;
+        font-size: $base-font-size * .79;
+        margin-bottom: 0;
+        margin-right: .5rem;
+      }
+
+      span {
+        color: lighten($darkblue, 23%);
+        margin-right: .2rem;
+      }
+    }
+  }
+
+  .meterial-list-content {
+    cursor: pointer;
+
+    &:hover {
+      background: lighten($orange, 25%);
+    }
+
+    &.active {
+      &:hover {
+        background: $primary;
+      }
+    }
+  }
+
+  .arrow-sign {
+    font-size: $base-font-size * .7;
+    margin-right: .5rem;
+    width: .5rem;
+  }
+
+  .list-group-root {
+    padding: 0;
+  }
+
+  .list-group-item {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .list-group {
+    .list-group-item {
+      margin-bottom: -2px;
+
+      .bullet {
+        color: $darkblue;
+        font-size: $base-font-size * .4;
+      }
+
+      &.active {
+        .level3 {
+          border-bottom: 0;
+
+          .arrow-sign {
+            span {
+              color: $white;
+            }
+          }
+        }
+
+        .meterial-list-content {
+          &.level2 {
+            border-bottom: 0;
+
+            .arrow-sign {
+              span {
+                color: $white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//
+.dropdown-toggle {
+  &::after {
+    align-self: center;
+    color: $white;
+    margin-left: auto;
+  }
+}
+
+
+.dropdown-menu {
+  &.show {
+    left: 0 !important;
+    min-width: 22.219rem;
+
+    &::before {
+      border-bottom: 7px solid $gray-200;
+      border-bottom-color: rgba(0, 0, 0, 0.2);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      content: '';
+      display: inline-block;
+      position: absolute;
+      right: 13px;
+      top: -7px;
+   }
+
+    &::after {
+      border-bottom: 6px solid $white;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      content: '';
+      display: inline-block;
+      position: absolute;
+      right: 14px;
+      top: -6px;
+   }
+  }
+}
+
+//sidebar scroll css
+::-webkit-scrollbar-track {
+  background-color: $gray-100;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  background-color: $gray-100;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $gray-600;
+  border-radius: 10px;
+}

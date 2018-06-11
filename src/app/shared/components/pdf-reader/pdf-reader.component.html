@@ -1,0 +1,71 @@
+<div #pdfReader class="pdf-container d-flex flex-column bg-white" id="pdg-pdf-viewer" allowfullscreen webkitallowfullscreen
+  mozallowfullscreen>
+  <div class="align-self-center loader-icon" *ngIf="showLoader">
+    <i class="fa fa-spinner fa-pulse fa-fw fa-2x" aria-hidden="true"></i>
+  </div>
+  <div class="container" *ngIf="showPdf">
+    <div class="d-flex flex-wrap justify-content-between p-1 bg-light sticky-top ped-pdf-config-menu">
+      <div class=" form-inline ped-pg-no">
+        <div class="btn-group mr-1">
+          <button type="button" [disabled]="page === 1" class="btn btn-outline-dark btn-sm" (click)="incrementPage(-1)">
+            <span class="fa fa-arrow-up"></span>
+          </button>
+          <button type="button" [disabled]="page === pdfTotalPage" class="btn btn-outline-dark btn-sm" (click)="incrementPage(1)">
+            <span class="fa fa-arrow-down"></span>
+          </button>
+        </div>
+        <div class="form-group page-no mb-0">
+          <input #pageNumber type="text" pdgOnlyNumber="true" class="form-control form-control-sm" [value]="page" (keyup.enter)="changePage(pageNumber.value)"
+            pattern="-?[0-9]*(\.[0-9]+)?" id="pdf-page"> &nbsp; of {{pdfTotalPage}}
+        </div>
+      </div>
+      <div class="form-inline">
+        <div class="btn-group mr-1">
+          <button type="button" [disabled]="zoomPercentage === '200%'" class="btn btn-outline-dark btn-sm" (click)="incrementZoom(0.1)">
+            <span class="fa fa-plus"></span>
+          </button>
+          <button type="button" [disabled]="zoomPercentage === '30%'" class="btn btn-outline-dark btn-sm" (click)="incrementZoom(-0.1)">
+            <span class="fa fa-minus"></span>
+          </button>
+        </div>
+
+        <div class="d-inline-block ped-zoom-percentage" ngbDropdown #myDrop="ngbDropdown">
+          <button class="btn btn-outline-dark btn-sm" id="dropdownManual" ngbDropdownToggle>{{zoomPercentage}}</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <!-- <button class="dropdown-item" (click)="setZoom(1.9)">Fit to Width</button> -->
+            <button class="dropdown-item" (click)="setZoom(0.5)">50%</button>
+            <button class="dropdown-item" (click)="setZoom(0.75)">75%</button>
+            <button class="dropdown-item" (click)="setZoom(1.0)">100%</button>
+            <button class="dropdown-item" (click)="setZoom(1.25)">125%</button>
+            <button class="dropdown-item" (click)="setZoom(1.5)">150%</button>
+            <button class="dropdown-item" (click)="setZoom(2.0)">200%</button>
+          </div>
+        </div>
+
+        <div class="d-inline-block ml-2">
+          <label class="custom-control mb-0 custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="autoResize" (change)="setAutoResize()" />
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">{{'AUTO_RESIZE' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class=" form-inline">
+        <button class="btn btn-sm btn-dark mr-2" (click)="showFullscreen()">
+          <span class="fa fa-arrows-alt"></span>
+        </button>
+        <button class="btn btn-sm btn-dark mr-2 ped-pdf-undo" (click)="rotate(-90)">
+          <span class="fa fa-undo"></span>
+        </button>
+        <button class="btn btn-sm btn-dark ped-pdf-redo" (click)="rotate(90)">
+          <span class="fa fa-repeat"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="pdf-viewer d-flex"> -->
+  <pdf-viewer [hidden]="showLoader" (after-load-complete)="afterLoadComplete($event)" [src]="src" [show-all]="true" [page]="page" [fit-to-page]="fitToPage"
+    [rotation]="rotation" [stick-to-page]="true" [autoresize]="autoResize" [original-size]="originalSize" [zoom]="zoom" [render-text]="renderText"
+    [external-link-target]="'blank'"></pdf-viewer>
+</div>

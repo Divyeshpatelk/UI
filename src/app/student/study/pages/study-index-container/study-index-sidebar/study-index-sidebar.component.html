@@ -1,0 +1,67 @@
+<nav class="sidebar">
+  <div class="sidebar-header px-3 py-2 d-flex justify-content-between">
+    <div class="course-name align-self-center">
+      <h6 class="mb-0 text-truncate">{{course.courseName}}</h6>
+    </div>
+  </div>
+  <div class="sidebar-header subject-name px-3 py-2 bg-dark" ngbDropdown>
+    <div class="d-flex" ngbDropdownToggle>
+      <div>
+        <p class="mb-0 text-white">{{selectedSubject.subjectName}}</p>
+        <div class="d-flex justify-content-start meterial-list">
+          <p>
+            <span class="fa fa-play-circle-o"></span>{{total?.videos || 0}} {{(total?.videos > 1 ? 'VIDEOS' : 'VIDEO') | translate}}</p>
+          <p>
+            <span class="fa fa-book"></span>{{total?.books || 0}} {{(total?.books > 1 ? 'PDFS' : 'PDF') | translate}}</p>
+        </div>
+      </div>
+      <!-- <div class="align-self-start mt-1 ml-auto">
+        <button class="btn btn-light btn-sm" ></button>
+      </div> -->
+    </div>
+    <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button class="dropdown-item" *ngFor="let subject of subjects" (click)="selectSubject(subject)">{{subject.subjectName}}</button>
+    </ul>
+  </div>
+  <div class="sidebar-menu-item">
+    <div class="list-group">
+      <div *ngFor="let index1 of indexes; let i1 = index">
+        <div class="list-group-item d-flex p-2 meterial-list-content" [class.active]="selectedIndex.indexId === index1.indexId" (click)="selectIndex(index1, [i1], true)"
+          [attr.aria-expanded]="!selectedIndexOpenState[i1]?.isCollapsed" aria-controls="collapseExample">
+          <div class="arrow-sign" (click)="toggleCollapse(index1, [i1], $event)">
+            <span [ngClass]="getDecoration(selectedIndexOpenState[i1]?.isCollapsed)" *ngIf="index1.children"></span>
+          </div>
+          <pdg-study-sidebar-item [index]="index1" [active]="selectedIndex.indexId === index1.indexId"></pdg-study-sidebar-item>
+        </div>
+
+        <!-- second level -->
+        <div id="collapseExample" [ngbCollapse]="selectedIndexOpenState[i1]?.isCollapsed" *ngIf="index1.children">
+          <div class="list-group-item p-0" [class.active]="selectedIndex.indexId === index2.indexId" *ngFor="let index2 of index1.children; let i2 = index">
+            <div class="d-flex pl-4 py-2 meterial-list-content" [class.level2]="selectedIndex.indexId === index2.indexId" (click)="selectIndex(index2, [i1, i2], true)"
+              [attr.aria-expanded]="!selectedIndexOpenState[i1].children && selectedIndexOpenState[i1].children[i2]?.isCollapsed"
+              aria-controls="collapseExample1">
+
+              <div class="arrow-sign" (click)="toggleCollapse(index2, [i1, i2], $event)">
+                <span [ngClass]="getDecoration(selectedIndexOpenState[i1].children && selectedIndexOpenState[i1].children[i2]?.isCollapsed)"
+                  class="bullet"></span>
+              </div>
+              <pdg-study-sidebar-item [index]="index2" [active]="selectedIndex.indexId === index2.indexId"></pdg-study-sidebar-item>
+            </div>
+            <div id="collapseExample1" [ngbCollapse]="selectedIndexOpenState[i1].children && selectedIndexOpenState[i1].children[i2]?.isCollapsed"
+              *ngIf="index2.children">
+              <div class="list-group-item p-0" [class.active]="selectedIndex.indexId === index3.indexId" *ngFor="let index3 of index2.children; let i3 = index">
+                <div class="d-flex pl-5 py-2 meterial-list-content" [class.level3]="selectedIndex.indexId === index3.indexId" (click)="selectIndex(index3, [i1, i2, i3], true)">
+                  <div class="arrow-sign">
+                    <span [ngClass]="getDecoration(selectedIndexOpenState[i1].children && selectedIndexOpenState[i1].children[i2].children && selectedIndexOpenState[i1].children[i2].children[i3]?.isCollapsed)"
+                      class="bullet"></span>
+                  </div>
+                  <pdg-study-sidebar-item [index]="index3" [active]="selectedIndex.indexId === index3.indexId"></pdg-study-sidebar-item>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

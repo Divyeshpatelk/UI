@@ -1,0 +1,32 @@
+<div class="p-3 bg-white question-list" [class.selected]="selected">
+  <div class="d-flex">
+    <div innerHTML="{{content.question}}" style="flex-grow: 1;overflow-wrap: break-word;" class="question mb-0"></div>
+    <div class="ml-1"*ngIf="showRemoveButton">
+      <i class="fa fa-trash" style="cursor: pointer;" aria-hidden="true" (click)="emitRemove()"></i>
+    </div>
+  </div>
+  <!-- <div class="que_date mb-2">
+    <span *ngFor="let pastExam of content?.pastExams" class="badge badge-pill badge-light">{{pastExam}}</span>
+  </div> -->
+  <button type="button" class="btn btn-dark btn-sm mb-2" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapseExample">
+    Hide Answer
+  </button>
+  <div id="collapseExample" [ngbCollapse]="isCollapsed">
+    <div class="option-list p-2">
+      <div class="row">
+        <div class="col-sm-6" *ngFor="let choice of content?.choices">
+          <label class="custom-control mb-0 custom-checkbox mr-0">
+            <input type="checkbox" class="custom-control-input" [disabled]="true" [checked]="content?.rightAnswers.indexOf(choice.id) > -1"
+            />
+            <span class="custom-control-indicator"></span>
+            <span innerHTML="{{choice?.text}}" class="custom-control-description choicetext"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="text-danger" [hidden]="content?.updated">
+      <small>{{content?.errorMessage}}</small>
+    </div>
+  </div>
+</div>

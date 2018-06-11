@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="conatainer studymeterial bg-white">
+      <div class="row py-2">
+        <div class="col-sm-7 align-self-center">
+          <button class="btn btn-dark  pl-3" id="btn-add-ques" (click)="openCustomTestEditor(null)">{{'ADD' | translate}}
+            <i class="fa fa-plus mx-2 clr-white"></i>
+          </button>
+        </div>
+        <!-- <div class="col-sm-5 ml-auto ">
+          <div class="search-bar">
+            <div class="form-group">
+              <div class="icon-addon addon-md">
+                <input #filter type="text" placeholder="{{'SEARCH' | translate}} {{'QUESTION' | translate}}" class="form-control" id="search"
+                  (keyup.enter)='search(filter.value)'>
+                <label for="search" class="fa fa-search" rel="tooltip" title="{{'SEARCH' | translate}}"></label>
+              </div>
+            </div>
+          </div>
+        </div> -->
+  
+        <div class="m-3">
+          <p-table [value]="customTests" [lazy]="true" (onLazyLoad)="loadTestsLazy($event)" [paginator]="true" [rows]="[recordPerPage]"
+            [totalRecords]="totalRecords">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>{{ 'NAME' | translate }}</th>
+                <th style="width: 120px;">{{ 'DURATION' | translate }}</th>
+                <th style="width: 100px;">{{ 'QUESTIONS' | translate }}</th>
+                <th style="width: 130px;">{{ 'STATUS' | translate }}</th>
+                <th>{{ 'UPDATED' | translate }}</th>
+                <th style="width: 60px;"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-test>
+              <tr>
+                <td>{{test.testName}}</td>
+                <td>{{test.duration + " minutes"}}</td>
+                <td>{{test.historyData?.total || 0}}</td>
+                <td>{{(test?.status === 'DELETE' ? 'DELETED' : test.status) | translate}}</td>
+                <td>{{test.lastModifiedDate | dateTimeFormat}}</td>
+                <td>
+                  <div *ngIf="test?.status !== 'DELETE'">
+                    <i class="fa fa-pencil m-1" style="cursor: pointer;" (click)="openCustomTestEditor(test.id)"></i>
+                    <i class="fa fa-trash m-1" style="cursor: pointer;" (click)="removeCustomTest(test.id)"></i> 
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <tr [hidden]="totalRecords || totalRecords>0">
+                <td colspan="6">{{ 'NO_RECORD' | translate }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+  
+      </div>
+    </div>
+  </div>

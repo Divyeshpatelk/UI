@@ -1,0 +1,86 @@
+<!-- <div class="d-flex flex-wrap"> -->
+<!-- <span class="sm-font font-weight-bold align-self-center">Content Pack</span> <a href="" class="mx-2 dark-grey"> <span class="fa fa-trash-o"></span></a>
+            <a href=""><span class="badge badge-pill badge-primary  py-1 mt-auto mr-2">MY CONTENT</span></a>
+            <a href=""><span class="badge badge-pill badge-info  py-1 mt-auto mr-2">SAT</span></a>
+            <a href=""><span class="badge badge-pill badge-success  py-1  mt-auto mr-2">CAT</span></a>
+            <a href=""><span class="badge badge-pill badge-secondary  py-1 mt-auto mr-2">ABHILASH CONT...</span></a> -->
+
+<!-- <div class="ml-auto align-self-center addcontent" ngbDropdown>
+            <button ngbDropdownToggle class="btn  btn-link p-0 mx-2 " type="button" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false">
+              <small> Added Content</small>
+            </button>
+            <ul ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <li class="dropdown-item">
+                <small>Content</small>
+              </li>
+              <li class="dropdown-item">
+                <small>Not Added Content</small>
+              </li>
+              <li class="dropdown-item">
+                <small>All</small>
+              </li>
+            </ul>
+          </div> -->
+<!-- <div class="form-group ">
+              <select class="form-control form-control-sm border-0 align-self-center" id="exampleFormControlSelect1">
+                <option> <small> Added Content</small></option>
+                <option><small>Content</small></option>
+                <option><small>Not Added Content</small></option>
+                <option><small>All</small></option>
+              </select>
+            </div> -->
+<!-- <small class="align-self-center">
+            <a href="" class="dark-grey sm-font mx-2 ">
+              <span class="fa fa-play-circle-o  mr-1"> </span>
+              50 Lecture</a>
+          </small>
+          <small class="align-self-center">
+            <a href="" class="dark-grey sm-font mx-2 ">
+              <span class="fa fa-book  mr-1"> </span>20 Ebooks</a>
+          </small>
+          <a href="#" class="mx-2  sm-font dark-grey">
+            <span class="fa fa-th"></span>
+          </a>
+          <a href="#" class="mx-2  sm-font dark-grey">
+            <span class="fa fa-list "></span>
+          </a>
+        </div> -->
+<!-- <div>
+          <div>{{course.id}}</div>
+          <div>{{subject.subjectName}}</div>
+          <div>{{subjectIndex.title}}</div>
+        </div> -->
+<div class="fixed-height" [ngClass]="droppableClasses" [pdgFileDrop] (fileDrop)="filesDropped($event)" (fileDragOver)="filesDragOver($event)"
+  (fileDragLeave)="filesDragLeave($event)">
+  <div class="d-flex flex-wrap course-detail-list">
+    <div class="col-sm-6 col-xs-12" *ngIf="course?.status === 'DRAFT'">
+      <div class="d-flex text-center add-meterial-section py-3 m-1">
+        <div id="add-material" class="mx-auto">
+          <a href="javascript:void(0)" (click)="openFileSelect()">
+            <span class="fa fa-plus-circle fa-4x my-2"></span>
+            <p class="my-1">{{'ADD_MATERIAL' | translate}}</p>
+            <input #fileSelect class="d-none" type="file" [pdgFileSelect] (fileSelect)="selectFiles($event)" multiple/>
+          </a>
+        </div>
+        <div class="seperator"></div>
+        <div class="px-4 d-flex flex-column align-self-center add_option">
+          <a id="add-from-library" href="javascript:void(0)" (click)="addFromMyLibrary($event)">
+            <span class="fa fa-book fa-lg"></span>
+            <p class="mb-1">
+              <small>{{'UPLOAD_FROM_LIBRARY' | translate}}</small>
+            </p>
+          </a>
+          <a id="add-reference" href="javascript:void(0)" (click)="openUploadPreview(null, true)">
+            <span class="fa fa-youtube fa-lg"></span>
+            <p class="mb-0">
+              <small>{{'ADD_FROM_YOUTUBE_REFERENCE' | translate}}</small>
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xs-12" *ngFor="let content of contents">
+      <pdg-course-content-item class="pointer" [content]="content" (remove)="removeContent($event)" (click)="openPreview(content)"></pdg-course-content-item>
+    </div>
+  </div>
+</div>

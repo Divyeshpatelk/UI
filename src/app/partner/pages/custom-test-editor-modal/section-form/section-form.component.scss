@@ -1,0 +1,52 @@
+.ped-subjectmarks-field {
+  width: 100%;
+  margin: 0 auto;
+  .form-group {
+      position: relative;
+      &.form-group-title {
+          margin-bottom: 5px;
+          margin-top:25px;
+          label {
+              margin-bottom:2px;
+              font-size: 18px;
+          }
+      }
+      .section-title {
+          font-size:22px;
+      }
+      i {
+          font-size: 25px;
+          position: absolute;
+          left: 0;
+          padding: 6px 0;
+      }
+      
+      &.mark-save {
+          padding-left: 0;
+          margin-top: 15px;
+      }
+      /* For Firefox */
+      input[type='number'] {
+          -moz-appearance:textfield;
+      }
+      /* Webkit browsers like Safari and Chrome */
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type="number"] {
+          width: 75px;
+          display: inline-block;
+          margin-right: 5px;
+      }
+      .section-lable {
+          max-width: 35.5%;
+          padding-right: 1px;
+          label {
+              margin: 7px 0;
+          }
+      }
+  }
+
+}

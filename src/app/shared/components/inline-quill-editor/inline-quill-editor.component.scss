@@ -1,0 +1,125 @@
+@import 'theme-variables';
+
+.inline-quill-editor-container {
+  height: 70%;
+  word-break: break-all;
+  word-wrap: break-all;
+}
+
+.inline-quill-editor-preview {
+  border: 1px solid $white;
+  display: inline-block;
+  word-break: break-all;
+  word-wrap: break-all;
+
+  &:hover {
+    border: 1px solid;
+
+    .quill-icon-div {
+      visibility: visible;
+    }
+
+    &.disabled {
+      border: 1px solid $white;
+
+      .quill-icon-div {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.inline-quill-edit-text {
+  display: inline-block;
+  padding: 1px;
+}
+
+.quill-text-div {
+  display: inline-block;
+  white-space: pre-wrap;
+  background: $white !important;
+  color: $gray-900 !important;
+  font-family: $font-family-sans-serif !important;
+  font-size: $font-size-base !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+
+  a,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    background: $white !important;
+    color: $gray-900 !important;
+    font-family: $font-family-sans-serif !important;
+    font-size: $font-size-base !important;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  img {
+    max-width: 100%;
+    position: relative;
+  }
+}
+
+.quill-icon-div {
+  background: $gray-300;
+  cursor: pointer;
+  display: inline-block;
+  height: 100%;
+  visibility: hidden;
+}
+
+quill-editor {
+  height: inherit;
+  .ql-container {
+    background: $white !important;
+    color: $gray-900 !important;
+    font-family: $font-family-sans-serif !important;
+    font-size: $font-size-base !important;
+
+    a,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    span, {
+      background: $white !important;
+      color: $gray-900 !important;
+      font-family: $font-family-sans-serif !important;
+      font-size: $font-size-base !important;
+    }
+  }
+
+  .ql-toolbar.ql-snow {
+    border-bottom: 0;
+    padding: 0;
+  }
+
+  .ql-toolbar.ql-snow + .ql-container.ql-snow {
+    border-top: 1px solid #ccc;
+  }
+}
+
+.show-toolbar {
+  display: none;
+}
+
+.custom-tooltip {
+  color: $orange;
+  font-size: $font-size-sm;
+  font-weight: normal;
+  opacity: 1;
+  position: absolute;
+}
+.quill-text-div-label {
+  color: #adb5bd !important;
+}

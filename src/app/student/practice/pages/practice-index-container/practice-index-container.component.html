@@ -1,0 +1,26 @@
+<div class="d-flex index-fixed-height">
+  <!-- Sidebar start -->
+  <div style="overflow: auto; width: 480px;" class="d-none d-sm-none d-md-block">
+    
+    <pdg-practice-index-sidebar></pdg-practice-index-sidebar>
+  </div>
+  <!-- Sidebar end -->
+  <div class="container-fluid" style="overflow: auto;">
+    <div class="page-headingdark ">
+      <div class="row bg-dark py-2">
+        <div class="col-sm-6 d-flex pb-1">
+          <h6 class="mb-0 text-light align-self-center">{{subject?.subjectName}}</h6>
+        </div>
+        <div class="col-sm-6 d-flex">
+          <div class="mylibs-heading">
+            <p class="mb-0 text-white">
+              {{'SELECTED_QUES' | translate}} : {{selectedQuestionCount}} | {{'AVAILABLE_QUES' | translate}} : {{subject?.contentUnitCount?.questions
+              || 0}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pdg-practice-index-config></pdg-practice-index-config>
+  </div>
+</div>
